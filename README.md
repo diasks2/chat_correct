@@ -4,7 +4,7 @@ A Ruby gem to help students improve their English. A teacher can correct a stude
 
 Live Demo: [Chat Correct chat room application](http://www.chat-correct.com)
 
-![](https://s3.amazonaws.com/tm-town-nlp-resources/chat_correct.jpg)
+![](https://s3.amazonaws.com/tm-town-nlp-resources/chat_correct_screenshot.jpg)
 
 ##Install  
 
