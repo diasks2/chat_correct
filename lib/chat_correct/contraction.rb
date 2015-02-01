@@ -1,5 +1,5 @@
 module ChatCorrect
-  class ContractionChecker
+  class Contraction
     NOT_CONTRACTION = {
       'am' => "ain't",
       'do' => "don't",
