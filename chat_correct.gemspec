@@ -22,4 +22,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "rspec"
   spec.add_runtime_dependency "levenshtein-ffi"
+  spec.add_runtime_dependency "linguistics", "~> 2.0.2"
 end
