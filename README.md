@@ -1,6 +1,8 @@
-# ChatCorrect
+# Chat Correct
 
 A Ruby gem to help students improve their English. A teacher can correct a student's sentence and this gem will automatically provide information on the type of error (i.e. punctuation, spelling, etc.), the placement of the errors, and the number of errors.
+
+Live Demo: [Chat Correct chat room application](http://www.chat-correct.com)
 
 ##Install  
 

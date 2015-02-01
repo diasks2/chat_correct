@@ -9,5 +9,13 @@ module ChatCorrect
     def correct
       []
     end
+
+    def number_of_mistakes
+      []
+    end
+
+    def mistake_report
+      []
+    end
   end
 end
