@@ -135,6 +135,8 @@ cc.mistakes[1]['mistake']
 
 #### Mistake Report
 
+The mistake report method returns a hash containing the number of mistakes for each error type.
+
 ```ruby
 os = "is the, puncttuation are wrong."
 cs = "Is the punctuation wrong?"
@@ -160,6 +162,8 @@ cc.mistake_report['punctuation']
 ```
 
 #### Number of Mistakes
+
+The number of mistakes method returns the total number of mistakes in the original sentence.
 
 ```ruby
 os = "is the, puncttuation are wrong."
