@@ -22,7 +22,15 @@ gem 'chat_correct'
 
 ## Usage
 
-TODO: Write usage instructions here
+#### Number of Mistakes
+
+```ruby
+os = "is the, puncttuation are wrong."
+cs = "Is the punctuation wrong?"
+cc = ChatCorrect.new(original_sentence: os, corrected_sentence: cs)
+cc.number_of_mistakes
+# => 5
+```
 
 ## Contributing
 
