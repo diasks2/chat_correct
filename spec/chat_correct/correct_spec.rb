@@ -1540,4 +1540,24 @@ RSpec.describe ChatCorrect::Correct do
       expect(@cc.mistake_report).to eq([])
     end
   end
+
+  context "example correction #078" do
+    before do
+      original_sentence = "Quieting is is so peaceful when you don't have to be quieted students so they sit quiets."
+      corrected_sentence = "The quiet is so peaceful when you don't have to be quieting students so they sit quietly."
+      @cc = ChatCorrect::Correct.new(original_sentence: original_sentence, corrected_sentence: corrected_sentence)
+    end
+
+    it 'Annotates the corrections' do
+      expect(@cc.correct).to eq([])
+    end
+
+    it 'Counts the number of mistakes' do
+      expect(@cc.number_of_mistakes).to eq([])
+    end
+
+    it 'Reports the mistakes by mistake type' do
+      expect(@cc.mistake_report).to eq([])
+    end
+  end
 end
