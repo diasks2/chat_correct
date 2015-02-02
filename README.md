@@ -22,6 +22,28 @@ gem 'chat_correct'
 
 ## Usage
 
+#### Mistake Report
+
+```ruby
+os = "is the, puncttuation are wrong."
+cs = "Is the punctuation wrong?"
+cc = ChatCorrect.new(original_sentence: os, corrected_sentence: cs)
+cc.mistake_report
+# => { 'missing_word'     => 0, 
+       'unnecessary_word' => 1,
+       'spelling'         => 1,
+       'verb_tense'       => 0,
+       'punctuation'      => 2,
+       'word_order'       => 0,
+       'capitalization'   => 1,
+       'duplicate_word'   => 0,
+       'word_choice'      => 0,
+       'pluralization'    => 0,
+       'possessive'       => 0,
+       'stylistic_choice' => 0
+     }
+```
+
 #### Number of Mistakes
 
 ```ruby
