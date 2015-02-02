@@ -10,7 +10,7 @@ module ChatCorrect
       []
     end
 
-    def number_of_mistakes
+    def mistakes
       []
     end
 
@@ -18,9 +18,8 @@ module ChatCorrect
       []
     end
 
-    def mistakes
+    def number_of_mistakes
       []
     end
-
   end
 end

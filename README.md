@@ -22,6 +22,54 @@ gem 'chat_correct'
 
 ## Usage
 
+#### Mistakes
+
+```ruby
+os = "is the, puncttuation are wrong."
+cs = "Is the punctuation wrong?"
+cc = ChatCorrect.new(original_sentence: os, corrected_sentence: cs)
+cc.mistakes
+
+# =>  {
+#       0 => {
+#        'position' => 0,
+#        'error_type' => 'capitalization',
+#        'mistake' => 'is',
+#        'correction' => 'Is'
+#       },
+#       1 => {
+#        'position' => 3,
+#        'error_type' => 'punctuation',
+#        'mistake' => ',',
+#        'correction' => ''
+#       },
+#       2 => {
+#        'position' => 4,
+#        'error_type' => 'spelling',
+#        'mistake' => 'puncttuation',
+#        'correction' => 'punctuation'
+#       },
+#       3 => {
+#        'position' => 3,
+#        'error_type' => 'unnecessary_word',
+#        'mistake' => 'are',
+#        'correction' => ''
+#       },
+#       4 => {
+#        'position' => 3,
+#        'error_type' => 'punctuation',
+#        'mistake' => '.',
+#        'correction' => '?'
+#       }
+#     }
+
+cc.mistakes[4]['correction']
+# => '?'
+
+cc.mistakes[1]['mistake']
+# => ','
+```
+
 #### Mistake Report
 
 ```ruby
@@ -29,7 +77,8 @@ os = "is the, puncttuation are wrong."
 cs = "Is the punctuation wrong?"
 cc = ChatCorrect.new(original_sentence: os, corrected_sentence: cs)
 cc.mistake_report
-# => { 'missing_word'     => 0, 
+# => { 
+#      'missing_word'     => 0, 
 #      'unnecessary_word' => 1,
 #      'spelling'         => 1,
 #      'verb_tense'       => 0,
@@ -42,6 +91,9 @@ cc.mistake_report
 #      'possessive'       => 0,
 #      'stylistic_choice' => 0
 #    }
+
+cc.mistake_report['punctuation']
+# => 2
 ```
 
 #### Number of Mistakes
