@@ -22,6 +22,65 @@ gem 'chat_correct'
 
 ## Usage
 
+#### Correct
+
+```ruby
+os = "is the, puncttuation are wrong."
+cs = "Is the punctuation wrong?"
+cc = ChatCorrect.new(original_sentence: os, corrected_sentence: cs)
+cc.correct
+
+# =>  {
+#       0 => {
+#        'token' => 'is',
+#        'type' => 'capitalization_mistake'
+#       },
+#       1 => {
+#        'token' => 'Is',
+#        'type' => 'capitalization_correction'
+#       },
+#       2 => {
+#        'token' => 'the',
+#        'type' => 'no_mistake'
+#       },
+#       3 => {
+#        'token' => ',',
+#        'type' => 'punctuation_mistake'
+#       },
+#       4 => {
+#        'token' => 'puncttuation',
+#        'type' => 'spelling_mistake'
+#       },
+#       5 => {
+#        'token' => 'punctuation',
+#        'type' => 'spelling_correction'
+#       },
+#       6 => {
+#        'token' => 'are',
+#        'type' => 'unnecessary_word_mistake'
+#       },
+#       7 => {
+#        'token' => 'wrong',
+#        'type' => 'no_mistake'
+#       },
+#       8 => {
+#        'token' => '.',
+#        'type' => 'punctuation_mistake'
+#       },
+#       9 => {
+#        'token' => '?',
+#        'type' => 'punctuation_correction'
+#       }
+#     }
+
+cc.correct[5]['token']
+# => 'punctuation'
+
+cc.correct[5]['type']
+# => 'spelling_correction'
+
+```
+
 #### Mistakes
 
 ```ruby
