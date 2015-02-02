@@ -24,6 +24,8 @@ gem 'chat_correct'
 
 #### Correct
 
+The correct method returns a hash of the original sentence interleaved with the corrected sentence. The idea is that you can use styling in your output progam to highlight the errors (color, **font weight**, ~~strikethrough~~, etc.).
+
 ```ruby
 os = "is the, puncttuation are wrong."
 cs = "Is the punctuation wrong?"
@@ -82,6 +84,8 @@ cc.correct[5]['type']
 ```
 
 #### Mistakes
+
+The mistakes method returns a hash of each mistake, ordered by its position in the sentence. For each mistake the method returns the `position`, `error_type`, `mistake`, and `correction`.
 
 ```ruby
 os = "is the, puncttuation are wrong."
