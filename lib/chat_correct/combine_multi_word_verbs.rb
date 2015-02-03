@@ -2,15 +2,15 @@ require 'engtagger'
 
 module ChatCorrect
   class CombineMultiWordVerbs
-    attr_reader :sentence
-    def initialize(sentence:)
-      @sentence = sentence
+    attr_reader :text
+    def initialize(text:)
+      @text = text
     end
 
     def combine
       tgr = EngTagger.new
-      tokens = ChatCorrect::Tokenize.new(text: sentence).tokenize
-      sentence_tagged = tgr.add_tags(sentence).split
+      tokens = ChatCorrect::Tokenize.new(text: text).tokenize
+      sentence_tagged = tgr.add_tags(text).split
       words_to_delete = Array.new
       tokens.each_with_index do |word, index|
         case
@@ -27,6 +27,16 @@ module ChatCorrect
           words_to_delete << tokens[index + 2].to_s
         end
       end
+      delete_tokens_from_array(tokens, words_to_delete)
+    end
+
+    private
+
+    def delete_tokens_from_array(tokens, array)
+      array.each do |token_to_delete|
+        tokens.delete(token_to_delete) if tokens.include?(token_to_delete)
+      end
+      tokens
     end
   end
 end
