@@ -22,12 +22,12 @@ module ChatCorrect
       # puts "OSI: #{original_sentence_info_hash}"
       # puts "CSI: #{corrected_sentence_info_hash}"
       # puts "**********"
-      stage_1_pass
+      stage_1
       debug
       # puts "OSI: #{original_sentence_info_hash}"
       # puts "CSI: #{corrected_sentence_info_hash}"
       # puts "End of Stage 1 **********"
-      stage_2_pass
+      stage_2
       debug
       # puts "OSI: #{original_sentence_info_hash}"
       # puts "CSI: #{corrected_sentence_info_hash}"
@@ -49,11 +49,11 @@ module ChatCorrect
       debug
       prev_next_match_check
       debug
-      stage_8_pass
+      stage_8
       debug
       prev_next_match_check
       debug
-      stage_9_pass
+      stage_9
       debug
       reverse_symbols(create_final_hash)
     end
@@ -218,7 +218,7 @@ module ChatCorrect
       end
     end
 
-    def stage_1_pass
+    def stage_1
       matched_id_array = []
       corrected_sentence_info_hash.each do |kc, vc|
         original_sentence_info_hash.each do |ko, vo|
@@ -243,7 +243,7 @@ module ChatCorrect
       end
     end
 
-    def stage_2_pass
+    def stage_2
       corrected_sentence_info_hash.each do |kc, vc|
         unless vc['matched'] == true
           if kc == 0
@@ -341,7 +341,7 @@ module ChatCorrect
         write_match_to_info_hash(ks, kc, vc)
     end
 
-    def stage_8_pass
+    def stage_8
       corrected_sentence_info_hash.each do |kc, vc|
         unless vc['matched'] == true
           if kc == corrected_sentence_info_hash.length - 1
@@ -372,7 +372,7 @@ module ChatCorrect
       end
     end
 
-    def stage_9_pass
+    def stage_9
       original_sentence_info_hash.each do |k, v|
         if v['match_id'].blank?
           original_sentence_info_hash[k]['match_id'] = 's' + k.to_s
