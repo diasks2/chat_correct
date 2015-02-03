@@ -4,19 +4,19 @@ RSpec.describe ChatCorrect::Tokenize do
   it 'correctly tokenizes test sentence #001' do
     text = "Hello Ms. Piggy, this is John. We are selling a new fridge for $5,000. That is a 20% discount over the Nev. retailers. It is a 'MUST BUY', so don't hesistate."
     cc = ChatCorrect::Tokenize.new(text: text)
-    expect(cc.tokenize).to eq(['Hello', 'Ms.', 'Piggy', ',', 'this', 'is', 'John', '.', 'We', 'are', 'selling', 'a', 'new', 'fridge', 'for', '$5,000', '.', 'That', 'is', 'a', '20', '%', 'discount', 'over', 'the', 'Nev.', 'retailers', '.', 'It', 'is', 'a', "'", 'MUST', 'BUY', "'", ',', 'so', "don't", 'hesistate', '.'])
+    expect(cc.tokenize).to eq(["Hello", "Ms.", "Piggy", ",", "this", "is", "John", ".", "We", "are", "selling", "a", "new", "fridge", "for", "$5☌000", ".", "That", "is", "a", "20", "%", "discount", "over", "the", "Nev.", "retailers", ".", "It", "is", "a", "∫", "MUST", "BUY", "∮", ",", "so", "donƪt", "hesistate", "."])
   end
 
   it 'correctly tokenizes test sentence #002' do
     text = "Hello Ms. Piggy, this is John. We are selling a new fridge for $5,000. That is a 20% discount over the Nev. retailers. It is a 'MUST BUY', so don't hesistate."
     cc = ChatCorrect::Tokenize.new(text: text)
-    expect(cc.tokenize_no_punct).to eq(['Hello', 'Ms.', 'Piggy', 'this', 'is', 'John', 'We', 'are', 'selling', 'a', 'new', 'fridge', 'for', '$5,000', 'That', 'is', 'a', '20', 'discount', 'over', 'the', 'Nev.', 'retailers', 'It', 'is', 'a', 'MUST', 'BUY', 'so', "don't", 'hesistate'])
+    expect(cc.tokenize_no_punct).to eq(["Hello", "Ms.", "Piggy", "this", "is", "John", "We", "are", "selling", "a", "new", "fridge", "for", "$5☌000", "That", "is", "a", "20", "discount", "over", "the", "Nev.", "retailers", "It", "is", "a", "∫", "MUST", "BUY", "∮", "so", "donƪt", "hesistate"])
   end
 
   it 'correctly tokenizes test sentence #003' do
     text = "Lisa Raines, a lawyer and director of government relations for the Industrial Biotechnical Association, contends that a judge well-versed in patent law and the concerns of research-based industries would have ruled otherwise. And Judge Newman, a former patent lawyer, wrote in her dissent when the court denied a motion for a rehearing of the case by the full court, \'The panel's judicial legislation has affected an important high-technological industry, without regard to the consequences for research and innovation or the public interest.\' Says Ms. Raines, \'[The judgement] confirms our concern that the absence of patent lawyers on the court could prove troublesome.\'"
     cc = ChatCorrect::Tokenize.new(text: text)
-    expect(cc.tokenize).to eq(['Lisa', 'Raines', ',', 'a', 'lawyer', 'and', 'director', 'of', 'government', 'relations', 'for', 'the', 'Industrial', 'Biotechnical', 'Association', ',', 'contends', 'that', 'a', 'judge', 'well-versed', 'in', 'patent', 'law', 'and', 'the', 'concerns', 'of', 'research-based', 'industries', 'would', 'have', 'ruled', 'otherwise', '.', 'And', 'Judge', 'Newman', ',', 'a', 'former', 'patent', 'lawyer', ',', 'wrote', 'in', 'her', 'dissent', 'when', 'the', 'court', 'denied', 'a', 'motion', 'for', 'a', 'rehearing', 'of', 'the', 'case', 'by', 'the', 'full', 'court', ',', "\'", 'The', "panel's", 'judicial', 'legislation', 'has', 'affected', 'an', 'important', 'high-technological', 'industry', ',', 'without', 'regard', 'to', 'the', 'consequences', 'for', 'research', 'and', 'innovation', 'or', 'the', 'public', 'interest', '.', '\'', 'Says', 'Ms.', 'Raines', ',', '\'', '[', 'The', 'judgement', ']', 'confirms', 'our', 'concern', 'that', 'the', 'absence', 'of', 'patent', 'lawyers', 'on', 'the', 'court', 'could', 'prove', 'troublesome', '.', "\'"])
+    expect(cc.tokenize).to eq(["Lisa", "Raines", ",", "a", "lawyer", "and", "director", "of", "government", "relations", "for", "the", "Industrial", "Biotechnical", "Association", ",", "contends", "that", "a", "judge", "well-versed", "in", "patent", "law", "and", "the", "concerns", "of", "research-based", "industries", "would", "have", "ruled", "otherwise", ".", "And", "Judge", "Newman", ",", "a", "former", "patent", "lawyer", ",", "wrote", "in", "her", "dissent", "when", "the", "court", "denied", "a", "motion", "for", "a", "rehearing", "of", "the", "case", "by", "the", "full", "court", ",", "∫", "The", "panelƪs", "judicial", "legislation", "has", "affected", "an", "important", "high-technological", "industry", ",", "without", "regard", "to", "the", "consequences", "for", "research", "and", "innovation", "or", "the", "public", "interest", ".", "∫", "Says", "Ms.", "Raines", ",", "∫", "[", "The", "judgement", "]", "confirms", "our", "concern", "that", "the", "absence", "of", "patent", "lawyers", "on", "the", "court", "could", "prove", "troublesome", ".", "∮"])
   end
 
   it 'correctly tokenizes test sentence #004' do
@@ -37,7 +37,7 @@ RSpec.describe ChatCorrect::Tokenize do
 
   it 'correctly tokenizes test sentence #007' do
     cc = ChatCorrect::Tokenize.new(text: "\"Whether there will be eligible to become king to you.\"")
-    expect(cc.tokenize).to eq(["'", "Whether", "there", "will", "be", "eligible", "to", "become", "king", "to", "you", ".", "'"])
+    expect(cc.tokenize).to eq(["∬", "Whether", "there", "will", "be", "eligible", "to", "become", "king", "to", "you", ".", "∯"])
   end
 
   it 'correctly tokenizes test sentence #008' do
@@ -102,7 +102,7 @@ RSpec.describe ChatCorrect::Tokenize do
 
   it 'correctly tokenizes test sentence #020' do
     cc = ChatCorrect::Tokenize.new(text: 'He paid $10,000,000 for the new house which is equivalent to ¥1,000,000,000.')
-    expect(cc.tokenize).to eq(['He', 'paid', '$10,000,000', 'for', 'the', 'new', 'house', 'which', 'is', 'equivalent', 'to', '¥1,000,000,000', '.'])
+    expect(cc.tokenize).to eq(["He", "paid", "$10☌000☌000", "for", "the", "new", "house", "which", "is", "equivalent", "to", "¥1☌000☌000☌000", "."])
   end
 
   it 'correctly tokenizes test sentence #021' do
@@ -117,7 +117,7 @@ RSpec.describe ChatCorrect::Tokenize do
 
   it 'correctly tokenizes test sentence #023' do
     cc = ChatCorrect::Tokenize.new(text: 'his name is mr. smith, king of the \'entire\' forest.')
-    expect(cc.tokenize).to eq(['his', 'name', 'is', 'mr.', 'smith', ',', 'king', 'of', 'the', '\'', 'entire', '\'', 'forest', '.'])
+    expect(cc.tokenize).to eq(["his", "name", "is", "mr.", "smith", ",", "king", "of", "the", "∫", "entire", "∮", "forest", "."])
   end
 
   it 'correctly tokenizes test sentence #024' do

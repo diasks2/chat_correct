@@ -10,13 +10,13 @@ module ChatCorrect
     def tokenize
       return if text.nil?
       return [text] if /\A\w+\z/ =~ text
-      converted_text = convert_all_quotes(text)
+      converted_text = convert_quotes(text)
       converted_text = shift_all_punct(converted_text)
       converted_text = convert_contractions(converted_text)
       converted_text = convert_numbers_with_commas(converted_text)
       converted_text = convert_numbers_with_periods(converted_text)
       result = converted_text.split(' ')
-      tokenized_array = separate_other_ending_punc(reverse_symbols(separate_full_stop(result))).map do |s|
+      tokenized_array = separate_other_ending_punc(separate_full_stop(result)).map do |s|
         s.tr("\n", '').tr("\r", '').strip
       end
     end
@@ -27,11 +27,6 @@ module ChatCorrect
     end
 
     private
-
-    def convert_all_quotes(txt)
-      converted_text = convert_dbl_quotes(txt)
-      convert_sgl_quotes(converted_text)
-    end
 
     def shift_all_punct(txt)
       converted_text = shift_multiple_dash(txt)
@@ -45,14 +40,12 @@ module ChatCorrect
       shift_special_quotes(converted_text)
     end
 
-    def convert_dbl_quotes(txt)
-      txt.gsub(/"/, ' ∬ ').squeeze(' ').strip
-    end
-
-    def convert_sgl_quotes(txt)
+    def convert_quotes(txt)
       txt.gsub(/`(?!`)(?=.*\w)/o, ' ∫ ')
+         .gsub(/"(?=.*\w)/o, ' ∬ ')
          .gsub(/(\W|^)'(?=.*\w)(?!twas)(?!Twas)/o) { $1 ? $1 + ' ∫ ' : ' ∫ ' }
          .gsub(/(\W|^)'(?=.*\w)/o, 'ƪ')
+         .gsub(/"/, ' ∯ ')
          .gsub(/(\w|\D)'(?!')(?=\W|$)/o) { $1 + ' ∮ ' }
          .squeeze(' ').strip
     end
@@ -135,19 +128,6 @@ module ChatCorrect
 
     def convert_numbers_with_periods(txt)
       txt.gsub(/(?<=\d)\.(?=\d)/, '☊')
-    end
-
-    def reverse_symbols(array)
-      array.each do |a|
-        a.gsub!('∬', "\'")
-        a.gsub!('ƪ', "'")
-        a.gsub!('∫', "'")
-        a.gsub!('∮', "'")
-        a.gsub!('☍', ". ")
-        a.gsub!('☊', ".")
-        a.gsub!('☌', ",")
-      end
-      array
     end
 
     def separate_other_ending_punc(array)

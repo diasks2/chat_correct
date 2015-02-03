@@ -18,52 +18,44 @@ module ChatCorrect
       # puts "CSTag: #{corrected_sentence_tagged}"
       # puts "OSTD: #{original_sentence_tokenized_downcased}"
       # puts "CSTD: #{corrected_sentence_tokenized_downcased}"
-      if (original_sentence_tokenized - corrected_sentence_tokenized).eql?([])
-        corrections_hash = {}
-        original_sentence_tokenized.each_with_index do |token, index|
-          corrections_hash[index] = {'token' => token, 'type' => 'no_mistake'}
-        end
-        corrections_hash
-      else
-        # puts "OSI: #{original_sentence_info_hash}"
-        # puts "CSI: #{corrected_sentence_info_hash}"
-        # puts "**********"
-        stage_1_pass
-        debug
-        # puts "OSI: #{original_sentence_info_hash}"
-        # puts "CSI: #{corrected_sentence_info_hash}"
-        # puts "End of Stage 1 **********"
-        stage_2_pass
-        debug
-        # puts "OSI: #{original_sentence_info_hash}"
-        # puts "CSI: #{corrected_sentence_info_hash}"
-        # puts "End of Stage 2 **********"
-        stage_3_pass
-        debug
-        # puts "OSI: #{original_sentence_info_hash}"
-        # puts "CSI: #{corrected_sentence_info_hash}"
-        # puts "End of Stage 3 **********"
-        stage_4_pass
-        debug
-        stage_5_pass
-        debug
-        stage_6_pass
-        debug
-        prev_next_match_check
-        debug
-        stage_7_pass
-        debug
-        prev_next_match_check
-        debug
-        stage_8_pass
-        debug
-        prev_next_match_check
-        debug
-        stage_9_pass
-        debug
-        puts create_final_hash
-        create_final_hash
-      end
+
+      # puts "OSI: #{original_sentence_info_hash}"
+      # puts "CSI: #{corrected_sentence_info_hash}"
+      # puts "**********"
+      stage_1_pass
+      debug
+      # puts "OSI: #{original_sentence_info_hash}"
+      # puts "CSI: #{corrected_sentence_info_hash}"
+      # puts "End of Stage 1 **********"
+      stage_2_pass
+      debug
+      # puts "OSI: #{original_sentence_info_hash}"
+      # puts "CSI: #{corrected_sentence_info_hash}"
+      # puts "End of Stage 2 **********"
+      stage_3_pass
+      debug
+      # puts "OSI: #{original_sentence_info_hash}"
+      # puts "CSI: #{corrected_sentence_info_hash}"
+      # puts "End of Stage 3 **********"
+      stage_4_pass
+      debug
+      stage_5_pass
+      debug
+      stage_6_pass
+      debug
+      prev_next_match_check
+      debug
+      stage_7_pass
+      debug
+      prev_next_match_check
+      debug
+      stage_8_pass
+      debug
+      prev_next_match_check
+      debug
+      stage_9_pass
+      debug
+      reverse_symbols(create_final_hash)
     end
 
     def mistakes
@@ -85,6 +77,17 @@ module ChatCorrect
     end
 
     private
+
+    def reverse_symbols(txt)
+      txt.gsub('∬', '"')
+         .gsub('∯', '"')
+         .gsub('ƪ', "'")
+         .gsub('∫', "'")
+         .gsub('∮', "'")
+         .gsub('☍', ". ")
+         .gsub('☊', ".")
+         .gsub('☌', ",")
+    end
 
     def original_sentence_tokenized
       @original_sentence_tokenized ||= ChatCorrect::Tokenize.new(text: original_sentence).tokenize
@@ -204,9 +207,9 @@ module ChatCorrect
     end
 
     def debug
-      puts "++++++++++++++++++++"
+      # puts "++++++++++++++++++++"
       original_sentence_info_hash.each do |k, v|
-        puts 'Key: ' + k.to_s + '; Word: ' + v['token'].to_s + '; Match ID: ' + v['match_id'].to_s
+        # puts 'Key: ' + k.to_s + '; Word: ' + v['token'].to_s + '; Match ID: ' + v['match_id'].to_s
       end
     end
 
@@ -229,7 +232,7 @@ module ChatCorrect
             original_sentence_info_hash[ko]['match_id'] = vc['match_id']
             corrected_sentence_info_hash[kc]['matched'] = true
             matched_id_array << vc['match_id'].to_s
-            puts "Matched ID: #{matched_id_array}"
+            # puts "Matched ID: #{matched_id_array}"
           end
         end
       end
