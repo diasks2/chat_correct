@@ -286,6 +286,11 @@ module ChatCorrect
       end
     end
 
+    def write_match_to_info_hash
+      original_sentence_info_hash[ks]['match_id'] = vc['match_id']
+      corrected_sentence_info_hash[kc]['matched'] = true
+    end
+
     def stage_3_pass
       corrected_sentence_info_hash.each do |kc, vc|
         unless vc['matched'] == true
@@ -293,8 +298,7 @@ module ChatCorrect
             if vs['match_id'].blank?
               if (vc['token'] == vs['token']) && (vc['prev_word1'] == vs['prev_word1'] || vc['next_word1'] == vs['next_word1'])
                 unless vc['matched'] == true || vs['prev_word1'] == 'ȸ'
-                  original_sentence_info_hash[ks]['match_id'] = vc['match_id']
-                  corrected_sentence_info_hash[kc]['matched'] = true
+                  write_match_to_info_hash
                 end
               end
             end
@@ -310,10 +314,7 @@ module ChatCorrect
             if vs['match_id'].blank?
               if vc['token'].length > 3 && vs['token'].length > 3 && Levenshtein.distance(vc['token'], vs['token']) < 3
                 unless vc['matched'] == true
-                  # puts 'Stage 4.1 Executed'
-                  # puts 'VC: ' + vc.to_s
-                  original_sentence_info_hash[ks]['match_id'] = vc['match_id']
-                  corrected_sentence_info_hash[kc]['matched'] = true
+                  write_match_to_info_hash
                 end
               end
             end
@@ -329,10 +330,7 @@ module ChatCorrect
             if vs['match_id'].blank?
               if ChatCorrect::Pluralization.new(token_a: vc['token'], token_b: vs['token']).pluralization_error?
                 unless vc['matched'] == true
-                  #puts 'Stage 4.2 Executed'
-                  #puts 'VC: ' + vc.to_s
-                  original_sentence_info_hash['match_id'] = vc['match_id']
-                  corrected_sentence_info_hash[kc]['matched'] = true
+                  write_match_to_info_hash
                 end
               end
             end
@@ -348,10 +346,7 @@ module ChatCorrect
             if vs['match_id'].blank?
               if ChatCorrect::Verb.new(word: vs['token'], pos: vc['pos_tag'], text: vc['token']).verb_error? && (vc['prev_word1'].eql?(vs['prev_word1']) || vc['next_word1'].eql?(vs['next_word1']))
                 unless vc['matched'] == true || vs['next_word1'].include?(' ')
-                  #puts 'Stage 4.3 Executed'
-                  #puts 'VC: ' + vc.to_s
-                  original_sentence_info_hash[ks]['match_id'] = vc['match_id']
-                  corrected_sentence_info_hash[kc]['matched'] = true
+                  write_match_to_info_hash
                 end
               end
             end
@@ -373,10 +368,7 @@ module ChatCorrect
                 #puts 'VS Position: ' + vs['position'].to_s
                 #puts 'VC Position: ' + vc['position'].to_s
                 unless vc['matched'] == true
-                  #puts 'Stage 6.1 Executed'
-                  #puts 'VC: ' + vc.to_s
-                  original_sentence_info_hash[ks]['match_id'] = vc['match_id']
-                  corrected_sentence_info_hash[kc]['matched'] = true
+                  write_match_to_info_hash
                 end
               end
             end
@@ -402,18 +394,12 @@ module ChatCorrect
             if vs['match_id'].blank?
               if vs['multiple_words'] == true && vc['multiple_words'] == true
                 unless vc['matched'] == true
-                  #puts 'Stage 8.01 Executed'
-                  #puts 'VC: ' + vc.to_s
-                  original_sentence_info_hash[ks]['match_id'] = vc['match_id']
-                  corrected_sentence_info_hash[kc]['matched'] = true
+                  write_match_to_info_hash
                 end
               end
               if next_match_vc == 'ȹ' && next_match_vs == 'ȹ' && vs['token'].gsub(/[[:punct:]]/, '') == '' && vc['token'].gsub(/[[:punct:]]/, '') == ''
                 unless vc['matched'] == true
-                  #puts 'Stage 8.1 Executed'
-                  #puts 'VC: ' + vc.to_s
-                  original_sentence_info_hash[ks]['match_id'] = vc['match_id']
-                  corrected_sentence_info_hash[kc]['matched'] = true
+                 write_match_to_info_hash
                 end
               end
             end
