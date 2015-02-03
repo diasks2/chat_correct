@@ -471,25 +471,25 @@ RSpec.describe ChatCorrect::Correct do
     # end
   end
 
-  # context "example correction #024" do
-  #   before do
-  #     original_sentence = 'I will call my mom yesterday if I had time.'
-  #     corrected_sentence = 'I would have called my mom yesterday if I had had time.'
-  #     @cc = ChatCorrect::Correct.new(original_sentence: original_sentence, corrected_sentence: corrected_sentence)
-  #   end
+  context "example correction #024" do
+    before do
+      original_sentence = 'I will call my mom yesterday if I had time.'
+      corrected_sentence = 'I would have called my mom yesterday if I had had time.'
+      @cc = ChatCorrect::Correct.new(original_sentence: original_sentence, corrected_sentence: corrected_sentence)
+    end
 
-  #   it 'Annotates the corrections' do
-  #     expect(@cc.correct).to eq([])
-  #   end
+    it 'Annotates the corrections' do
+      expect(@cc.correct).to eq("{\"0\":{\"I\":\"no_mistake\"},\"1\":{\"will call\":\"verb_mistake\"},\"2\":{\"would have called\":\"verb_mistake_opposite\"},\"3\":{\"my\":\"no_mistake\"},\"4\":{\"mom\":\"no_mistake\"},\"5\":{\"yesterday\":\"no_mistake\"},\"6\":{\"if\":\"no_mistake\"},\"7\":{\"I\":\"no_mistake\"},\"8\":{\"had\":\"no_mistake\"},\"9\":{\"had\":\"missing_word_mistake\"},\"10\":{\"time\":\"no_mistake\"},\"11\":{\".\":\"no_mistake\"}}")
+    end
 
-  #   it 'Counts the number of mistakes' do
-  #     expect(@cc.number_of_mistakes).to eq([])
-  #   end
+    # it 'Counts the number of mistakes' do
+    #   expect(@cc.number_of_mistakes).to eq([])
+    # end
 
-  #   it 'Reports the mistakes by mistake type' do
-  #     expect(@cc.mistake_report).to eq([])
-  #   end
-  # end
+    # it 'Reports the mistakes by mistake type' do
+    #   expect(@cc.mistake_report).to eq([])
+    # end
+  end
 
   # context "example correction #025" do
   #   before do
