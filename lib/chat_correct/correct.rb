@@ -41,11 +41,11 @@ module ChatCorrect
       debug
       iterate_sentences('stage_5')
       debug
-      stage_6_pass
+      iterate_sentences('stage_6')
       debug
       prev_next_match_check
       debug
-      stage_7_pass
+      iterate_sentences('stage_7')
       debug
       prev_next_match_check
       debug
@@ -320,33 +320,25 @@ module ChatCorrect
         write_match_to_info_hash(ks, kc, vc)
     end
 
-    def stage_6_pass
+    def stage_6(kc, vc, ks, vs)
       return unless ChatCorrect::Verb.new(word: vs['token'], pos: vc['pos_tag'], text: vc['token']).verb_error? &&
       (vc['prev_word1'].eql?(vs['prev_word1']) || vc['next_word1'].eql?(vs['next_word1'])) &&
       !vc['matched'] && !vs['next_word1'].include?(' ')
         write_match_to_info_hash(ks, kc, vc)
     end
 
-    def stage_7_pass
-      corrected_sentence_info_hash.each do |kc, vc|
-        unless vc['matched'] == true
-          original_sentence_info_hash.each do |ks, vs|
-          if vs['match_id'].blank?
-            # Distance between position of words is currently set to 5,
-            # but this is a SWAG and can be adjusted based on testing.
-            # The idea is to stop the algoroithm from matching words like to
-            # and the that appear very far apart in the sentence and should not be matched.
-            if vc['token'].length > 1 && vs['token'].length > 1 && Levenshtein.distance(vc['token'], vs['token']) < 3 && vs['token'].to_s[0] == vc['token'].to_s[0] && (vs['position'].to_i - vc['position'].to_i).abs < 5
-                #puts 'VS Position: ' + vs['position'].to_s
-                #puts 'VC Position: ' + vc['position'].to_s
-                unless vc['matched'] == true
-                  write_match_to_info_hash(ks, kc, vc)
-                end
-              end
-            end
-          end
-        end
-      end
+    def stage_7(kc, vc, ks, vs)
+      # Distance between position of words is currently hardcoded to 5,
+      # but this is a SWAG and can be adjusted based on testing.
+      # The idea is to stop the algoroithm from matching words like 'to'
+      # and 'the' that appear very far apart in the sentence and should not be matched.
+      return unless vc['token'].length > 1 &&
+      vs['token'].length > 1 &&
+      Levenshtein.distance(vc['token'], vs['token']) < 3 &&
+      vs['token'].to_s[0].eql?(vc['token'].to_s[0]) &&
+      (vs['position'].to_i - vc['position'].to_i).abs < 5 &&
+      !vc['matched']
+        write_match_to_info_hash(ks, kc, vc)
     end
 
     def stage_8_pass
