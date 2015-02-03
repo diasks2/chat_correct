@@ -48,15 +48,15 @@ module ChatCorrect
         "weaved" => "wove",
         "gots" => "have"
       }
-    attr_reader :word_a, :word_b
-    def initialize(word_a:, word_b:)
-      @word_a = word_a
-      @word_b = word_b
+    attr_reader :token_a, :token_b
+    def initialize(token_a:, token_b:)
+      @token_a = token_a
+      @token_b = token_b
     end
 
     def exists?
-      COMMON_VERB_MISTAKES[word_a].eql?(word_b) ||
-      COMMON_VERB_MISTAKES[word_b].eql?(word_a)
+      COMMON_VERB_MISTAKES[token_a].eql?(token_b) ||
+      COMMON_VERB_MISTAKES[token_b].eql?(token_a)
     end
   end
 end

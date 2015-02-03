@@ -1,13 +1,13 @@
 module ChatCorrect
   class Capitalization
-    attr_reader :word_a, :word_b
-    def initialize(word_a:, word_b:)
-      @word_a = word_a
-      @word_b = word_b
+    attr_reader :token_a, :token_b
+    def initialize(token_a:, token_b:)
+      @token_a = token_a
+      @token_b = token_b
     end
 
     def capitalization_error?
-      word_a.downcase.eql?(word_b.downcase) && (word_a != word_b)
+      token_a.downcase.eql?(token_b.downcase) && (token_a != token_b)
     end
   end
 end

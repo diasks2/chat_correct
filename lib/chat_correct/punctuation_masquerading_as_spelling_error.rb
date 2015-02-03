@@ -1,14 +1,14 @@
 module ChatCorrect
   class PunctuationMasqueradingAsSpellingError
-    attr_reader :word_a, :word_b
-    def initialize(word_a:, word_b:)
-      @word_a = word_a
-      @word_b = word_b
+    attr_reader :token_a, :token_b
+    def initialize(token_a:, token_b:)
+      @token_a = token_a
+      @token_b = token_b
     end
 
     def exists?
-      (word_a.include?('ƪ') || word_b.include?('ƪ')) &&
-        word_a.delete("ƪ").eql?(word_b.delete("ƪ"))
+      (token_a.include?('ƪ') || token_b.include?('ƪ')) &&
+        token_a.delete("ƪ").eql?(token_b.delete("ƪ"))
     end
   end
 end

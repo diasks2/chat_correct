@@ -2,21 +2,21 @@ require 'linguistics'
 
 module ChatCorrect
   class Pluralization
-    attr_reader :word_a, :word_b
-    def initialize(word_a:, word_b:)
-      @word_a = word_a
-      @word_b = word_b
+    attr_reader :token_a, :token_b
+    def initialize(token_a:, token_b:)
+      @token_a = token_a
+      @token_b = token_b
     end
 
     def pluralization_error?
       begin
         Linguistics.use(:en)
-        word_a_plural = word_a.en.plural
-        word_b_plural = word_b.en.plural
+        token_a_plural = token_a.en.plural
+        token_b_plural = token_b.en.plural
       rescue
         return false
       end
-      word_a_plural.eql?(word_b) || word_b_plural.eql?(word_a)
+      token_a_plural.eql?(token_b) || token_b_plural.eql?(token_a)
     end
   end
 end

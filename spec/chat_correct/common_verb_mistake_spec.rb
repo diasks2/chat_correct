@@ -2,23 +2,23 @@ require 'spec_helper'
 
 RSpec.describe ChatCorrect::CommonVerbMistake do
   it 'returns true if a common verb mistake is found #001' do
-    word_a = 'freezed'
-    word_b = 'froze'
-    cc = ChatCorrect::CommonVerbMistake.new(word_a: word_a, word_b: word_b)
+    token_a = 'freezed'
+    token_b = 'froze'
+    cc = ChatCorrect::CommonVerbMistake.new(token_a: token_a, token_b: token_b)
     expect(cc.exists?).to eq(true)
   end
 
   it 'returns true if a common verb mistake is found #002' do
-    word_a = 'froze'
-    word_b = 'freezed'
-    cc = ChatCorrect::CommonVerbMistake.new(word_a: word_a, word_b: word_b)
+    token_a = 'froze'
+    token_b = 'freezed'
+    cc = ChatCorrect::CommonVerbMistake.new(token_a: token_a, token_b: token_b)
     expect(cc.exists?).to eq(true)
   end
 
   it 'returns true if a common verb mistake is found #003' do
-    word_a = 'cooked'
-    word_b = 'cooks'
-    cc = ChatCorrect::CommonVerbMistake.new(word_a: word_a, word_b: word_b)
+    token_a = 'cooked'
+    token_b = 'cooks'
+    cc = ChatCorrect::CommonVerbMistake.new(token_a: token_a, token_b: token_b)
     expect(cc.exists?).to eq(false)
   end
 end

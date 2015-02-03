@@ -1,16 +1,16 @@
 module ChatCorrect
   class Possessive
-    attr_reader :word_a, :word_b
-    def initialize(word_a:, word_b:)
-      @word_a = word_a
-      @word_b = word_b
+    attr_reader :token_a, :token_b
+    def initialize(token_a:, token_b:)
+      @token_a = token_a
+      @token_b = token_b
     end
 
     def possessive?
-      check_for_possessive(word_a, word_b, "ƪ") ||
-      check_for_possessive(word_b, word_a, "ƪ") ||
-      check_for_possessive(word_a, word_b, "∮") ||
-      check_for_possessive(word_b, word_a, "∮")
+      check_for_possessive(token_a, token_b, "ƪ") ||
+      check_for_possessive(token_b, token_a, "ƪ") ||
+      check_for_possessive(token_a, token_b, "∮") ||
+      check_for_possessive(token_b, token_a, "∮")
     end
 
     private
