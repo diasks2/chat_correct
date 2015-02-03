@@ -32,14 +32,14 @@ module ChatCorrect
       # puts "OSI: #{original_sentence_info_hash}"
       # puts "CSI: #{corrected_sentence_info_hash}"
       # puts "End of Stage 2 **********"
-      stage_3_pass
+      iterate_sentences('stage_3')
       debug
       # puts "OSI: #{original_sentence_info_hash}"
       # puts "CSI: #{corrected_sentence_info_hash}"
       # puts "End of Stage 3 **********"
-      stage_4_pass
+      iterate_sentences('stage_4')
       debug
-      stage_5_pass
+      iterate_sentences('stage_5')
       debug
       stage_6_pass
       debug
@@ -146,6 +146,11 @@ module ChatCorrect
         sentence_hash[index] = sentence_info
       end
       sentence_hash
+    end
+
+    def write_match_to_info_hash(ks, kc, vc)
+      original_sentence_info_hash[ks]['match_id'] = vc['match_id']
+      corrected_sentence_info_hash[kc]['matched'] = true
     end
 
     def assign_previous_token(hash, index, lookup, tokenized_array)
@@ -286,57 +291,33 @@ module ChatCorrect
       end
     end
 
-    def write_match_to_info_hash
-      original_sentence_info_hash[ks]['match_id'] = vc['match_id']
-      corrected_sentence_info_hash[kc]['matched'] = true
-    end
-
-    def stage_3_pass
+    def iterate_sentences(inner_method)
       corrected_sentence_info_hash.each do |kc, vc|
-        unless vc['matched'] == true
-          original_sentence_info_hash.each do |ks, vs|
-            if vs['match_id'].blank?
-              if (vc['token'] == vs['token']) && (vc['prev_word1'] == vs['prev_word1'] || vc['next_word1'] == vs['next_word1'])
-                unless vc['matched'] == true || vs['prev_word1'] == 'ȸ'
-                  write_match_to_info_hash
-                end
-              end
-            end
-          end
+        next if vc['matched']
+        original_sentence_info_hash.each do |ks, vs|
+          next if !vs['match_id'].blank?
+          send("#{inner_method}", kc, vc, ks, vs)
         end
       end
     end
 
-    def stage_4_pass
-      corrected_sentence_info_hash.each do |kc, vc|
-        unless vc['matched'] == true
-          original_sentence_info_hash.each do |ks, vs|
-            if vs['match_id'].blank?
-              if vc['token'].length > 3 && vs['token'].length > 3 && Levenshtein.distance(vc['token'], vs['token']) < 3
-                unless vc['matched'] == true
-                  write_match_to_info_hash
-                end
-              end
-            end
-          end
-        end
-      end
+    def stage_3(kc, vc, ks, vs)
+      return unless vc['token'].eql?(vs['token']) &&
+        (vc['prev_word1'].eql?(vs['prev_word1']) || vc['next_word1'].eql?(vs['next_word1'])) &&
+        !vc['matched'] && vs['prev_word1'] != 'ȸ'
+        write_match_to_info_hash(ks, kc, vc)
     end
 
-    def stage_5_pass
-      corrected_sentence_info_hash.each do |kc, vc|
-        unless vc['matched'] == true
-          original_sentence_info_hash.each do |ks, vs|
-            if vs['match_id'].blank?
-              if ChatCorrect::Pluralization.new(token_a: vc['token'], token_b: vs['token']).pluralization_error?
-                unless vc['matched'] == true
-                  write_match_to_info_hash
-                end
-              end
-            end
-          end
-        end
-      end
+    def stage_4(kc, vc, ks, vs)
+      return unless vc['token'].length > 3 && vs['token'].length > 3 &&
+        Levenshtein.distance(vc['token'], vs['token']) < 3 && !vc['matched']
+        write_match_to_info_hash(ks, kc, vc)
+    end
+
+    def stage_5(kc, vc, ks, vs)
+      return unless ChatCorrect::Pluralization.new(token_a: vc['token'], token_b: vs['token']).pluralization_error? &&
+      !vc['matched']
+        write_match_to_info_hash(ks, kc, vc)
     end
 
     def stage_6_pass
@@ -346,7 +327,7 @@ module ChatCorrect
             if vs['match_id'].blank?
               if ChatCorrect::Verb.new(word: vs['token'], pos: vc['pos_tag'], text: vc['token']).verb_error? && (vc['prev_word1'].eql?(vs['prev_word1']) || vc['next_word1'].eql?(vs['next_word1']))
                 unless vc['matched'] == true || vs['next_word1'].include?(' ')
-                  write_match_to_info_hash
+                  write_match_to_info_hash(ks, kc, vc)
                 end
               end
             end
@@ -368,7 +349,7 @@ module ChatCorrect
                 #puts 'VS Position: ' + vs['position'].to_s
                 #puts 'VC Position: ' + vc['position'].to_s
                 unless vc['matched'] == true
-                  write_match_to_info_hash
+                  write_match_to_info_hash(ks, kc, vc)
                 end
               end
             end
@@ -394,12 +375,12 @@ module ChatCorrect
             if vs['match_id'].blank?
               if vs['multiple_words'] == true && vc['multiple_words'] == true
                 unless vc['matched'] == true
-                  write_match_to_info_hash
+                  write_match_to_info_hash(ks, kc, vc)
                 end
               end
               if next_match_vc == 'ȹ' && next_match_vs == 'ȹ' && vs['token'].gsub(/[[:punct:]]/, '') == '' && vc['token'].gsub(/[[:punct:]]/, '') == ''
                 unless vc['matched'] == true
-                 write_match_to_info_hash
+                  write_match_to_info_hash(ks, kc, vc)
                 end
               end
             end
