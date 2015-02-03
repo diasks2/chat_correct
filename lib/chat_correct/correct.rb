@@ -12,8 +12,8 @@ module ChatCorrect
     def correct
       # puts "OS: #{original_sentence}"
       # puts "CS: #{corrected_sentence}"
-      puts "OST: #{original_sentence_tokenized}"
-      puts "CST: #{corrected_sentence_tokenized}"
+      # puts "OST: #{original_sentence_tokenized}"
+      # puts "CST: #{corrected_sentence_tokenized}"
       # puts "OSTag: #{original_sentence_tagged}"
       # puts "CSTag: #{corrected_sentence_tagged}"
       # puts "OSTD: #{original_sentence_tokenized_downcased}"
@@ -207,9 +207,9 @@ module ChatCorrect
     end
 
     def debug
-      puts "++++++++++++++++++++"
+      # puts "++++++++++++++++++++"
       original_sentence_info_hash.each do |k, v|
-        puts 'Key: ' + k.to_s + '; Word: ' + v['token'].to_s + '; Match ID: ' + v['match_id'].to_s
+        # puts 'Key: ' + k.to_s + '; Word: ' + v['token'].to_s + '; Match ID: ' + v['match_id'].to_s
       end
     end
 
