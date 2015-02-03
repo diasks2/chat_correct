@@ -24,4 +24,16 @@ RSpec.describe ChatCorrect::CombineMultiWordVerbs do
     cc = ChatCorrect::CombineMultiWordVerbs.new(text: text)
     expect(cc.combine).to eq(["He", "hadnƪt realized", "that", "he", "should", "have changed", "the", "locks", "."])
   end
+
+  it 'returns an array' do
+    text = "I was not going to the party ."
+    cc = ChatCorrect::CombineMultiWordVerbs.new(text: text)
+    expect(cc.combine).to eq(["I", "was not going", "to", "the", "party", "."])
+  end
+
+  it 'returns an array' do
+    text = "I did not go to the party ."
+    cc = ChatCorrect::CombineMultiWordVerbs.new(text: text)
+    expect(cc.combine).to eq(["I", "did not go", "to", "the", "party", "."])
+  end
 end

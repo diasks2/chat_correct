@@ -21,6 +21,12 @@ module ChatCorrect
             tokens[index] = token + ' ' + tokens[index + 1] + ' ' + tokens[index + 2]
             tokens_to_delete << tokens[index + 1].to_s
             tokens_to_delete << tokens[index + 2].to_s
+        when TOKEN_ARRAY_2.include?(token) &&
+          tokens[index + 1].to_s.eql?('not') &&
+          sentence_tagged[index + 2].to_s[1].to_s.eql?('v')
+            tokens[index] = token + ' ' + tokens[index + 1] + ' ' + tokens[index + 2]
+            tokens_to_delete << tokens[index + 1].to_s
+            tokens_to_delete << tokens[index + 2].to_s
         when TOKEN_ARRAY.include?(token) &&
           (sentence_tagged[index + 1].to_s[1].to_s.eql?('v') ||
           sentence_tagged[index + 1].to_s[1..2].to_s.eql?('rb')) &&
@@ -28,12 +34,6 @@ module ChatCorrect
           tokens[index + 1] != 'had'
             tokens[index] = token + ' ' + tokens[index + 1]
             tokens_to_delete << tokens[index + 1].to_s
-        when TOKEN_ARRAY_2.include?(token) &&
-          tokens[index + 1].to_s.eql?('not') &&
-          sentence_tagged[index + 2].to_s[1].to_s.eql?('v')
-            tokens[index] = token + ' ' + tokens[index + 1] + ' ' + tokens[index + 2]
-            tokens_to_delete << tokens[index + 1].to_s
-            tokens_to_delete << tokens[index + 2].to_s
         end
       end
       delete_tokens_from_array(tokens, tokens_to_delete)
