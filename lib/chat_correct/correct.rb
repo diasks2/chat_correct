@@ -303,14 +303,14 @@ module ChatCorrect
 
     def stage_3(kc, vc, ks, vs)
       return unless vc['token'].eql?(vs['token']) &&
-        (vc['prev_word1'].eql?(vs['prev_word1']) || vc['next_word1'].eql?(vs['next_word1'])) &&
-        !vc['matched'] && vs['prev_word1'] != 'ȸ'
+      (vc['prev_word1'].eql?(vs['prev_word1']) || vc['next_word1'].eql?(vs['next_word1'])) &&
+      !vc['matched'] && vs['prev_word1'] != 'ȸ'
         write_match_to_info_hash(ks, kc, vc)
     end
 
     def stage_4(kc, vc, ks, vs)
       return unless vc['token'].length > 3 && vs['token'].length > 3 &&
-        Levenshtein.distance(vc['token'], vs['token']) < 3 && !vc['matched']
+      Levenshtein.distance(vc['token'], vs['token']) < 3 && !vc['matched']
         write_match_to_info_hash(ks, kc, vc)
     end
 
@@ -321,19 +321,10 @@ module ChatCorrect
     end
 
     def stage_6_pass
-      corrected_sentence_info_hash.each do |kc, vc|
-        unless vc['matched'] == true
-          original_sentence_info_hash.each do |ks, vs|
-            if vs['match_id'].blank?
-              if ChatCorrect::Verb.new(word: vs['token'], pos: vc['pos_tag'], text: vc['token']).verb_error? && (vc['prev_word1'].eql?(vs['prev_word1']) || vc['next_word1'].eql?(vs['next_word1']))
-                unless vc['matched'] == true || vs['next_word1'].include?(' ')
-                  write_match_to_info_hash(ks, kc, vc)
-                end
-              end
-            end
-          end
-        end
-      end
+      return unless ChatCorrect::Verb.new(word: vs['token'], pos: vc['pos_tag'], text: vc['token']).verb_error? &&
+      (vc['prev_word1'].eql?(vs['prev_word1']) || vc['next_word1'].eql?(vs['next_word1'])) &&
+      !vc['matched'] && !vs['next_word1'].include?(' ')
+        write_match_to_info_hash(ks, kc, vc)
     end
 
     def stage_7_pass
