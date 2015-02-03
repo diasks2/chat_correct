@@ -551,7 +551,7 @@ module ChatCorrect
                   end
                 else
                   #puts 'Check Possessive: ' + check_possessive(original_sentence_info_hash[j]['token'], corrected_sentence_info_hash[i]['token']).to_s
-                  if check_possessive(original_sentence_info_hash[j]['token'], corrected_sentence_info_hash[i]['token']) == true
+                  if ChatCorrect::Possessive.new(token_a: original_sentence_info_hash[j]['token'], token_b: corrected_sentence_info_hash[i]['token']).possessive?
                     #puts original_sentence_info_hash[j]['match_id'] + ' :possessive_mistake 16'
                     #puts corrected_sentence_info_hash[i]['match_id'] + ' :possessive_mistake_opposite 17'
                     wrong_info[original_sentence_info_hash[j]['token']] = 'possessive_mistake'
@@ -592,7 +592,7 @@ module ChatCorrect
                   #puts '17.1 corrected sentence word: ' + corrected_sentence_info_hash[i]['token'].to_s
                   #puts '17.1 student sentence word: ' + original_sentence_info_hash[word_order_key]['token'].to_s
                   #puts '17.1 corrected sentence pos_tag: ' + corrected_sentence_info_hash[i]['pos_tag'].to_s
-                  if check_verb(corrected_sentence_info_hash[i]['token'], original_sentence_info_hash[word_order_key]['token'], 'vb') == true
+                  if ChatCorrect::Verb.new(word: corrected_sentence_info_hash[i]['token'], pos: 'vb', text: original_sentence_info_hash[word_order_key]['token']).verb_error?
                     #puts corrected_sentence_info_hash[i]['match_id'] + ' :verb_mistake_opposite 17.001'
                     correct_info[corrected_sentence_info_hash[i]['token']] = 'verb_mistake_opposite'
                     combined_hash[combined_hash.length] = correct_info
@@ -601,7 +601,7 @@ module ChatCorrect
                     wrong_info[original_sentence_info_hash[word_order_key]['token']] = 'verb_mistake'
                     combined_hash[combined_hash.length] = wrong_info
                     #puts combined_hash.to_s + ' :verb_mistake 17.002'
-                  elsif check_pluralization(corrected_sentence_info_hash[i]['token'], original_sentence_info_hash[word_order_key]['token']) == true
+                  elsif ChatCorrect::Pluralization.new(token_a: corrected_sentence_info_hash[i]['token'], token_b: original_sentence_info_hash[word_order_key]['token']).pluralization_error?
                     #puts corrected_sentence_info_hash[i]['match_id'] + ' :pluralization_mistake_opposite 17.01'
                     correct_info[corrected_sentence_info_hash[i]['token']] = 'pluralization_mistake_opposite'
                     combined_hash[combined_hash.length] = correct_info
@@ -634,7 +634,7 @@ module ChatCorrect
                     concatenated_corrected_string = corrected_sentence_info_hash[i - 1]['token'].to_s + corrected_sentence_info_hash[i]['token'].to_s
                     #puts 'Corrected sentence word: ' + concatenated_corrected_string
                     #puts check_possessive(original_sentence_info_hash[j - 1]['token'], concatenated_corrected_string).to_s
-                    if check_possessive(original_sentence_info_hash[j - 1]['token'], concatenated_corrected_string) == true
+                    if ChatCorrect::Possessive.new(token_a: original_sentence_info_hash[j - 1]['token'], token_b: concatenated_corrected_string).possessive?
                       #puts original_sentence_info_hash[j - 1]['match_id'] + ' :possessive_mistake 19'
                       #puts corrected_sentence_info_hash[i]['match_id'] + ' :possessive_mistake_opposite 19.1'
                       wrong_info[original_sentence_info_hash[j - 1]['token']] = 'possessive_mistake'
@@ -715,7 +715,7 @@ module ChatCorrect
             #puts contraction_check(combined_hash[k - 2].key('unnecessary_word_mistake').to_s, combined_hash[k - 1].key('unnecessary_word_mistake').to_s, k1.to_s).to_s
             #puts combined_hash[k - 1].key('unnecessary_word_mistake').to_s
             #puts combined_hash[k - 2].key('unnecessary_word_mistake').to_s
-            if contraction_check(combined_hash[k - 2].key('unnecessary_word_mistake').to_s, combined_hash[k - 1].key('unnecessary_word_mistake').to_s, k1.to_s) == true
+            if ChatCorrect::Contraction.new(token_a: combined_hash[k - 2].key('unnecessary_word_mistake').to_s, token_b: combined_hash[k - 1].key('unnecessary_word_mistake').to_s, contraction: k1.to_s).contraction?
               combined_hash[k][k1] = 'stylistic_choice_opposite'
               combined_hash[k - 1][combined_hash[k - 1].key('unnecessary_word_mistake')] = 'stylistic_choice'
               combined_hash[k - 2][combined_hash[k - 2].key('unnecessary_word_mistake')] = 'stylistic_choice'
@@ -725,7 +725,7 @@ module ChatCorrect
             #puts contraction_check(combined_hash[k + 2].key('unnecessary_word_mistake').to_s, combined_hash[k + 1].key('unnecessary_word_mistake').to_s, k1.to_s).to_s
             #puts combined_hash[k + 1].key('unnecessary_word_mistake').to_s
             #puts combined_hash[k + 2].key('unnecessary_word_mistake').to_s
-            if contraction_check(combined_hash[k + 2].key('unnecessary_word_mistake').to_s, combined_hash[k + 1].key('unnecessary_word_mistake').to_s, k1.to_s) == true
+            if ChatCorrect::Contraction.new(token_a: combined_hash[k + 2].key('unnecessary_word_mistake').to_s, token_b: combined_hash[k + 1].key('unnecessary_word_mistake').to_s, contraction: k1.to_s).contraction?
               combined_hash[k][k1] = 'stylistic_choice_opposite'
               combined_hash[k + 1][combined_hash[k + 1].key('unnecessary_word_mistake')] = 'stylistic_choice'
               combined_hash[k + 2][combined_hash[k + 2].key('unnecessary_word_mistake')] = 'stylistic_choice'
@@ -735,7 +735,7 @@ module ChatCorrect
             #puts contraction_check(combined_hash[k + 1].key('missing_word_mistake').to_s, combined_hash[k + 2].key('missing_word_mistake').to_s, k1.to_s).to_s
             #puts combined_hash[k + 1].key('missing_word_mistake').to_s
             #puts combined_hash[k + 2].key('missing_word_mistake').to_s
-            if contraction_check(combined_hash[k + 1].key('missing_word_mistake').to_s, combined_hash[k + 2].key('missing_word_mistake').to_s, k1.to_s) == true
+            if ChatCorrect::Contraction.new(token_a: combined_hash[k + 1].key('missing_word_mistake').to_s, token_b: combined_hash[k + 2].key('missing_word_mistake').to_s,  contraction: k1.to_s).contraction?
               combined_hash[k][k1] = 'stylistic_choice'
               combined_hash[k + 1][combined_hash[k + 1].key('missing_word_mistake')] = 'stylistic_choice_opposite'
               combined_hash[k + 2][combined_hash[k + 2].key('missing_word_mistake')] = 'stylistic_choice_opposite'
@@ -745,7 +745,7 @@ module ChatCorrect
             #puts contraction_check(combined_hash[k - 2].key('missing_word_mistake').to_s, combined_hash[k - 1].key('missing_word_mistake').to_s, k1.to_s).to_s
             #puts combined_hash[k - 1].key('missing_word_mistake').to_s
             #puts combined_hash[k - 2].key('missing_word_mistake').to_s
-            if contraction_check(combined_hash[k - 2].key('missing_word_mistake').to_s, combined_hash[k - 1].key('missing_word_mistake').to_s, k1.to_s) == true
+            if ChatCorrect::Contraction.new(token_a: combined_hash[k - 2].key('missing_word_mistake').to_s, token_b: combined_hash[k - 1].key('missing_word_mistake').to_s,  contraction: k1.to_s).contraction?
               combined_hash[k][k1] = 'stylistic_choice'
               combined_hash[k - 1][combined_hash[k - 1].key('missing_word_mistake')] = 'stylistic_choice_opposite'
               combined_hash[k - 2][combined_hash[k - 2].key('missing_word_mistake')] = 'stylistic_choice_opposite'
@@ -753,7 +753,7 @@ module ChatCorrect
           end
           if k1.include?('ƪ') == true && v1.include?('verb_mistake') && combined_hash[k + 1].to_s.include?('verb_mistake_opposite')
             #puts 'Split sentences k1: ' + k1.gsub(/ƪ/o, "'").split.to_s
-            if contraction_check(combined_hash[k + 1].key('verb_mistake_opposite').to_s.split[0].to_s, combined_hash[k + 1].key('verb_mistake_opposite').to_s.split[1].to_s, k1.gsub(/ƪ/o, "'").split[0].to_s.gsub(/'/o, 'ƪ')) == true
+            if ChatCorrect::Contraction.new(token_a: combined_hash[k + 1].key('verb_mistake_opposite').to_s.split[0].to_s, token_b: combined_hash[k + 1].key('verb_mistake_opposite').to_s.split[1].to_s,  contraction: k1.gsub(/ƪ/o, "'").split[0].to_s.gsub(/'/o, 'ƪ')).contraction?
               combined_hash[k][k1] = 'stylistic_choice'
               combined_hash[k + 1][combined_hash[k + 1].key('verb_mistake_opposite')] = 'stylistic_choice_opposite'
             end
@@ -765,7 +765,7 @@ module ChatCorrect
             #puts combined_hash[k - 1].key('verb_mistake').to_s.split[0].to_s
             #puts combined_hash[k - 1].key('verb_mistake').to_s.split[1].to_s
             #puts k1.gsub(/ƪ/o, "'").split[0].to_s
-            if contraction_check(combined_hash[k - 1].key('verb_mistake').to_s.split[0].to_s, combined_hash[k - 1].key('verb_mistake').to_s.split[1].to_s, k1.gsub(/ƪ/o, "'").split[0].to_s.gsub(/'/o, 'ƪ')) == true
+            if ChatCorrect::Contraction.new(token_a: combined_hash[k - 1].key('verb_mistake').to_s.split[0].to_s, token_b: combined_hash[k - 1].key('verb_mistake').to_s.split[1].to_s,  contraction: k1.gsub(/ƪ/o, "'").split[0].to_s.gsub(/'/o, 'ƪ')).contraction?
               combined_hash[k][k1] = 'stylistic_choice_opposite'
               combined_hash[k - 1][combined_hash[k - 1].key('verb_mistake')] = 'stylistic_choice'
             end
