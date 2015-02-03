@@ -324,7 +324,7 @@ module ChatCorrect
         unless vc['matched'] == true
           original_sentence_info_hash.each do |ks, vs|
             if vs['match_id'].blank?
-              if check_pluralization(vc['token'], vs['token']) == true
+              if ChatCorrect::Pluralization.new(token_a: vc['token'], token_b: vs['token']).pluralization_error?
                 unless vc['matched'] == true
                   #puts 'Stage 4.2 Executed'
                   #puts 'VC: ' + vc.to_s
@@ -343,7 +343,7 @@ module ChatCorrect
         unless vc['matched'] == true
           original_sentence_info_hash.each do |ks, vs|
             if vs['match_id'].blank?
-              if (check_verb(vs['token'], vc['token'], vc['pos_tag']) == true) && (vc['prev_word1'] == vs['prev_word1'] || vc['next_word1'] == vs['next_word1'])
+              if ChatCorrect::Verb.new(word: vs['token'], pos: vc['pos_tag'], text: vc['token']).verb_error? && (vc['prev_word1'].eql?(vs['prev_word1']) || vc['next_word1'].eql?(vs['next_word1']))
                 unless vc['matched'] == true || vs['next_word1'].include?(' ')
                   #puts 'Stage 4.3 Executed'
                   #puts 'VC: ' + vc.to_s
