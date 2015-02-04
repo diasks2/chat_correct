@@ -18,36 +18,19 @@ module ChatCorrect
       # puts "CSTag: #{corrected_sentence_tagged}"
       # puts "OSTD: #{original_sentence_tokenized_downcased}"
       # puts "CSTD: #{corrected_sentence_tokenized_downcased}"
-
-      # puts "OSI: #{original_sentence_info_hash}"
-      # puts "CSI: #{corrected_sentence_info_hash}"
-      # puts "**********"
       stage_1
       debug
-      # puts "OSI: #{original_sentence_info_hash}"
-      # puts "CSI: #{corrected_sentence_info_hash}"
-      # puts "End of Stage 1 **********"
       stage_2
       debug
-      # puts "OSI: #{original_sentence_info_hash}"
-      # puts "CSI: #{corrected_sentence_info_hash}"
-      # puts "End of Stage 2 **********"
       iterate_sentences('stage_3')
       debug
-      # puts "OSI: #{original_sentence_info_hash}"
-      # puts "CSI: #{corrected_sentence_info_hash}"
-      # puts "End of Stage 3 **********"
       iterate_sentences('stage_4')
       debug
       iterate_sentences('stage_5')
       debug
       iterate_sentences('stage_6')
       debug
-      prev_next_match_check
-      debug
       iterate_sentences('stage_7')
-      debug
-      prev_next_match_check
       debug
       stage_8
       debug
@@ -237,11 +220,7 @@ module ChatCorrect
       corrected_sentence_info_hash.each do |kc, vc|
         if !vc['matched']
           prev_match_vc = set_previous_match(kc, corrected_sentence_info_hash)
-          if kc.eql?(corrected_sentence_info_hash.length - 1)
-              next_match_vc = 'ȹ'
-            else
-              next_match_vc = corrected_sentence_info_hash[kc + 1]['match_id']
-            end
+            next_match_vc = set_next_match(kc, corrected_sentence_info_hash)
             if kc.eql?(corrected_sentence_info_hash.length - 1)
               next_word_vc = 'ȹ'
             else

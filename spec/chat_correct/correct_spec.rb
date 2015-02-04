@@ -35,7 +35,7 @@ RSpec.describe ChatCorrect::Correct do
 
     it 'Annotates the corrections' do
       #expect(@cc.correct).to eq({0 => {'token' => 'is', 'type' => 'capitalization_mistake'}, 1 => {'token' => 'Is', 'type' => 'capitalization_correction'},  2 => {'token' => 'the', 'type' => 'no_mistake'},  3 => {'token' => ',', 'type' => 'punctuation_mistake'}, 4 => {'token' => 'puncttuation', 'type' => 'spelling_mistake'}, 5 => {'token' => 'punctuation', 'type' => 'spelling_correction'}, 6 => {'token' => 'are', 'type' => 'unnecessary_word_mistake'},  7 => {'token' => 'wrong', 'type' => 'no_mistake'},  8 => {'token' => '.', 'type' => 'punctuation_mistake'},  9 => {'token' => '?', 'type' => 'punctuation_correction'}})
-      expect(@cc.correct).to eq("{\"0\":{\"is\":\"capitalization_mistake\"},\"1\":{\"Is\":\"capitalization_mistake_opposite\"},\"2\":{\"the\":\"no_mistake\"},\"3\":{\",\":\"punctuation_mistake\"},\"4\":{\"puncttuation\":\"spelling_mistake\"},\"5\":{\"punctuation\":\"spelling_mistake_opposite\"},\"6\":{\"are\":\"unnecessary_word_mistake\"},\"7\":{\"wrong\":\"no_mistake\"},\"8\":{\".\":\"punctuation_mistake\"},\"9\":{\"?\":\"punctuation_mistake_opposite\"}}")
+      expect(@cc.correct).to eq("{\"0\":{\"is\":\"capitalization_mistake\"},\"1\":{\"Is\":\"capitalization_mistake_correction\"},\"2\":{\"the\":\"no_mistake\"},\"3\":{\",\":\"punctuation_mistake\"},\"4\":{\"puncttuation\":\"spelling_mistake\"},\"5\":{\"punctuation\":\"spelling_mistake_correction\"},\"6\":{\"are\":\"unnecessary_word_mistake\"},\"7\":{\"wrong\":\"no_mistake\"},\"8\":{\".\":\"punctuation_mistake\"},\"9\":{\"?\":\"punctuation_mistake_correction\"}}")
     end
 
     # it 'Reports the mistakes' do
@@ -79,7 +79,7 @@ RSpec.describe ChatCorrect::Correct do
     end
 
     it 'Annotates the corrections' do
-      expect(@cc.correct).to eq("{\"0\":{\"I\":\"no_mistake\"},\"1\":{\"go\":\"verb_mistake\"},\"2\":{\"went\":\"verb_mistake_opposite\"},\"3\":{\"on\":\"missing_word_mistake\"},\"4\":{\"a\":\"missing_word_mistake\"},\"5\":{\"trip\":\"no_mistake\"},\"6\":{\"last\":\"no_mistake\"},\"7\":{\"month\":\"no_mistake\"},\"8\":{\".\":\"no_mistake\"}}")
+      expect(@cc.correct).to eq("{\"0\":{\"I\":\"no_mistake\"},\"1\":{\"go\":\"verb_mistake\"},\"2\":{\"went\":\"verb_mistake_correction\"},\"3\":{\"on\":\"missing_word_mistake\"},\"4\":{\"a\":\"missing_word_mistake\"},\"5\":{\"trip\":\"no_mistake\"},\"6\":{\"last\":\"no_mistake\"},\"7\":{\"month\":\"no_mistake\"},\"8\":{\".\":\"no_mistake\"}}")
     end
 
     # it 'Counts the number of mistakes' do
@@ -99,7 +99,7 @@ RSpec.describe ChatCorrect::Correct do
     end
 
     it 'Annotates the corrections' do
-      expect(@cc.correct).to eq("{\"0\":{\"This\":\"no_mistake\"},\"1\":{\"is\":\"no_mistake\"},\"2\":{\"an\":\"no_mistake\"},\"3\":{\"exclamation\":\"no_mistake\"},\"4\":{\".\":\"punctuation_mistake\"},\"5\":{\"!\":\"punctuation_mistake_opposite\"}}")
+      expect(@cc.correct).to eq("{\"0\":{\"This\":\"no_mistake\"},\"1\":{\"is\":\"no_mistake\"},\"2\":{\"an\":\"no_mistake\"},\"3\":{\"exclamation\":\"no_mistake\"},\"4\":{\".\":\"punctuation_mistake\"},\"5\":{\"!\":\"punctuation_mistake_correction\"}}")
     end
 
     # it 'Counts the number of mistakes' do
@@ -119,7 +119,7 @@ RSpec.describe ChatCorrect::Correct do
     end
 
     it 'Annotates the corrections' do
-      expect(@cc.correct).to eq("{\"0\":{\"what\":\"capitalization_mistake\"},\"1\":{\"What\":\"capitalization_mistake_opposite\"},\"2\":{\"am\":\"verb_mistake\"},\"3\":{\"was\":\"verb_mistake_opposite\"},\"4\":{\"i\":\"capitalization_mistake\"},\"5\":{\"I\":\"capitalization_mistake_opposite\"},\"6\":{\"thinking\":\"no_mistake\"},\"7\":{\"!\":\"punctuation_mistake\"},\"8\":{\"?\":\"punctuation_mistake_opposite\"}}")
+      expect(@cc.correct).to eq("{\"0\":{\"what\":\"capitalization_mistake\"},\"1\":{\"What\":\"capitalization_mistake_correction\"},\"2\":{\"am\":\"verb_mistake\"},\"3\":{\"was\":\"verb_mistake_correction\"},\"4\":{\"i\":\"capitalization_mistake\"},\"5\":{\"I\":\"capitalization_mistake_correction\"},\"6\":{\"thinking\":\"no_mistake\"},\"7\":{\"!\":\"punctuation_mistake\"},\"8\":{\"?\":\"punctuation_mistake_correction\"}}")
     end
 
     # it 'Counts the number of mistakes' do
@@ -139,7 +139,7 @@ RSpec.describe ChatCorrect::Correct do
     end
 
     it 'Annotates the corrections' do
-      expect(@cc.correct).to eq("{\"0\":{\"There\":\"no_mistake\"},\"1\":{\"arre\":\"spelling_mistake\"},\"2\":{\"are\":\"spelling_mistake_opposite\"},\"3\":{\"a\":\"missing_word_mistake\"},\"4\":{\"lotts\":\"spelling_mistake\"},\"5\":{\"lot\":\"spelling_mistake_opposite\"},\"6\":{\"of\":\"no_mistake\"},\"7\":{\"misspeellings\":\"spelling_mistake\"},\"8\":{\"misspellings\":\"spelling_mistake_opposite\"},\"9\":{\".\":\"no_mistake\"}}")
+      expect(@cc.correct).to eq("{\"0\":{\"There\":\"no_mistake\"},\"1\":{\"arre\":\"spelling_mistake\"},\"2\":{\"are\":\"spelling_mistake_correction\"},\"3\":{\"a\":\"missing_word_mistake\"},\"4\":{\"lotts\":\"spelling_mistake\"},\"5\":{\"lot\":\"spelling_mistake_correction\"},\"6\":{\"of\":\"no_mistake\"},\"7\":{\"misspeellings\":\"spelling_mistake\"},\"8\":{\"misspellings\":\"spelling_mistake_correction\"},\"9\":{\".\":\"no_mistake\"}}")
     end
 
     # it 'Counts the number of mistakes' do
@@ -159,7 +159,7 @@ RSpec.describe ChatCorrect::Correct do
     end
 
     it 'Annotates the corrections' do
-      expect(@cc.correct).to eq("{\"0\":{\"There\":\"no_mistake\"},\"1\":{\"arre\":\"spelling_mistake\"},\"2\":{\"are\":\"spelling_mistake_opposite\"},\"3\":{\"a\":\"missing_word_mistake\"},\"4\":{\"lotts\":\"spelling_mistake\"},\"5\":{\"lot\":\"spelling_mistake_opposite\"},\"6\":{\",\":\"punctuation_mistake\"},\"7\":{\"off\":\"spelling_mistake\"},\"8\":{\"of\":\"spelling_mistake_opposite\"},\"9\":{\"consecutiveee\":\"spelling_mistake\"},\"10\":{\"consecutive\":\"spelling_mistake_opposite\"},\"11\":{\"misspeellings\":\"spelling_mistake\"},\"12\":{\"misspellings\":\"spelling_mistake_opposite\"},\"13\":{\"!\":\"punctuation_mistake\"},\"14\":{\".\":\"punctuation_mistake_opposite\"}}")
+      expect(@cc.correct).to eq("{\"0\":{\"There\":\"no_mistake\"},\"1\":{\"arre\":\"spelling_mistake\"},\"2\":{\"are\":\"spelling_mistake_correction\"},\"3\":{\"a\":\"missing_word_mistake\"},\"4\":{\"lotts\":\"spelling_mistake\"},\"5\":{\"lot\":\"spelling_mistake_correction\"},\"6\":{\",\":\"punctuation_mistake\"},\"7\":{\"off\":\"spelling_mistake\"},\"8\":{\"of\":\"spelling_mistake_correction\"},\"9\":{\"consecutiveee\":\"spelling_mistake\"},\"10\":{\"consecutive\":\"spelling_mistake_correction\"},\"11\":{\"misspeellings\":\"spelling_mistake\"},\"12\":{\"misspellings\":\"spelling_mistake_correction\"},\"13\":{\"!\":\"punctuation_mistake\"},\"14\":{\".\":\"punctuation_mistake_correction\"}}")
     end
 
     # it 'Counts the number of mistakes' do
@@ -199,7 +199,7 @@ RSpec.describe ChatCorrect::Correct do
     end
 
     it 'Annotates the corrections' do
-      expect(@cc.correct).to eq("{\"0\":{\"This\":\"no_mistake\"},\"1\":{\"is\":\"no_mistake\"},\"2\":{\"and\":\"no_mistake\"},\"3\":{\"this\":\"no_mistake\"},\"4\":{\"and\":\"no_mistake\"},\"5\":{\"this\":\"no_mistake\"},\"6\":{\"is\":\"no_mistake\"},\"7\":{\"a\":\"no_mistake\"},\"8\":{\"correct\":\"no_mistake\"},\"9\":{\"double\":\"no_mistake\"},\"10\":{\"word\":\"no_mistake\"},\"11\":{\"check\":\"no_mistake\"},\"12\":{\"!\":\"punctuation_mistake\"},\"13\":{\".\":\"punctuation_mistake_opposite\"}}")
+      expect(@cc.correct).to eq("{\"0\":{\"This\":\"no_mistake\"},\"1\":{\"is\":\"no_mistake\"},\"2\":{\"and\":\"no_mistake\"},\"3\":{\"this\":\"no_mistake\"},\"4\":{\"and\":\"no_mistake\"},\"5\":{\"this\":\"no_mistake\"},\"6\":{\"is\":\"no_mistake\"},\"7\":{\"a\":\"no_mistake\"},\"8\":{\"correct\":\"no_mistake\"},\"9\":{\"double\":\"no_mistake\"},\"10\":{\"word\":\"no_mistake\"},\"11\":{\"check\":\"no_mistake\"},\"12\":{\"!\":\"punctuation_mistake\"},\"13\":{\".\":\"punctuation_mistake_correction\"}}")
     end
 
     # it 'Counts the number of mistakes' do
@@ -219,7 +219,7 @@ RSpec.describe ChatCorrect::Correct do
     end
 
     it 'Annotates the corrections' do
-      expect(@cc.correct).to eq("{\"0\":{\"He\":\"no_mistake\"},\"1\":{\"said\":\"no_mistake\"},\"2\":{\",\":\"no_mistake\"},\"3\":{\"\"\":\"no_mistake\"},\"4\":{\"Shhe\":\"spelling_mistake\"},\"5\":{\"She\":\"spelling_mistake_opposite\"},\"6\":{\"is\":\"no_mistake\"},\"7\":{\"a\":\"no_mistake\"},\"8\":{\"crazy\":\"no_mistake\"},\"9\":{\"girl\":\"no_mistake\"},\"10\":{\".\":\"word_order_mistake\"},\"11\":{\"\"\":\"word_order_mistake\"}}")
+      expect(@cc.correct).to eq("{\"0\":{\"He\":\"no_mistake\"},\"1\":{\"said\":\"no_mistake\"},\"2\":{\",\":\"no_mistake\"},\"3\":{\"\"\":\"no_mistake\"},\"4\":{\"Shhe\":\"spelling_mistake\"},\"5\":{\"She\":\"spelling_mistake_correction\"},\"6\":{\"is\":\"no_mistake\"},\"7\":{\"a\":\"no_mistake\"},\"8\":{\"crazy\":\"no_mistake\"},\"9\":{\"girl\":\"no_mistake\"},\"10\":{\".\":\"word_order_mistake\"},\"11\":{\"\"\":\"word_order_mistake\"}}")
     end
 
     # it 'Counts the number of mistakes' do
@@ -279,7 +279,7 @@ RSpec.describe ChatCorrect::Correct do
     end
 
     it 'Annotates the corrections' do
-      expect(@cc.correct).to eq("{\"0\":{\"I\":\"no_mistake\"},\"1\":{\"call\":\"verb_mistake\"},\"2\":{\"will call\":\"verb_mistake_opposite\"},\"3\":{\"my\":\"no_mistake\"},\"4\":{\"mom\":\"no_mistake\"},\"5\":{\"tomorrow\":\"no_mistake\"},\"6\":{\".\":\"no_mistake\"}}")
+      expect(@cc.correct).to eq("{\"0\":{\"I\":\"no_mistake\"},\"1\":{\"call\":\"verb_mistake\"},\"2\":{\"will call\":\"verb_mistake_correction\"},\"3\":{\"my\":\"no_mistake\"},\"4\":{\"mom\":\"no_mistake\"},\"5\":{\"tomorrow\":\"no_mistake\"},\"6\":{\".\":\"no_mistake\"}}")
     end
 
     # it 'Counts the number of mistakes' do
@@ -299,7 +299,7 @@ RSpec.describe ChatCorrect::Correct do
     end
 
     it 'Annotates the corrections' do
-      expect(@cc.correct).to eq("{\"0\":{\"I\":\"no_mistake\"},\"1\":{\"flied\":\"verb_mistake\"},\"2\":{\"flew\":\"verb_mistake_opposite\"},\"3\":{\"home\":\"no_mistake\"},\"4\":{\"yesterday\":\"no_mistake\"},\"5\":{\".\":\"no_mistake\"}}")
+      expect(@cc.correct).to eq("{\"0\":{\"I\":\"no_mistake\"},\"1\":{\"flied\":\"verb_mistake\"},\"2\":{\"flew\":\"verb_mistake_correction\"},\"3\":{\"home\":\"no_mistake\"},\"4\":{\"yesterday\":\"no_mistake\"},\"5\":{\".\":\"no_mistake\"}}")
     end
 
     # it 'Counts the number of mistakes' do
@@ -319,7 +319,7 @@ RSpec.describe ChatCorrect::Correct do
     end
 
     it 'Annotates the corrections' do
-      expect(@cc.correct).to eq("{\"0\":{\"This\":\"no_mistake\"},\"1\":{\"shouldn't\":\"no_mistake\"},\"2\":{\"be\":\"no_mistake\"},\"3\":{\"use\":\"verb_mistake\"},\"4\":{\"used\":\"verb_mistake_opposite\"},\"5\":{\"to\":\"no_mistake\"},\"6\":{\"test\":\"no_mistake\"},\"7\":{\"contractions\":\"no_mistake\"},\"8\":{\",\":\"no_mistake\"},\"9\":{\"but\":\"no_mistake\"},\"10\":{\"couln't\":\"spelling_mistake\"},\"11\":{\"couldn't\":\"spelling_mistake_opposite\"},\"12\":{\"it\":\"no_mistake\"},\"13\":{\"?\":\"no_mistake\"}}")
+      expect(@cc.correct).to eq("{\"0\":{\"This\":\"no_mistake\"},\"1\":{\"shouldn't\":\"no_mistake\"},\"2\":{\"be\":\"no_mistake\"},\"3\":{\"use\":\"verb_mistake\"},\"4\":{\"used\":\"verb_mistake_correction\"},\"5\":{\"to\":\"no_mistake\"},\"6\":{\"test\":\"no_mistake\"},\"7\":{\"contractions\":\"no_mistake\"},\"8\":{\",\":\"no_mistake\"},\"9\":{\"but\":\"no_mistake\"},\"10\":{\"couln't\":\"spelling_mistake\"},\"11\":{\"couldn't\":\"spelling_mistake_correction\"},\"12\":{\"it\":\"no_mistake\"},\"13\":{\"?\":\"no_mistake\"}}")
     end
 
     # it 'Counts the number of mistakes' do
@@ -339,7 +339,7 @@ RSpec.describe ChatCorrect::Correct do
     end
 
     it 'Annotates the corrections' do
-      expect(@cc.correct).to eq("{\"0\":{\"This\":\"no_mistake\"},\"1\":{\"is\":\"no_mistake\"},\"2\":{\"to\":\"no_mistake\"},\"3\":{\"test\":\"no_mistake\"},\"4\":{\",\":\"no_mistake\"},\"5\":{\"'\":\"no_mistake\"},\"6\":{\"single\":\"capitalization_mistake\"},\"7\":{\"Single\":\"capitalization_mistake_opposite\"},\"8\":{\"quotes\":\"no_mistake\"},\"9\":{\".\":\"word_order_mistake\"},\"10\":{\"'\":\"word_order_mistake\"}}")
+      expect(@cc.correct).to eq("{\"0\":{\"This\":\"no_mistake\"},\"1\":{\"is\":\"no_mistake\"},\"2\":{\"to\":\"no_mistake\"},\"3\":{\"test\":\"no_mistake\"},\"4\":{\",\":\"no_mistake\"},\"5\":{\"'\":\"no_mistake\"},\"6\":{\"single\":\"capitalization_mistake\"},\"7\":{\"Single\":\"capitalization_mistake_correction\"},\"8\":{\"quotes\":\"no_mistake\"},\"9\":{\".\":\"word_order_mistake\"},\"10\":{\"'\":\"word_order_mistake\"}}")
     end
 
     # it 'Counts the number of mistakes' do
@@ -379,7 +379,7 @@ RSpec.describe ChatCorrect::Correct do
     end
 
     it 'Annotates the corrections' do
-      expect(@cc.correct).to eq("{\"0\":{\"I\":\"no_mistake\"},\"1\":{\"will call\":\"verb_mistake\"},\"2\":{\"called\":\"verb_mistake_opposite\"},\"3\":{\"my\":\"no_mistake\"},\"4\":{\"mom\":\"no_mistake\"},\"5\":{\"yesterday\":\"no_mistake\"},\"6\":{\".\":\"no_mistake\"}}")
+      expect(@cc.correct).to eq("{\"0\":{\"I\":\"no_mistake\"},\"1\":{\"will call\":\"verb_mistake\"},\"2\":{\"called\":\"verb_mistake_correction\"},\"3\":{\"my\":\"no_mistake\"},\"4\":{\"mom\":\"no_mistake\"},\"5\":{\"yesterday\":\"no_mistake\"},\"6\":{\".\":\"no_mistake\"}}")
     end
 
     # it 'Counts the number of mistakes' do
@@ -399,7 +399,7 @@ RSpec.describe ChatCorrect::Correct do
     end
 
     it 'Annotates the corrections' do
-      expect(@cc.correct).to eq("{\"0\":{\"Test\":\"no_mistake\"},\"1\":{\"run\":\"unnecessary_word_mistake\"},\"2\":{\"the\":\"no_mistake\"},\"3\":{\"word\":\"word_order_mistake\"},\"4\":{\"order\":\"word_order_mistake\"},\"5\":{\"with\":\"no_mistake\"},\"6\":{\"anotther\":\"spelling_mistake\"},\"7\":{\"another\":\"spelling_mistake_opposite\"},\"8\":{\"simple\":\"missing_word_mistake\"},\"9\":{\"mistake\":\"no_mistake\"},\"10\":{\".\":\"no_mistake\"}}")
+      expect(@cc.correct).to eq("{\"0\":{\"Test\":\"no_mistake\"},\"1\":{\"run\":\"unnecessary_word_mistake\"},\"2\":{\"the\":\"no_mistake\"},\"3\":{\"word\":\"word_order_mistake\"},\"4\":{\"order\":\"word_order_mistake\"},\"5\":{\"with\":\"no_mistake\"},\"6\":{\"anotther\":\"spelling_mistake\"},\"7\":{\"another\":\"spelling_mistake_correction\"},\"8\":{\"simple\":\"missing_word_mistake\"},\"9\":{\"mistake\":\"no_mistake\"},\"10\":{\".\":\"no_mistake\"}}")
     end
 
     # it 'Counts the number of mistakes' do
@@ -439,7 +439,7 @@ RSpec.describe ChatCorrect::Correct do
     end
 
     it 'Annotates the corrections' do
-      expect(@cc.correct).to eq("{\"0\":{\"This\":\"no_mistake\"},\"1\":{\"is\":\"no_mistake\"},\"2\":{\"to\":\"no_mistake\"},\"3\":{\"test\":\"no_mistake\"},\"4\":{\"quotations\":\"no_mistake\"},\"5\":{\"\"\":\"punctuation_mistake\"},\"6\":{\"again\":\"no_mistake\"},\"7\":{\"\"\":\"punctuation_mistake\"},\"8\":{\".\":\"punctuation_mistake_opposite\"}}")
+      expect(@cc.correct).to eq("{\"0\":{\"This\":\"no_mistake\"},\"1\":{\"is\":\"no_mistake\"},\"2\":{\"to\":\"no_mistake\"},\"3\":{\"test\":\"no_mistake\"},\"4\":{\"quotations\":\"no_mistake\"},\"5\":{\"\"\":\"punctuation_mistake\"},\"6\":{\"again\":\"no_mistake\"},\"7\":{\"\"\":\"punctuation_mistake\"},\"8\":{\".\":\"punctuation_mistake_correction\"}}")
     end
 
     # it 'Counts the number of mistakes' do
@@ -459,7 +459,7 @@ RSpec.describe ChatCorrect::Correct do
     end
 
     it 'Annotates the corrections' do
-      expect(@cc.correct).to eq("{\"0\":{\"He\":\"no_mistake\"},\"1\":{\"didn't realize\":\"verb_mistake\"},\"2\":{\"hadn't realized\":\"verb_mistake_opposite\"},\"3\":{\"that\":\"no_mistake\"},\"4\":{\"he\":\"no_mistake\"},\"5\":{\"should\":\"no_mistake\"},\"6\":{\"had changed\":\"verb_mistake\"},\"7\":{\"have changed\":\"verb_mistake_opposite\"},\"8\":{\"the\":\"no_mistake\"},\"9\":{\"locks\":\"no_mistake\"},\"10\":{\".\":\"no_mistake\"}}")
+      expect(@cc.correct).to eq("{\"0\":{\"He\":\"no_mistake\"},\"1\":{\"didn't realize\":\"verb_mistake\"},\"2\":{\"hadn't realized\":\"verb_mistake_correction\"},\"3\":{\"that\":\"no_mistake\"},\"4\":{\"he\":\"no_mistake\"},\"5\":{\"should\":\"no_mistake\"},\"6\":{\"had changed\":\"verb_mistake\"},\"7\":{\"have changed\":\"verb_mistake_correction\"},\"8\":{\"the\":\"no_mistake\"},\"9\":{\"locks\":\"no_mistake\"},\"10\":{\".\":\"no_mistake\"}}")
     end
 
     # it 'Counts the number of mistakes' do
@@ -479,7 +479,7 @@ RSpec.describe ChatCorrect::Correct do
     end
 
     it 'Annotates the corrections' do
-      expect(@cc.correct).to eq("{\"0\":{\"I\":\"no_mistake\"},\"1\":{\"will call\":\"verb_mistake\"},\"2\":{\"would have called\":\"verb_mistake_opposite\"},\"3\":{\"my\":\"no_mistake\"},\"4\":{\"mom\":\"no_mistake\"},\"5\":{\"yesterday\":\"no_mistake\"},\"6\":{\"if\":\"no_mistake\"},\"7\":{\"I\":\"no_mistake\"},\"8\":{\"had\":\"no_mistake\"},\"9\":{\"had\":\"missing_word_mistake\"},\"10\":{\"time\":\"no_mistake\"},\"11\":{\".\":\"no_mistake\"}}")
+      expect(@cc.correct).to eq("{\"0\":{\"I\":\"no_mistake\"},\"1\":{\"will call\":\"verb_mistake\"},\"2\":{\"would have called\":\"verb_mistake_correction\"},\"3\":{\"my\":\"no_mistake\"},\"4\":{\"mom\":\"no_mistake\"},\"5\":{\"yesterday\":\"no_mistake\"},\"6\":{\"if\":\"no_mistake\"},\"7\":{\"I\":\"no_mistake\"},\"8\":{\"had\":\"no_mistake\"},\"9\":{\"had\":\"missing_word_mistake\"},\"10\":{\"time\":\"no_mistake\"},\"11\":{\".\":\"no_mistake\"}}")
     end
 
     # it 'Counts the number of mistakes' do
@@ -499,7 +499,7 @@ RSpec.describe ChatCorrect::Correct do
     end
 
     it 'Annotates the corrections' do
-      expect(@cc.correct).to eq("{\"0\":{\"I\":\"no_mistake\"},\"1\":{\"call\":\"verb_mistake\"},\"2\":{\"would have called\":\"verb_mistake_opposite\"},\"3\":{\"my\":\"no_mistake\"},\"4\":{\"mom\":\"no_mistake\"},\"5\":{\"yesterday\":\"no_mistake\"},\"6\":{\".\":\"no_mistake\"}}")
+      expect(@cc.correct).to eq("{\"0\":{\"I\":\"no_mistake\"},\"1\":{\"call\":\"verb_mistake\"},\"2\":{\"would have called\":\"verb_mistake_correction\"},\"3\":{\"my\":\"no_mistake\"},\"4\":{\"mom\":\"no_mistake\"},\"5\":{\"yesterday\":\"no_mistake\"},\"6\":{\".\":\"no_mistake\"}}")
     end
 
     # it 'Counts the number of mistakes' do
@@ -519,7 +519,7 @@ RSpec.describe ChatCorrect::Correct do
     end
 
     it 'Annotates the corrections' do
-      expect(@cc.correct).to eq("{\"0\":{\"I\":\"no_mistake\"},\"1\":{\"singed\":\"verb_mistake\"},\"2\":{\"sang\":\"verb_mistake_opposite\"},\"3\":{\"at\":\"no_mistake\"},\"4\":{\"the\":\"no_mistake\"},\"5\":{\"karaoke\":\"no_mistake\"},\"6\":{\"bar\":\"no_mistake\"},\"7\":{\".\":\"no_mistake\"}}")
+      expect(@cc.correct).to eq("{\"0\":{\"I\":\"no_mistake\"},\"1\":{\"singed\":\"verb_mistake\"},\"2\":{\"sang\":\"verb_mistake_correction\"},\"3\":{\"at\":\"no_mistake\"},\"4\":{\"the\":\"no_mistake\"},\"5\":{\"karaoke\":\"no_mistake\"},\"6\":{\"bar\":\"no_mistake\"},\"7\":{\".\":\"no_mistake\"}}")
     end
 
     # it 'Counts the number of mistakes' do
@@ -539,7 +539,7 @@ RSpec.describe ChatCorrect::Correct do
     end
 
     it 'Annotates the corrections' do
-      expect(@cc.correct).to eq("{\"0\":{\"I\":\"no_mistake\"},\"1\":{\"flied\":\"verb_mistake\"},\"2\":{\"flew\":\"verb_mistake_opposite\"},\"3\":{\"to\":\"no_mistake\"},\"4\":{\"California\":\"no_mistake\"},\"5\":{\"and\":\"no_mistake\"},\"6\":{\"go\":\"verb_mistake\"},\"7\":{\"went\":\"verb_mistake_opposite\"},\"8\":{\"to\":\"no_mistake\"},\"9\":{\"the\":\"missing_word_mistake\"},\"10\":{\"zoo\":\"no_mistake\"},\"11\":{\".\":\"no_mistake\"}}")
+      expect(@cc.correct).to eq("{\"0\":{\"I\":\"no_mistake\"},\"1\":{\"flied\":\"verb_mistake\"},\"2\":{\"flew\":\"verb_mistake_correction\"},\"3\":{\"to\":\"no_mistake\"},\"4\":{\"California\":\"no_mistake\"},\"5\":{\"and\":\"no_mistake\"},\"6\":{\"go\":\"verb_mistake\"},\"7\":{\"went\":\"verb_mistake_correction\"},\"8\":{\"to\":\"no_mistake\"},\"9\":{\"the\":\"missing_word_mistake\"},\"10\":{\"zoo\":\"no_mistake\"},\"11\":{\".\":\"no_mistake\"}}")
     end
 
     # it 'Counts the number of mistakes' do
@@ -599,7 +599,7 @@ RSpec.describe ChatCorrect::Correct do
     end
 
     it 'Annotates the corrections' do
-      expect(@cc.correct).to eq("{\"0\":{\"If\":\"no_mistake\"},\"1\":{\"my\":\"no_mistake\"},\"2\":{\"school\":\"no_mistake\"},\"3\":{\"were located\":\"no_mistake\"},\"4\":{\"in\":\"no_mistake\"},\"5\":{\"Tokyo\":\"no_mistake\"},\"6\":{\",\":\"no_mistake\"},\"7\":{\"the\":\"missing_word_mistake\"},\"8\":{\"situation\":\"no_mistake\"},\"9\":{\"would have\":\"verb_mistake\"},\"10\":{\"would have been\":\"verb_mistake_opposite\"},\"11\":{\"quite\":\"no_mistake\"},\"12\":{\"changed\":\"word_choice_mistake\"},\"13\":{\"different\":\"word_choice_mistake_opposite\"},\"14\":{\".\":\"no_mistake\"}}")
+      expect(@cc.correct).to eq("{\"0\":{\"If\":\"no_mistake\"},\"1\":{\"my\":\"no_mistake\"},\"2\":{\"school\":\"no_mistake\"},\"3\":{\"were located\":\"no_mistake\"},\"4\":{\"in\":\"no_mistake\"},\"5\":{\"Tokyo\":\"no_mistake\"},\"6\":{\",\":\"no_mistake\"},\"7\":{\"the\":\"missing_word_mistake\"},\"8\":{\"situation\":\"no_mistake\"},\"9\":{\"would have\":\"verb_mistake\"},\"10\":{\"would have been\":\"verb_mistake_correction\"},\"11\":{\"quite\":\"no_mistake\"},\"12\":{\"changed\":\"word_choice_mistake\"},\"13\":{\"different\":\"word_choice_mistake_correction\"},\"14\":{\".\":\"no_mistake\"}}")
     end
 
     # it 'Counts the number of mistakes' do
@@ -639,7 +639,7 @@ RSpec.describe ChatCorrect::Correct do
     end
 
     it 'Annotates the corrections' do
-      expect(@cc.correct).to eq("{\"0\":{\"He\":\"no_mistake\"},\"1\":{\"is\":\"no_mistake\"},\"2\":{\"super\":\"no_mistake\"},\"3\":{\"rad\":\"word_choice_mistake\"},\"4\":{\"cool\":\"word_choice_mistake_opposite\"},\"5\":{\".\":\"punctuation_mistake\"},\"6\":{\"!\":\"punctuation_mistake_opposite\"}}")
+      expect(@cc.correct).to eq("{\"0\":{\"He\":\"no_mistake\"},\"1\":{\"is\":\"no_mistake\"},\"2\":{\"super\":\"no_mistake\"},\"3\":{\"rad\":\"word_choice_mistake\"},\"4\":{\"cool\":\"word_choice_mistake_correction\"},\"5\":{\".\":\"punctuation_mistake\"},\"6\":{\"!\":\"punctuation_mistake_correction\"}}")
     end
 
     # it 'Counts the number of mistakes' do
@@ -659,7 +659,7 @@ RSpec.describe ChatCorrect::Correct do
     end
 
     it 'Annotates the corrections' do
-      expect(@cc.correct).to eq("{\"0\":{\"I\":\"no_mistake\"},\"1\":{\"was not going\":\"verb_mistake\"},\"2\":{\"did not go\":\"verb_mistake_opposite\"},\"3\":{\"to\":\"no_mistake\"},\"4\":{\"the\":\"no_mistake\"},\"5\":{\"party\":\"no_mistake\"},\"6\":{\".\":\"no_mistake\"}}")
+      expect(@cc.correct).to eq("{\"0\":{\"I\":\"no_mistake\"},\"1\":{\"was not going\":\"verb_mistake\"},\"2\":{\"did not go\":\"verb_mistake_correction\"},\"3\":{\"to\":\"no_mistake\"},\"4\":{\"the\":\"no_mistake\"},\"5\":{\"party\":\"no_mistake\"},\"6\":{\".\":\"no_mistake\"}}")
     end
 
     # it 'Counts the number of mistakes' do
@@ -679,7 +679,7 @@ RSpec.describe ChatCorrect::Correct do
     end
 
     it 'Annotates the corrections' do
-      expect(@cc.correct).to eq("{\"0\":{\"I\":\"no_mistake\"},\"1\":{\"had\":\"no_mistake\"},\"2\":{\"experiences\":\"no_mistake\"},\"3\":{\"to\":\"word_choice_mistake\"},\"4\":{\"which\":\"word_choice_mistake_opposite\"},\"5\":{\"support\":\"no_mistake\"},\"6\":{\"my\":\"no_mistake\"},\"7\":{\"opinion\":\"no_mistake\"},\"8\":{\"which\":\"unnecessary_word_mistake\"},\"9\":{\"a\":\"unnecessary_word_mistake\"},\"10\":{\"that\":\"missing_word_mistake\"},\"11\":{\"success\":\"no_mistake\"},\"12\":{\"in\":\"no_mistake\"},\"13\":{\"life\":\"no_mistake\"},\"14\":{\"comes\":\"no_mistake\"},\"15\":{\"from\":\"no_mistake\"},\"16\":{\"careful\":\"no_mistake\"},\"17\":{\"planning\":\"no_mistake\"},\"18\":{\".\":\"no_mistake\"}}")
+      expect(@cc.correct).to eq("{\"0\":{\"I\":\"no_mistake\"},\"1\":{\"had\":\"no_mistake\"},\"2\":{\"experiences\":\"no_mistake\"},\"3\":{\"to\":\"word_choice_mistake\"},\"4\":{\"which\":\"word_choice_mistake_correction\"},\"5\":{\"support\":\"no_mistake\"},\"6\":{\"my\":\"no_mistake\"},\"7\":{\"opinion\":\"no_mistake\"},\"8\":{\"which\":\"unnecessary_word_mistake\"},\"9\":{\"a\":\"unnecessary_word_mistake\"},\"10\":{\"that\":\"missing_word_mistake\"},\"11\":{\"success\":\"no_mistake\"},\"12\":{\"in\":\"no_mistake\"},\"13\":{\"life\":\"no_mistake\"},\"14\":{\"comes\":\"no_mistake\"},\"15\":{\"from\":\"no_mistake\"},\"16\":{\"careful\":\"no_mistake\"},\"17\":{\"planning\":\"no_mistake\"},\"18\":{\".\":\"no_mistake\"}}")
     end
 
     # it 'Counts the number of mistakes' do
@@ -719,7 +719,7 @@ RSpec.describe ChatCorrect::Correct do
     end
 
     it 'Annotates the corrections' do
-      expect(@cc.correct).to eq("{\"0\":{\"If\":\"no_mistake\"},\"1\":{\"my\":\"no_mistake\"},\"2\":{\"school\":\"no_mistake\"},\"3\":{\"were located\":\"verb_mistake\"},\"4\":{\"had been located\":\"verb_mistake_opposite\"},\"5\":{\"in\":\"no_mistake\"},\"6\":{\"Tokyo\":\"no_mistake\"},\"7\":{\",\":\"no_mistake\"},\"8\":{\"the\":\"missing_word_mistake\"},\"9\":{\"situation\":\"no_mistake\"},\"10\":{\"would have\":\"verb_mistake\"},\"11\":{\"would have been\":\"verb_mistake_opposite\"},\"12\":{\"quite\":\"no_mistake\"},\"13\":{\"changed\":\"word_choice_mistake\"},\"14\":{\"different\":\"word_choice_mistake_opposite\"},\"15\":{\".\":\"no_mistake\"}}")
+      expect(@cc.correct).to eq("{\"0\":{\"If\":\"no_mistake\"},\"1\":{\"my\":\"no_mistake\"},\"2\":{\"school\":\"no_mistake\"},\"3\":{\"were located\":\"verb_mistake\"},\"4\":{\"had been located\":\"verb_mistake_correction\"},\"5\":{\"in\":\"no_mistake\"},\"6\":{\"Tokyo\":\"no_mistake\"},\"7\":{\",\":\"no_mistake\"},\"8\":{\"the\":\"missing_word_mistake\"},\"9\":{\"situation\":\"no_mistake\"},\"10\":{\"would have\":\"verb_mistake\"},\"11\":{\"would have been\":\"verb_mistake_correction\"},\"12\":{\"quite\":\"no_mistake\"},\"13\":{\"changed\":\"word_choice_mistake\"},\"14\":{\"different\":\"word_choice_mistake_correction\"},\"15\":{\".\":\"no_mistake\"}}")
     end
 
     # it 'Counts the number of mistakes' do
@@ -739,7 +739,7 @@ RSpec.describe ChatCorrect::Correct do
     end
 
     it 'Annotates the corrections' do
-      expect(@cc.correct).to eq("{\"0\":{\"I\":\"no_mistake\"},\"1\":{\"have\":\"no_mistake\"},\"2\":{\"three\":\"no_mistake\"},\"3\":{\"child\":\"pluralization_mistake\"},\"4\":{\"children\":\"pluralization_mistake_opposite\"},\"5\":{\".\":\"missing_punctuation_mistake\"}}")
+      expect(@cc.correct).to eq("{\"0\":{\"I\":\"no_mistake\"},\"1\":{\"have\":\"no_mistake\"},\"2\":{\"three\":\"no_mistake\"},\"3\":{\"child\":\"pluralization_mistake\"},\"4\":{\"children\":\"pluralization_mistake_correction\"},\"5\":{\".\":\"missing_punctuation_mistake\"}}")
     end
 
     # it 'Counts the number of mistakes' do
@@ -759,7 +759,7 @@ RSpec.describe ChatCorrect::Correct do
     end
 
     it 'Annotates the corrections' do
-      expect(@cc.correct).to eq("{\"0\":{\"is\":\"capitalization_mistake\"},\"1\":{\"Is\":\"capitalization_mistake_opposite\"},\"2\":{\"the\":\"no_mistake\"},\"3\":{\"bag\":\"no_mistake\"},\"4\":{\"your\":\"pluralization_mistake\"},\"5\":{\"yours\":\"pluralization_mistake_opposite\"},\"6\":{\"?\":\"missing_punctuation_mistake\"}}")
+      expect(@cc.correct).to eq("{\"0\":{\"is\":\"capitalization_mistake\"},\"1\":{\"Is\":\"capitalization_mistake_correction\"},\"2\":{\"the\":\"no_mistake\"},\"3\":{\"bag\":\"no_mistake\"},\"4\":{\"your\":\"pluralization_mistake\"},\"5\":{\"yours\":\"pluralization_mistake_correction\"},\"6\":{\"?\":\"missing_punctuation_mistake\"}}")
     end
 
     # it 'Counts the number of mistakes' do
@@ -779,7 +779,7 @@ RSpec.describe ChatCorrect::Correct do
     end
 
     it 'Annotates the corrections' do
-      expect(@cc.correct).to eq("{\"0\":{\"Is\":\"no_mistake\"},\"1\":{\"the\":\"word_choice_mistake\"},\"2\":{\"this\":\"word_choice_mistake_opposite\"},\"3\":{\"your\":\"word_order_mistake\"},\"4\":{\"bag\":\"word_order_mistake\"},\"5\":{\"?\":\"missing_punctuation_mistake\"}}")
+      expect(@cc.correct).to eq("{\"0\":{\"Is\":\"no_mistake\"},\"1\":{\"the\":\"word_choice_mistake\"},\"2\":{\"this\":\"word_choice_mistake_correction\"},\"3\":{\"your\":\"word_order_mistake\"},\"4\":{\"bag\":\"word_order_mistake\"},\"5\":{\"?\":\"missing_punctuation_mistake\"}}")
     end
 
     # it 'Counts the number of mistakes' do
@@ -799,7 +799,7 @@ RSpec.describe ChatCorrect::Correct do
     end
 
     it 'Annotates the corrections' do
-      expect(@cc.correct).to eq("{\"0\":{\"He\":\"no_mistake\"},\"1\":{\"doesnt\":\"punctuation_mistake\"},\"2\":{\"doesn't\":\"punctuation_mistake_opposite\"},\"3\":{\"wear\":\"no_mistake\"},\"4\":{\"a\":\"no_mistake\"},\"5\":{\"tie\":\"no_mistake\"},\"6\":{\".\":\"no_mistake\"}}")
+      expect(@cc.correct).to eq("{\"0\":{\"He\":\"no_mistake\"},\"1\":{\"doesnt\":\"punctuation_mistake\"},\"2\":{\"doesn't\":\"punctuation_mistake_correction\"},\"3\":{\"wear\":\"no_mistake\"},\"4\":{\"a\":\"no_mistake\"},\"5\":{\"tie\":\"no_mistake\"},\"6\":{\".\":\"no_mistake\"}}")
     end
 
     # it 'Counts the number of mistakes' do
@@ -819,7 +819,7 @@ RSpec.describe ChatCorrect::Correct do
     end
 
     it 'Annotates the corrections' do
-      expect(@cc.correct).to eq("{\"0\":{\"Rather\":\"word_choice_mistake\"},\"1\":{\"More\":\"word_choice_mistake_opposite\"},\"2\":{\"than\":\"no_mistake\"},\"3\":{\"the\":\"unnecessary_word_mistake\"},\"4\":{\"TV\":\"no_mistake\"},\"5\":{\",\":\"no_mistake\"},\"6\":{\"I\":\"no_mistake\"},\"7\":{\"feel\":\"no_mistake\"},\"8\":{\"the\":\"no_mistake\"},\"9\":{\"appearance\":\"no_mistake\"},\"10\":{\"of\":\"no_mistake\"},\"11\":{\"internet\":\"no_mistake\"},\"12\":{\"to\":\"no_mistake\"},\"13\":{\"be\":\"no_mistake\"},\"14\":{\"more\":\"no_mistake\"},\"15\":{\"likely\":\"missing_word_mistake\"},\"16\":{\"to\":\"missing_word_mistake\"},\"17\":{\"interrupt\":\"no_mistake\"},\"18\":{\"our\":\"no_mistake\"},\"19\":{\"communication\":\"no_mistake\"},\"20\":{\".\":\"no_mistake\"}}")
+      expect(@cc.correct).to eq("{\"0\":{\"Rather\":\"word_choice_mistake\"},\"1\":{\"More\":\"word_choice_mistake_correction\"},\"2\":{\"than\":\"no_mistake\"},\"3\":{\"the\":\"unnecessary_word_mistake\"},\"4\":{\"TV\":\"no_mistake\"},\"5\":{\",\":\"no_mistake\"},\"6\":{\"I\":\"no_mistake\"},\"7\":{\"feel\":\"no_mistake\"},\"8\":{\"the\":\"no_mistake\"},\"9\":{\"appearance\":\"no_mistake\"},\"10\":{\"of\":\"no_mistake\"},\"11\":{\"internet\":\"no_mistake\"},\"12\":{\"to\":\"no_mistake\"},\"13\":{\"be\":\"no_mistake\"},\"14\":{\"more\":\"no_mistake\"},\"15\":{\"likely\":\"missing_word_mistake\"},\"16\":{\"to\":\"missing_word_mistake\"},\"17\":{\"interrupt\":\"no_mistake\"},\"18\":{\"our\":\"no_mistake\"},\"19\":{\"communication\":\"no_mistake\"},\"20\":{\".\":\"no_mistake\"}}")
     end
 
     # it 'Counts the number of mistakes' do
@@ -840,7 +840,7 @@ RSpec.describe ChatCorrect::Correct do
 
     # it 'Annotates the corrections' do
       # Might want to look into fixing the algo to handle the case of split have + SOME_WORD + verb in the future
-      # expect(@cc.correct).to eq("{\"0\":{\"On\":\"no_mistake\"},\"1\":{\"the\":\"no_mistake\"},\"2\":{\"other\":\"no_mistake\"},\"3\":{\"point\":\"word_choice_mistake\"},\"4\":{\"hand\":\"word_choice_mistake_opposite\"},\"5\":{\",\":\"no_mistake\"},\"6\":{\"we\":\"no_mistake\"},\"7\":{\"have\":\"unnecessary_word_mistake\"},\"8\":{\"seldom\":\"no_mistake\"},\"9\":{\"watched\":\"verb_mistake\"},\"10\":{\"watch\":\"verb_mistake_opposite\"},\"11\":{\"a\":\"unnecessary_word_mistake\"},\"12\":{\"TV\":\"no_mistake\"},\"13\":{\"recently\":\"unnecessary_word_mistake\"},\"14\":{\"than\":\"unnecessary_word_mistake\"},\"15\":{\"in\":\"unnecessary_word_mistake\"},\"16\":{\"compared\":\"missing_word_mistake\"},\"17\":{\"to\":\"missing_word_mistake\"},\"18\":{\"the\":\"no_mistake\"},\"19\":{\"past\":\"no_mistake\"},\"20\":{\".\":\"no_mistake\"}}")
+      # expect(@cc.correct).to eq("{\"0\":{\"On\":\"no_mistake\"},\"1\":{\"the\":\"no_mistake\"},\"2\":{\"other\":\"no_mistake\"},\"3\":{\"point\":\"word_choice_mistake\"},\"4\":{\"hand\":\"word_choice_mistake_correction\"},\"5\":{\",\":\"no_mistake\"},\"6\":{\"we\":\"no_mistake\"},\"7\":{\"have\":\"unnecessary_word_mistake\"},\"8\":{\"seldom\":\"no_mistake\"},\"9\":{\"watched\":\"verb_mistake\"},\"10\":{\"watch\":\"verb_mistake_correction\"},\"11\":{\"a\":\"unnecessary_word_mistake\"},\"12\":{\"TV\":\"no_mistake\"},\"13\":{\"recently\":\"unnecessary_word_mistake\"},\"14\":{\"than\":\"unnecessary_word_mistake\"},\"15\":{\"in\":\"unnecessary_word_mistake\"},\"16\":{\"compared\":\"missing_word_mistake\"},\"17\":{\"to\":\"missing_word_mistake\"},\"18\":{\"the\":\"no_mistake\"},\"19\":{\"past\":\"no_mistake\"},\"20\":{\".\":\"no_mistake\"}}")
     # end
 
     # it 'Counts the number of mistakes' do
@@ -880,7 +880,7 @@ RSpec.describe ChatCorrect::Correct do
     end
 
     it 'Annotates the corrections' do
-      expect(@cc.correct).to eq("{\"0\":{\"In\":\"word_choice_mistake\"},\"1\":{\"On\":\"word_choice_mistake_opposite\"},\"2\":{\"the\":\"no_mistake\"},\"3\":{\"other\":\"no_mistake\"},\"4\":{\"hand\":\"no_mistake\"},\"5\":{\",\":\"no_mistake\"},\"6\":{\"TV\":\"no_mistake\"},\"7\":{\"topic\":\"pluralization_mistake\"},\"8\":{\"topics\":\"pluralization_mistake_opposite\"},\"9\":{\"develop\":\"no_mistake\"},\"10\":{\"our\":\"no_mistake\"},\"11\":{\"relationship\":\"no_mistake\"},\"12\":{\"to\":\"no_mistake\"},\"13\":{\"provide\":\"no_mistake\"},\"14\":{\"some\":\"no_mistake\"},\"15\":{\"topics\":\"no_mistake\"},\"16\":{\"such\":\"no_mistake\"},\"17\":{\"as\":\"no_mistake\"},\"18\":{\"a\":\"no_mistake\"},\"19\":{\"news\":\"no_mistake\"},\"20\":{\",\":\"no_mistake\"},\"21\":{\"drama\":\"no_mistake\"},\"22\":{\",\":\"no_mistake\"},\"23\":{\"comedy\":\"no_mistake\"},\"24\":{\",\":\"no_mistake\"},\"25\":{\"animation\":\"no_mistake\"},\"26\":{\",\":\"no_mistake\"},\"27\":{\"and\":\"no_mistake\"},\"28\":{\"so\":\"no_mistake\"},\"29\":{\"on\":\"no_mistake\"},\"30\":{\".\":\"no_mistake\"}}")
+      expect(@cc.correct).to eq("{\"0\":{\"In\":\"word_choice_mistake\"},\"1\":{\"On\":\"word_choice_mistake_correction\"},\"2\":{\"the\":\"no_mistake\"},\"3\":{\"other\":\"no_mistake\"},\"4\":{\"hand\":\"no_mistake\"},\"5\":{\",\":\"no_mistake\"},\"6\":{\"TV\":\"no_mistake\"},\"7\":{\"topic\":\"pluralization_mistake\"},\"8\":{\"topics\":\"pluralization_mistake_correction\"},\"9\":{\"develop\":\"no_mistake\"},\"10\":{\"our\":\"no_mistake\"},\"11\":{\"relationship\":\"no_mistake\"},\"12\":{\"to\":\"no_mistake\"},\"13\":{\"provide\":\"no_mistake\"},\"14\":{\"some\":\"no_mistake\"},\"15\":{\"topics\":\"no_mistake\"},\"16\":{\"such\":\"no_mistake\"},\"17\":{\"as\":\"no_mistake\"},\"18\":{\"a\":\"no_mistake\"},\"19\":{\"news\":\"no_mistake\"},\"20\":{\",\":\"no_mistake\"},\"21\":{\"drama\":\"no_mistake\"},\"22\":{\",\":\"no_mistake\"},\"23\":{\"comedy\":\"no_mistake\"},\"24\":{\",\":\"no_mistake\"},\"25\":{\"animation\":\"no_mistake\"},\"26\":{\",\":\"no_mistake\"},\"27\":{\"and\":\"no_mistake\"},\"28\":{\"so\":\"no_mistake\"},\"29\":{\"on\":\"no_mistake\"},\"30\":{\".\":\"no_mistake\"}}")
     end
 
     # it 'Counts the number of mistakes' do
@@ -900,7 +900,7 @@ RSpec.describe ChatCorrect::Correct do
     end
 
     it 'Annotates the corrections' do
-      expect(@cc.correct).to eq("{\"0\":{\"I\":\"no_mistake\"},\"1\":{\"carried\":\"verb_mistake\"},\"2\":{\"carry\":\"verb_mistake_opposite\"},\"3\":{\".\":\"punctuation_mistake\"}}")
+      expect(@cc.correct).to eq("{\"0\":{\"I\":\"no_mistake\"},\"1\":{\"carried\":\"verb_mistake\"},\"2\":{\"carry\":\"verb_mistake_correction\"},\"3\":{\".\":\"punctuation_mistake\"}}")
     end
 
     # it 'Counts the number of mistakes' do
@@ -940,7 +940,7 @@ RSpec.describe ChatCorrect::Correct do
     end
 
     it 'Annotates the corrections' do
-      expect(@cc.correct).to eq("{\"0\":{\"I\":\"missing_word_mistake\"},\"1\":{\"can\":\"word_order_mistake\"},\"2\":{\"do\":\"missing_word_mistake\"},\"3\":{\"make\":\"unnecessary_word_mistake\"},\"4\":{\"a\":\"word_order_mistake\"},\"5\":{\"lot\":\"word_order_mistake\"},\"6\":{\"of\":\"word_order_mistake\"},\"7\":{\"things\":\"word_order_mistake\"},\"8\":{\"with\":\"missing_word_mistake\"},\"9\":{\"the\":\"word_order_mistake\"},\"10\":{\"laptop\":\"word_order_mistake\"},\"11\":{\"such\":\"no_mistake\"},\"12\":{\"as\":\"no_mistake\"},\"13\":{\"a\":\"unnecessary_word_mistake\"},\"14\":{\"searching\":\"no_mistake\"},\"15\":{\"knowledge\":\"no_mistake\"},\"16\":{\",\":\"no_mistake\"},\"17\":{\"writing\":\"no_mistake\"},\"18\":{\"down\":\"no_mistake\"},\"19\":{\"some\":\"no_mistake\"},\"20\":{\"memo\":\"pluralization_mistake\"},\"21\":{\"memos\":\"pluralization_mistake_opposite\"},\"22\":{\",\":\"no_mistake\"},\"23\":{\"watching\":\"no_mistake\"},\"24\":{\"a\":\"no_mistake\"},\"25\":{\"movie\":\"no_mistake\"},\"26\":{\"and\":\"no_mistake\"},\"27\":{\"so\":\"no_mistake\"},\"28\":{\"on\":\"no_mistake\"},\"29\":{\".\":\"no_mistake\"}}")
+      expect(@cc.correct).to eq("{\"0\":{\"I\":\"missing_word_mistake\"},\"1\":{\"can\":\"word_order_mistake\"},\"2\":{\"do\":\"missing_word_mistake\"},\"3\":{\"make\":\"unnecessary_word_mistake\"},\"4\":{\"a\":\"word_order_mistake\"},\"5\":{\"lot\":\"word_order_mistake\"},\"6\":{\"of\":\"word_order_mistake\"},\"7\":{\"things\":\"word_order_mistake\"},\"8\":{\"with\":\"missing_word_mistake\"},\"9\":{\"the\":\"word_order_mistake\"},\"10\":{\"laptop\":\"word_order_mistake\"},\"11\":{\"such\":\"no_mistake\"},\"12\":{\"as\":\"no_mistake\"},\"13\":{\"a\":\"unnecessary_word_mistake\"},\"14\":{\"searching\":\"no_mistake\"},\"15\":{\"knowledge\":\"no_mistake\"},\"16\":{\",\":\"no_mistake\"},\"17\":{\"writing\":\"no_mistake\"},\"18\":{\"down\":\"no_mistake\"},\"19\":{\"some\":\"no_mistake\"},\"20\":{\"memo\":\"pluralization_mistake\"},\"21\":{\"memos\":\"pluralization_mistake_correction\"},\"22\":{\",\":\"no_mistake\"},\"23\":{\"watching\":\"no_mistake\"},\"24\":{\"a\":\"no_mistake\"},\"25\":{\"movie\":\"no_mistake\"},\"26\":{\"and\":\"no_mistake\"},\"27\":{\"so\":\"no_mistake\"},\"28\":{\"on\":\"no_mistake\"},\"29\":{\".\":\"no_mistake\"}}")
     end
 
     # it 'Counts the number of mistakes' do
@@ -960,7 +960,7 @@ RSpec.describe ChatCorrect::Correct do
     end
 
     it 'Annotates the corrections' do
-      expect(@cc.correct).to eq("{\"0\":{\"Actually\":\"no_mistake\"},\"1\":{\"when\":\"unnecessary_word_mistake\"},\"2\":{\",\":\"missing_punctuation_mistake\"},\"3\":{\"I\":\"no_mistake\"},\"4\":{\"attended\":\"no_mistake\"},\"5\":{\"the\":\"no_mistake\"},\"6\":{\"international\":\"no_mistake\"},\"7\":{\"meeting\":\"no_mistake\"},\"8\":{\",\":\"punctuation_mistake\"},\"9\":{\"or\":\"unnecessary_word_mistake\"},\"10\":{\"for\":\"missing_word_mistake\"},\"11\":{\"the\":\"missing_word_mistake\"},\"12\":{\"American\":\"no_mistake\"},\"13\":{\"society\":\"capitalization_mistake\"},\"14\":{\"Society\":\"capitalization_mistake_opposite\"},\"15\":{\"for\":\"no_mistake\"},\"16\":{\"surgery\":\"no_mistake\"},\"17\":{\"of\":\"no_mistake\"},\"18\":{\"hand\":\"no_mistake\"},\"19\":{\",\":\"punctuation_mistake\"},\"20\":{\"at\":\"unnecessary_word_mistake\"},\"21\":{\"while\":\"missing_word_mistake\"},\"22\":{\"I\":\"missing_word_mistake\"},\"23\":{\"was\":\"missing_word_mistake\"},\"24\":{\"on\":\"missing_word_mistake\"},\"25\":{\"the\":\"no_mistake\"},\"26\":{\"trip\":\"no_mistake\"},\"27\":{\".\":\"no_mistake\"}}")
+      expect(@cc.correct).to eq("{\"0\":{\"Actually\":\"no_mistake\"},\"1\":{\"when\":\"unnecessary_word_mistake\"},\"2\":{\",\":\"missing_punctuation_mistake\"},\"3\":{\"I\":\"no_mistake\"},\"4\":{\"attended\":\"no_mistake\"},\"5\":{\"the\":\"no_mistake\"},\"6\":{\"international\":\"no_mistake\"},\"7\":{\"meeting\":\"no_mistake\"},\"8\":{\",\":\"punctuation_mistake\"},\"9\":{\"or\":\"unnecessary_word_mistake\"},\"10\":{\"for\":\"missing_word_mistake\"},\"11\":{\"the\":\"missing_word_mistake\"},\"12\":{\"American\":\"no_mistake\"},\"13\":{\"society\":\"capitalization_mistake\"},\"14\":{\"Society\":\"capitalization_mistake_correction\"},\"15\":{\"for\":\"no_mistake\"},\"16\":{\"surgery\":\"no_mistake\"},\"17\":{\"of\":\"no_mistake\"},\"18\":{\"hand\":\"no_mistake\"},\"19\":{\",\":\"punctuation_mistake\"},\"20\":{\"at\":\"unnecessary_word_mistake\"},\"21\":{\"while\":\"missing_word_mistake\"},\"22\":{\"I\":\"missing_word_mistake\"},\"23\":{\"was\":\"missing_word_mistake\"},\"24\":{\"on\":\"missing_word_mistake\"},\"25\":{\"the\":\"no_mistake\"},\"26\":{\"trip\":\"no_mistake\"},\"27\":{\".\":\"no_mistake\"}}")
     end
 
     # it 'Counts the number of mistakes' do
@@ -1000,7 +1000,7 @@ RSpec.describe ChatCorrect::Correct do
     end
 
     it 'Annotates the corrections' do
-      expect(@cc.correct).to eq("{\"0\":{\"This\":\"no_mistake\"},\"1\":{\"year\":\"no_mistake\"},\"2\":{\",\":\"no_mistake\"},\"3\":{\"going\":\"no_mistake\"},\"4\":{\"back\":\"no_mistake\"},\"5\":{\"to\":\"no_mistake\"},\"6\":{\"my\":\"unnecessary_word_mistake\"},\"7\":{\"work\":\"no_mistake\"},\"8\":{\"at\":\"no_mistake\"},\"9\":{\"my\":\"no_mistake\"},\"10\":{\"university\":\"no_mistake\"},\"11\":{\",\":\"no_mistake\"},\"12\":{\"I\":\"no_mistake\"},\"13\":{\"have\":\"no_mistake\"},\"14\":{\"less\":\"no_mistake\"},\"15\":{\"time\":\"unnecessary_word_mistake\"},\"16\":{\"to\":\"unnecessary_word_mistake\"},\"17\":{\"spend\":\"unnecessary_word_mistake\"},\"18\":{\"my\":\"unnecessary_word_mistake\"},\"19\":{\"private\":\"no_mistake\"},\"20\":{\"time\":\"no_mistake\"},\"21\":{\",\":\"no_mistake\"},\"22\":{\"for\":\"no_mistake\"},\"23\":{\"example\":\"no_mistake\"},\"24\":{\",\":\"no_mistake\"},\"25\":{\"morning\":\"no_mistake\"},\"26\":{\"conference\":\"no_mistake\"},\"27\":{\"at\":\"no_mistake\"},\"28\":{\"7:10\":\"no_mistake\"},\"29\":{\"on\":\"no_mistake\"},\"30\":{\"Tuesday\":\"no_mistake\"},\"31\":{\",\":\"no_mistake\"},\"32\":{\"at\":\"no_mistake\"},\"33\":{\"7:30\":\"no_mistake\"},\"34\":{\"on\":\"no_mistake\"},\"35\":{\"Thursday\":\"no_mistake\"},\"36\":{\",\":\"no_mistake\"},\"37\":{\"preparation\":\"no_mistake\"},\"38\":{\"for\":\"no_mistake\"},\"39\":{\"operation\":\"pluralization_mistake\"},\"40\":{\"operations\":\"pluralization_mistake_opposite\"},\"41\":{\",\":\"no_mistake\"},\"42\":{\"meeting\":\"pluralization_mistake\"},\"43\":{\"meetings\":\"pluralization_mistake_opposite\"},\"44\":{\",\":\"no_mistake\"},\"45\":{\"work\":\"no_mistake\"},\"46\":{\"for\":\"no_mistake\"},\"47\":{\"outpatients\":\"no_mistake\"},\"48\":{\"and\":\"no_mistake\"},\"49\":{\"so\":\"no_mistake\"},\"50\":{\"on\":\"no_mistake\"},\"51\":{\".\":\"no_mistake\"}}")
+      expect(@cc.correct).to eq("{\"0\":{\"This\":\"no_mistake\"},\"1\":{\"year\":\"no_mistake\"},\"2\":{\",\":\"no_mistake\"},\"3\":{\"going\":\"no_mistake\"},\"4\":{\"back\":\"no_mistake\"},\"5\":{\"to\":\"no_mistake\"},\"6\":{\"my\":\"unnecessary_word_mistake\"},\"7\":{\"work\":\"no_mistake\"},\"8\":{\"at\":\"no_mistake\"},\"9\":{\"my\":\"no_mistake\"},\"10\":{\"university\":\"no_mistake\"},\"11\":{\",\":\"no_mistake\"},\"12\":{\"I\":\"no_mistake\"},\"13\":{\"have\":\"no_mistake\"},\"14\":{\"less\":\"no_mistake\"},\"15\":{\"time\":\"unnecessary_word_mistake\"},\"16\":{\"to\":\"unnecessary_word_mistake\"},\"17\":{\"spend\":\"unnecessary_word_mistake\"},\"18\":{\"my\":\"unnecessary_word_mistake\"},\"19\":{\"private\":\"no_mistake\"},\"20\":{\"time\":\"no_mistake\"},\"21\":{\",\":\"no_mistake\"},\"22\":{\"for\":\"no_mistake\"},\"23\":{\"example\":\"no_mistake\"},\"24\":{\",\":\"no_mistake\"},\"25\":{\"morning\":\"no_mistake\"},\"26\":{\"conference\":\"no_mistake\"},\"27\":{\"at\":\"no_mistake\"},\"28\":{\"7:10\":\"no_mistake\"},\"29\":{\"on\":\"no_mistake\"},\"30\":{\"Tuesday\":\"no_mistake\"},\"31\":{\",\":\"no_mistake\"},\"32\":{\"at\":\"no_mistake\"},\"33\":{\"7:30\":\"no_mistake\"},\"34\":{\"on\":\"no_mistake\"},\"35\":{\"Thursday\":\"no_mistake\"},\"36\":{\",\":\"no_mistake\"},\"37\":{\"preparation\":\"no_mistake\"},\"38\":{\"for\":\"no_mistake\"},\"39\":{\"operation\":\"pluralization_mistake\"},\"40\":{\"operations\":\"pluralization_mistake_correction\"},\"41\":{\",\":\"no_mistake\"},\"42\":{\"meeting\":\"pluralization_mistake\"},\"43\":{\"meetings\":\"pluralization_mistake_correction\"},\"44\":{\",\":\"no_mistake\"},\"45\":{\"work\":\"no_mistake\"},\"46\":{\"for\":\"no_mistake\"},\"47\":{\"outpatients\":\"no_mistake\"},\"48\":{\"and\":\"no_mistake\"},\"49\":{\"so\":\"no_mistake\"},\"50\":{\"on\":\"no_mistake\"},\"51\":{\".\":\"no_mistake\"}}")
     end
 
     # it 'Counts the number of mistakes' do
@@ -1020,7 +1020,7 @@ RSpec.describe ChatCorrect::Correct do
   #   end
 
   #   it 'Annotates the corrections' do
-  #     expect(@cc.correct).to eq("{\"0\":{\"These\":\"no_mistake\"},\"1\":{\"are\":\"no_mistake\"},\"2\":{\"my\":\"word_choice_mistake\"},\"3\":{\"things\":\"word_choice_mistake\"},\"4\":{\"to\":\"word_choice_mistake\"},\"5\":{\"the\":\"word_choice_mistake_opposite\"},\"6\":{\"ways\":\"word_choice_mistake_opposite\"},\"7\":{\"that\":\"word_choice_mistake_opposite\"},\"8\":{\"I\":\"word_choice_mistake_opposite\"},\"9\":{\"keep\":\"no_mistake\"},\"10\":{\"healthy\":\"no_mistake\"},\"11\":{\"now\":\"no_mistake\"},\"12\":{\".\":\"no_mistake\"}}")
+  #     expect(@cc.correct).to eq("{\"0\":{\"These\":\"no_mistake\"},\"1\":{\"are\":\"no_mistake\"},\"2\":{\"my\":\"word_choice_mistake\"},\"3\":{\"things\":\"word_choice_mistake\"},\"4\":{\"to\":\"word_choice_mistake\"},\"5\":{\"the\":\"word_choice_mistake_correction\"},\"6\":{\"ways\":\"word_choice_mistake_correction\"},\"7\":{\"that\":\"word_choice_mistake_correction\"},\"8\":{\"I\":\"word_choice_mistake_correction\"},\"9\":{\"keep\":\"no_mistake\"},\"10\":{\"healthy\":\"no_mistake\"},\"11\":{\"now\":\"no_mistake\"},\"12\":{\".\":\"no_mistake\"}}")
   #   end
 
     # it 'Counts the number of mistakes' do
@@ -1040,7 +1040,7 @@ RSpec.describe ChatCorrect::Correct do
     end
 
     it 'Annotates the corrections' do
-      expect(@cc.correct).to eq("{\"0\":{\"Her\":\"no_mistake\"},\"1\":{\"name\":\"no_mistake\"},\"2\":{\"was\":\"verb_mistake\"},\"3\":{\"is\":\"verb_mistake_opposite\"},\"4\":{\"Dr.\":\"no_mistake\"},\"5\":{\"Cole\":\"no_mistake\"},\"6\":{\".\":\"no_mistake\"}}")
+      expect(@cc.correct).to eq("{\"0\":{\"Her\":\"no_mistake\"},\"1\":{\"name\":\"no_mistake\"},\"2\":{\"was\":\"verb_mistake\"},\"3\":{\"is\":\"verb_mistake_correction\"},\"4\":{\"Dr.\":\"no_mistake\"},\"5\":{\"Cole\":\"no_mistake\"},\"6\":{\".\":\"no_mistake\"}}")
     end
 
     # it 'Counts the number of mistakes' do
@@ -1080,7 +1080,7 @@ RSpec.describe ChatCorrect::Correct do
     end
 
     it 'Annotates the corrections' do
-      expect(@cc.correct).to eq("{\"0\":{\"I\":\"no_mistake\"},\"1\":{\"gots\":\"verb_mistake\"},\"2\":{\"have\":\"verb_mistake_opposite\"},\"3\":{\"a\":\"no_mistake\"},\"4\":{\"dog\":\"no_mistake\"},\"5\":{\".\":\"no_mistake\"}}")
+      expect(@cc.correct).to eq("{\"0\":{\"I\":\"no_mistake\"},\"1\":{\"gots\":\"verb_mistake\"},\"2\":{\"have\":\"verb_mistake_correction\"},\"3\":{\"a\":\"no_mistake\"},\"4\":{\"dog\":\"no_mistake\"},\"5\":{\".\":\"no_mistake\"}}")
     end
 
     # it 'Counts the number of mistakes' do
@@ -1100,7 +1100,7 @@ RSpec.describe ChatCorrect::Correct do
   #   end
 
   #   it 'Annotates the corrections' do
-  #     expect(@cc.correct).to eq("{\"0\":{\"whatƪs\":\"stylistic_choice\"},\"1\":{\"what\":\"stylistic_choice_opposite\"},\"2\":{\"is\":\"stylistic_choice_opposite\"},\"3\":{\"hapen\":\"spelling_mistake\"},\"4\":{\"happen\":\"spelling_mistake_opposite\"}}")
+  #     expect(@cc.correct).to eq("{\"0\":{\"whatƪs\":\"stylistic_choice\"},\"1\":{\"what\":\"stylistic_choice_correction\"},\"2\":{\"is\":\"stylistic_choice_correction\"},\"3\":{\"hapen\":\"spelling_mistake\"},\"4\":{\"happen\":\"spelling_mistake_correction\"}}")
   #   end
 
     # it 'Counts the number of mistakes' do
@@ -1120,7 +1120,7 @@ RSpec.describe ChatCorrect::Correct do
   #   end
 
   #   it 'Annotates the corrections' do
-  #     expect(@cc.correct).to eq("{\"0\":{\"what\":\"stylistic_choice\"},\"1\":{\"is\":\"stylistic_choice\"},\"2\":{\"whatƪs\":\"stylistic_choice_opposite\"},\"3\":{\"happen\":\"no_mistake\"}}")
+  #     expect(@cc.correct).to eq("{\"0\":{\"what\":\"stylistic_choice\"},\"1\":{\"is\":\"stylistic_choice\"},\"2\":{\"whatƪs\":\"stylistic_choice_correction\"},\"3\":{\"happen\":\"no_mistake\"}}")
   #   end
 
     # it 'Counts the number of mistakes' do
@@ -1140,7 +1140,7 @@ RSpec.describe ChatCorrect::Correct do
   #   end
 
   #   it 'Annotates the corrections' do
-  #     expect(@cc.correct).to eq("{\"0\":{\"That\":\"no_mistake\"},\"1\":{\"couldnƪt happen\":\"stylistic_choice\"},\"2\":{\"could not happen\":\"stylistic_choice_opposite\"},\"3\":{\".\":\"no_mistake\"}}")
+  #     expect(@cc.correct).to eq("{\"0\":{\"That\":\"no_mistake\"},\"1\":{\"couldnƪt happen\":\"stylistic_choice\"},\"2\":{\"could not happen\":\"stylistic_choice_correction\"},\"3\":{\".\":\"no_mistake\"}}")
   #   end
 
     # it 'Counts the number of mistakes' do
@@ -1160,7 +1160,7 @@ RSpec.describe ChatCorrect::Correct do
   #   end
 
   #   it 'Annotates the corrections' do
-  #     expect(@cc.correct).to eq("{\"0\":{\"That\":\"no_mistake\"},\"1\":{\"could not happen\":\"stylistic_choice\"},\"2\":{\"couldnƪt happen\":\"stylistic_choice_opposite\"},\"3\":{\".\":\"no_mistake\"}}")
+  #     expect(@cc.correct).to eq("{\"0\":{\"That\":\"no_mistake\"},\"1\":{\"could not happen\":\"stylistic_choice\"},\"2\":{\"couldnƪt happen\":\"stylistic_choice_correction\"},\"3\":{\".\":\"no_mistake\"}}")
   #   end
 
     # it 'Counts the number of mistakes' do
@@ -1180,7 +1180,7 @@ RSpec.describe ChatCorrect::Correct do
   #   end
 
   #   it 'Annotates the corrections' do
-  #     expect(@cc.correct).to eq("{\"0\":{\"It\":\"stylistic_choice\"},\"1\":{\"was\":\"stylistic_choice\"},\"2\":{\"ƪTwas\":\"stylistic_choice_opposite\"},\"3\":{\"the\":\"no_mistake\"},\"4\":{\"night\":\"no_mistake\"},\"5\":{\"before\":\"no_mistake\"},\"6\":{\"Christmas\":\"no_mistake\"},\"7\":{\".\":\"no_mistake\"}}")
+  #     expect(@cc.correct).to eq("{\"0\":{\"It\":\"stylistic_choice\"},\"1\":{\"was\":\"stylistic_choice\"},\"2\":{\"ƪTwas\":\"stylistic_choice_correction\"},\"3\":{\"the\":\"no_mistake\"},\"4\":{\"night\":\"no_mistake\"},\"5\":{\"before\":\"no_mistake\"},\"6\":{\"Christmas\":\"no_mistake\"},\"7\":{\".\":\"no_mistake\"}}")
   #   end
 
     # it 'Counts the number of mistakes' do
@@ -1200,7 +1200,7 @@ RSpec.describe ChatCorrect::Correct do
   #   end
 
   #   it 'Annotates the corrections' do
-  #     expect(@cc.correct).to eq("{\"0\":{\"Yesterday\":\"no_mistake\"},\"1\":{\",\":\"no_mistake\"},\"2\":{\"it\":\"stylistic_choice\"},\"3\":{\"was\":\"stylistic_choice\"},\"4\":{\"ƪtwas\":\"stylistic_choice_opposite\"},\"5\":{\"the\":\"no_mistake\"},\"6\":{\"night\":\"no_mistake\"},\"7\":{\"before\":\"no_mistake\"},\"8\":{\"Christmas\":\"no_mistake\"},\"9\":{\".\":\"no_mistake\"}}")
+  #     expect(@cc.correct).to eq("{\"0\":{\"Yesterday\":\"no_mistake\"},\"1\":{\",\":\"no_mistake\"},\"2\":{\"it\":\"stylistic_choice\"},\"3\":{\"was\":\"stylistic_choice\"},\"4\":{\"ƪtwas\":\"stylistic_choice_correction\"},\"5\":{\"the\":\"no_mistake\"},\"6\":{\"night\":\"no_mistake\"},\"7\":{\"before\":\"no_mistake\"},\"8\":{\"Christmas\":\"no_mistake\"},\"9\":{\".\":\"no_mistake\"}}")
   #   end
 
     # it 'Counts the number of mistakes' do
@@ -1220,7 +1220,7 @@ RSpec.describe ChatCorrect::Correct do
   #   end
 
   #   it 'Annotates the corrections' do
-  #     expect(@cc.correct).to eq("{\"0\":{\"Usually\":\"no_mistake\"},\"1\":{\"we\":\"no_mistake\"},\"2\":{\"orthopedic\":\"no_mistake\"},\"3\":{\"surgeon\":\"pluralization_mistake\"},\"4\":{\"surgeons\":\"pluralization_mistake_opposite\"},\"5\":{\"suggest\":\"verb_mistake\"},\"6\":{\"will suggest\":\"verb_mistake_opposite\"},\"7\":{\"to\":\"word_choice_mistake\"},\"8\":{\"the\":\"word_choice_mistake_opposite\"},\"9\":{\"patient\":\"missing_word_mistake\"},\"10\":{\"to\":\"missing_word_mistake\"},\"11\":{\"take\":\"verb_mistake\"},\"12\":{\"have\":\"verb_mistake_opposite\"},\"13\":{\"a\":\"word_choice_mistake\"},\"14\":{\"an\":\"word_choice_mistake_opposite\"},\"15\":{\"operation\":\"no_mistake\"},\"16\":{\"which\":\"no_mistake\"},\"17\":{\"replaces\":\"verb_mistake_opposite\"},\"18\":{\"replace\":\"verb_mistake\"},\"19\":{\"the\":\"missing_word_mistake\"},\"20\":{\"to\":\"unnecessary_word_mistake\"},\"21\":{\"broken\":\"word_order_mistake\"},\"22\":{\"fermur\":\"word_order_mistake\"},\"23\":{\"neck\":\"word_order_mistake\"},\"24\":{\"with\":\"missing_word_mistake\"},\"25\":{\"prosthesis\":\"no_mistake\"},\"26\":{\".\":\"no_mistake\"}}")
+  #     expect(@cc.correct).to eq("{\"0\":{\"Usually\":\"no_mistake\"},\"1\":{\"we\":\"no_mistake\"},\"2\":{\"orthopedic\":\"no_mistake\"},\"3\":{\"surgeon\":\"pluralization_mistake\"},\"4\":{\"surgeons\":\"pluralization_mistake_correction\"},\"5\":{\"suggest\":\"verb_mistake\"},\"6\":{\"will suggest\":\"verb_mistake_correction\"},\"7\":{\"to\":\"word_choice_mistake\"},\"8\":{\"the\":\"word_choice_mistake_correction\"},\"9\":{\"patient\":\"missing_word_mistake\"},\"10\":{\"to\":\"missing_word_mistake\"},\"11\":{\"take\":\"verb_mistake\"},\"12\":{\"have\":\"verb_mistake_correction\"},\"13\":{\"a\":\"word_choice_mistake\"},\"14\":{\"an\":\"word_choice_mistake_correction\"},\"15\":{\"operation\":\"no_mistake\"},\"16\":{\"which\":\"no_mistake\"},\"17\":{\"replaces\":\"verb_mistake_correction\"},\"18\":{\"replace\":\"verb_mistake\"},\"19\":{\"the\":\"missing_word_mistake\"},\"20\":{\"to\":\"unnecessary_word_mistake\"},\"21\":{\"broken\":\"word_order_mistake\"},\"22\":{\"fermur\":\"word_order_mistake\"},\"23\":{\"neck\":\"word_order_mistake\"},\"24\":{\"with\":\"missing_word_mistake\"},\"25\":{\"prosthesis\":\"no_mistake\"},\"26\":{\".\":\"no_mistake\"}}")
   #   end
 
     # it 'Counts the number of mistakes' do
@@ -1240,7 +1240,7 @@ RSpec.describe ChatCorrect::Correct do
   #   end
 
   #   it 'Annotates the corrections' do
-  #     expect(@cc.correct).to eq("{\"0\":{\"But\":\"no_mistake\"},\"1\":{\"she\":\"no_mistake\"},\"2\":{\"had\":\"no_mistake\"},\"3\":{\"some\":\"no_mistake\"},\"4\":{\"difficulty\":\"no_mistake\"},\"5\":{\"in\":\"no_mistake\"},\"6\":{\"her\":\"no_mistake\"},\"7\":{\"condition\":\"no_mistake\"},\"8\":{\":\":\"no_mistake\"},\"9\":{\"heart\":\"no_mistake\"},\"10\":{\"ischemia\":\"no_mistake\"},\"11\":{\"which\":\"no_mistake\"},\"12\":{\"had\":\"no_mistake\"},\"13\":{\"recently\":\"no_mistake\"},\"14\":{\"operation\":\"no_mistake\"},\"15\":{\"of\":\"no_mistake\"},\"16\":{\"PCI\":\"no_mistake\"},\"17\":{\",\":\"no_mistake\"},\"18\":{\"COPD\":\"no_mistake\"},\"19\":{\":\":\"no_mistake\"},\"20\":{\"chornic\":\"spelling_mistake\"},\"21\":{\"chronic\":\"spelling_mistake_opposite\"},\"22\":{\"objective\":\"no_mistake\"},\"23\":{\"pulmpnary\":\"spelling_mistake\"},\"24\":{\"pulmonary\":\"spelling_mistake_opposite\"},\"25\":{\"disease\":\"no_mistake\"},\"26\":{\",\":\"no_mistake\"},\"27\":{\"chornic\":\"spelling_mistake\"},\"28\":{\"chronic\":\"spelling_mistake_opposite\"},\"29\":{\"kidney\":\"no_mistake\"},\"30\":{\"failure\":\"no_mistake\"},\"31\":{\"which\":\"no_mistake\"},\"32\":{\"had\":\"unnecessary_word_mistake\"},\"33\":{\"had treated\":\"verb_mistake\"},\"34\":{\"had been treated\":\"verb_mistake_opposite\"},\"35\":{\"on\":\"word_choice_mistake\"},\"36\":{\"with\":\"word_choice_mistake_opposite\"},\"37\":{\"regular\":\"no_mistake\"},\"38\":{\"hemodyalisis\":\"no_mistake\"},\"39\":{\"for\":\"no_mistake\"},\"40\":{\"some\":\"no_mistake\"},\"41\":{\"decade\":\"pluralization_mistake\"},\"42\":{\"decades\":\"pluralization_mistake_opposite\"},\"43\":{\".\":\"no_mistake\"}}")
+  #     expect(@cc.correct).to eq("{\"0\":{\"But\":\"no_mistake\"},\"1\":{\"she\":\"no_mistake\"},\"2\":{\"had\":\"no_mistake\"},\"3\":{\"some\":\"no_mistake\"},\"4\":{\"difficulty\":\"no_mistake\"},\"5\":{\"in\":\"no_mistake\"},\"6\":{\"her\":\"no_mistake\"},\"7\":{\"condition\":\"no_mistake\"},\"8\":{\":\":\"no_mistake\"},\"9\":{\"heart\":\"no_mistake\"},\"10\":{\"ischemia\":\"no_mistake\"},\"11\":{\"which\":\"no_mistake\"},\"12\":{\"had\":\"no_mistake\"},\"13\":{\"recently\":\"no_mistake\"},\"14\":{\"operation\":\"no_mistake\"},\"15\":{\"of\":\"no_mistake\"},\"16\":{\"PCI\":\"no_mistake\"},\"17\":{\",\":\"no_mistake\"},\"18\":{\"COPD\":\"no_mistake\"},\"19\":{\":\":\"no_mistake\"},\"20\":{\"chornic\":\"spelling_mistake\"},\"21\":{\"chronic\":\"spelling_mistake_correction\"},\"22\":{\"objective\":\"no_mistake\"},\"23\":{\"pulmpnary\":\"spelling_mistake\"},\"24\":{\"pulmonary\":\"spelling_mistake_correction\"},\"25\":{\"disease\":\"no_mistake\"},\"26\":{\",\":\"no_mistake\"},\"27\":{\"chornic\":\"spelling_mistake\"},\"28\":{\"chronic\":\"spelling_mistake_correction\"},\"29\":{\"kidney\":\"no_mistake\"},\"30\":{\"failure\":\"no_mistake\"},\"31\":{\"which\":\"no_mistake\"},\"32\":{\"had\":\"unnecessary_word_mistake\"},\"33\":{\"had treated\":\"verb_mistake\"},\"34\":{\"had been treated\":\"verb_mistake_correction\"},\"35\":{\"on\":\"word_choice_mistake\"},\"36\":{\"with\":\"word_choice_mistake_correction\"},\"37\":{\"regular\":\"no_mistake\"},\"38\":{\"hemodyalisis\":\"no_mistake\"},\"39\":{\"for\":\"no_mistake\"},\"40\":{\"some\":\"no_mistake\"},\"41\":{\"decade\":\"pluralization_mistake\"},\"42\":{\"decades\":\"pluralization_mistake_correction\"},\"43\":{\".\":\"no_mistake\"}}")
   #   end
 
     # it 'Counts the number of mistakes' do
@@ -1260,7 +1260,7 @@ RSpec.describe ChatCorrect::Correct do
   #   end
 
   #   it 'Annotates the corrections' do
-  #     expect(@cc.correct).to eq("{\"0\":{\"If\":\"no_mistake\"},\"1\":{\"she\":\"no_mistake\"},\"2\":{\"cannot\":\"no_mistake\"},\"3\":{\"be\":\"unnecessary_word_mistake\"},\"4\":{\"take\":\"verb_mistake\"},\"5\":{\"have\":\"verb_mistake_opposite\"},\"6\":{\"the\":\"no_mistake\"},\"7\":{\"operation\":\"no_mistake\"},\"8\":{\",\":\"no_mistake\"},\"9\":{\"she\":\"no_mistake\"},\"10\":{\"usually\":\"unnecessary_word_mistake\"},\"11\":{\"cannot\":\"unnecessary_word_mistake\"},\"12\":{\"probably\":\"missing_word_mistake\"},\"13\":{\"will not be\":\"missing_word_mistake\"},\"14\":{\"able\":\"missing_word_mistake\"},\"15\":{\"to\":\"missing_word_mistake\"},\"16\":{\"walk\":\"no_mistake\"},\"17\":{\"at\":\"no_mistake\"},\"18\":{\"all\":\"no_mistake\"},\"19\":{\"and\":\"no_mistake\"},\"20\":{\"needs\":\"unnecessary_word_mistake\"},\"21\":{\"any\":\"unnecessary_word_mistake\"},\"22\":{\"other’s\":\"unnecessary_word_mistake\"},\"23\":{\"will need\":\"missing_word_mistake\"},\"24\":{\"another\":\"missing_word_mistake\"},\"25\":{\"personƪs\":\"missing_word_mistake\"},\"26\":{\"help\":\"no_mistake\"},\"27\":{\"forever\":\"no_mistake\"},\"28\":{\".\":\"no_mistake\"}}")
+  #     expect(@cc.correct).to eq("{\"0\":{\"If\":\"no_mistake\"},\"1\":{\"she\":\"no_mistake\"},\"2\":{\"cannot\":\"no_mistake\"},\"3\":{\"be\":\"unnecessary_word_mistake\"},\"4\":{\"take\":\"verb_mistake\"},\"5\":{\"have\":\"verb_mistake_correction\"},\"6\":{\"the\":\"no_mistake\"},\"7\":{\"operation\":\"no_mistake\"},\"8\":{\",\":\"no_mistake\"},\"9\":{\"she\":\"no_mistake\"},\"10\":{\"usually\":\"unnecessary_word_mistake\"},\"11\":{\"cannot\":\"unnecessary_word_mistake\"},\"12\":{\"probably\":\"missing_word_mistake\"},\"13\":{\"will not be\":\"missing_word_mistake\"},\"14\":{\"able\":\"missing_word_mistake\"},\"15\":{\"to\":\"missing_word_mistake\"},\"16\":{\"walk\":\"no_mistake\"},\"17\":{\"at\":\"no_mistake\"},\"18\":{\"all\":\"no_mistake\"},\"19\":{\"and\":\"no_mistake\"},\"20\":{\"needs\":\"unnecessary_word_mistake\"},\"21\":{\"any\":\"unnecessary_word_mistake\"},\"22\":{\"other’s\":\"unnecessary_word_mistake\"},\"23\":{\"will need\":\"missing_word_mistake\"},\"24\":{\"another\":\"missing_word_mistake\"},\"25\":{\"personƪs\":\"missing_word_mistake\"},\"26\":{\"help\":\"no_mistake\"},\"27\":{\"forever\":\"no_mistake\"},\"28\":{\".\":\"no_mistake\"}}")
   #   end
 
     # it 'Counts the number of mistakes' do
