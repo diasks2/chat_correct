@@ -75,19 +75,6 @@ module ChatCorrect
                 combined_hash[combined_hash.length] = mistake_info
                 combined_hash[combined_hash.length] = correct_info
                 #puts combined_hash.to_s + ' :possessive_mistake 12'
-              when ChatCorrect::Spelling.new(token_a: corrected_sentence_info_hash[i]['token'], token_b: original_sentence_info_hash[j]['token']).spelling_error?
-                if ChatCorrect::PunctuationMasqueradingAsSpellingError.new(token_a: corrected_sentence_info_hash[i]['token'], token_b: original_sentence_info_hash[j]['token']).exists?
-                  #puts 'Check Possessive: ' + check_possessive(original_sentence_info_hash[j]['token'], corrected_sentence_info_hash[i]['token']).to_s
-                  unless ChatCorrect::Possessive.new(token_a: original_sentence_info_hash[j]['token'], token_b: corrected_sentence_info_hash[i]['token']).possessive?
-                    #puts original_sentence_info_hash[j]['match_id'] + ' :punctuation_mistake 12'
-                    #puts corrected_sentence_info_hash[i]['match_id'] + ' :punctuation_mistake_opposite 13'
-                    mistake_info[original_sentence_info_hash[j]['token']] = 'punctuation_mistake'
-                    correct_info[corrected_sentence_info_hash[i]['token']] = 'punctuation_mistake_opposite'
-                    combined_hash[combined_hash.length] = mistake_info
-                    combined_hash[combined_hash.length] = correct_info
-                    #puts combined_hash.to_s + ' :punctuation_mistake 12'
-                  end
-                end
               when ChatCorrect::MistakeAnalyzer.new(original: original_sentence_info_hash[j], corrected: corrected_sentence_info_hash[i]).punctuation_mistake?
                   #puts original_sentence_info_hash[j]['match_id'] + ' :punctuation_mistake 14'
                   #puts corrected_sentence_info_hash[i]['match_id'] + ' :punctuation_mistake_opposite 15'
