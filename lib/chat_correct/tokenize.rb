@@ -31,7 +31,6 @@ module ChatCorrect
     def shift_all_punct(txt)
       converted_text = shift_multiple_dash(txt)
       converted_text = shift_comma(converted_text)
-      converted_text = shift_colon(converted_text)
       converted_text = shift_ellipse(converted_text)
       converted_text = shift_bracket(converted_text)
       converted_text = shift_other_punct(converted_text)
@@ -64,19 +63,6 @@ module ChatCorrect
 
     def shift_upsidedown_exclamation(txt)
       txt.gsub(/¡/, ' ¡ ')
-    end
-
-    def shift_colon(txt)
-      if txt.include?(':') &&
-        !(/\A\d+/ == txt.to_s.partition(':').last[0]) &&
-        !(/\A\d+/ == txt.to_s.partition(':').first[-1]) &&
-        txt.to_s.partition(':').last[0..1] != '//' &&
-        txt.to_s.partition(':').first[-4..-1].downcase != 'http' &&
-        txt.to_s.partition(':').first[-5..-1].downcase != 'https'
-        txt.gsub(/:/o, ' :')
-      else
-        txt
-      end
     end
 
     def shift_ellipse(txt)

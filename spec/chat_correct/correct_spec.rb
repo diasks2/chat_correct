@@ -671,165 +671,165 @@ RSpec.describe ChatCorrect::Correct do
     # end
   end
 
-  # context "example correction #034" do
-  #   before do
-  #     original_sentence = 'I had experiences to support my opinion which a success in life comes from careful planning.'
-  #     corrected_sentence = 'I had experiences which support my opinion that success in life comes from careful planning.'
-  #     @cc = ChatCorrect::Correct.new(original_sentence: original_sentence, corrected_sentence: corrected_sentence)
-  #   end
+  context "example correction #034" do
+    before do
+      original_sentence = 'I had experiences to support my opinion which a success in life comes from careful planning.'
+      corrected_sentence = 'I had experiences which support my opinion that success in life comes from careful planning.'
+      @cc = ChatCorrect::Correct.new(original_sentence: original_sentence, corrected_sentence: corrected_sentence)
+    end
 
-  #   it 'Annotates the corrections' do
-  #     expect(@cc.correct).to eq([])
-  #   end
+    it 'Annotates the corrections' do
+      expect(@cc.correct).to eq("{\"0\":{\"I\":\"no_mistake\"},\"1\":{\"had\":\"no_mistake\"},\"2\":{\"experiences\":\"no_mistake\"},\"3\":{\"to\":\"word_choice_mistake\"},\"4\":{\"which\":\"word_choice_mistake_opposite\"},\"5\":{\"support\":\"no_mistake\"},\"6\":{\"my\":\"no_mistake\"},\"7\":{\"opinion\":\"no_mistake\"},\"8\":{\"which\":\"unnecessary_word_mistake\"},\"9\":{\"a\":\"unnecessary_word_mistake\"},\"10\":{\"that\":\"missing_word_mistake\"},\"11\":{\"success\":\"no_mistake\"},\"12\":{\"in\":\"no_mistake\"},\"13\":{\"life\":\"no_mistake\"},\"14\":{\"comes\":\"no_mistake\"},\"15\":{\"from\":\"no_mistake\"},\"16\":{\"careful\":\"no_mistake\"},\"17\":{\"planning\":\"no_mistake\"},\"18\":{\".\":\"no_mistake\"}}")
+    end
 
-  #   it 'Counts the number of mistakes' do
-  #     expect(@cc.number_of_mistakes).to eq([])
-  #   end
+    # it 'Counts the number of mistakes' do
+    #   expect(@cc.number_of_mistakes).to eq([])
+    # end
 
-  #   it 'Reports the mistakes by mistake type' do
-  #     expect(@cc.mistake_report).to eq([])
-  #   end
-  # end
+    # it 'Reports the mistakes by mistake type' do
+    #   expect(@cc.mistake_report).to eq([])
+    # end
+  end
 
-  # context "example correction #035" do
-  #   before do
-  #     original_sentence = 'She have a good day yesterday.'
-  #     corrected_sentence = 'hello world'
-  #     @cc = ChatCorrect::Correct.new(original_sentence: original_sentence, corrected_sentence: corrected_sentence)
-  #   end
+  context "example correction #035" do
+    before do
+      original_sentence = 'She have a good day yesterday.'
+      corrected_sentence = 'hello world'
+      @cc = ChatCorrect::Correct.new(original_sentence: original_sentence, corrected_sentence: corrected_sentence)
+    end
 
-  #   it 'Annotates the corrections' do
-  #     expect(@cc.correct).to eq([])
-  #   end
+    it 'Annotates the corrections' do
+      expect(@cc.correct).to eq("{\"0\":{\"She\":\"unnecessary_word_mistake\"},\"1\":{\"have\":\"unnecessary_word_mistake\"},\"2\":{\"a\":\"unnecessary_word_mistake\"},\"3\":{\"good\":\"unnecessary_word_mistake\"},\"4\":{\"day\":\"unnecessary_word_mistake\"},\"5\":{\"yesterday\":\"unnecessary_word_mistake\"},\"6\":{\".\":\"punctuation_mistake\"},\"7\":{\"hello\":\"missing_word_mistake\"},\"8\":{\"world\":\"missing_word_mistake\"}}")
+    end
 
-  #   it 'Counts the number of mistakes' do
-  #     expect(@cc.number_of_mistakes).to eq([])
-  #   end
+    # it 'Counts the number of mistakes' do
+    #   expect(@cc.number_of_mistakes).to eq([])
+    # end
 
-  #   it 'Reports the mistakes by mistake type' do
-  #     expect(@cc.mistake_report).to eq([])
-  #   end
-  # end
+    # it 'Reports the mistakes by mistake type' do
+    #   expect(@cc.mistake_report).to eq([])
+    # end
+  end
 
-  # context "example correction #036" do
-  #   before do
-  #     original_sentence = 'If my school were located in Tokyo, situation would have quite changed.'
-  #     corrected_sentence = 'If my school had been located in Tokyo, the situation would have been quite different.'
-  #     @cc = ChatCorrect::Correct.new(original_sentence: original_sentence, corrected_sentence: corrected_sentence)
-  #   end
+  context "example correction #036" do
+    before do
+      original_sentence = 'If my school were located in Tokyo, situation would have quite changed.'
+      corrected_sentence = 'If my school had been located in Tokyo, the situation would have been quite different.'
+      @cc = ChatCorrect::Correct.new(original_sentence: original_sentence, corrected_sentence: corrected_sentence)
+    end
 
-  #   it 'Annotates the corrections' do
-  #     expect(@cc.correct).to eq([])
-  #   end
+    it 'Annotates the corrections' do
+      expect(@cc.correct).to eq("{\"0\":{\"If\":\"no_mistake\"},\"1\":{\"my\":\"no_mistake\"},\"2\":{\"school\":\"no_mistake\"},\"3\":{\"were located\":\"verb_mistake\"},\"4\":{\"had been located\":\"verb_mistake_opposite\"},\"5\":{\"in\":\"no_mistake\"},\"6\":{\"Tokyo\":\"no_mistake\"},\"7\":{\",\":\"no_mistake\"},\"8\":{\"the\":\"missing_word_mistake\"},\"9\":{\"situation\":\"no_mistake\"},\"10\":{\"would have\":\"verb_mistake\"},\"11\":{\"would have been\":\"verb_mistake_opposite\"},\"12\":{\"quite\":\"no_mistake\"},\"13\":{\"changed\":\"word_choice_mistake\"},\"14\":{\"different\":\"word_choice_mistake_opposite\"},\"15\":{\".\":\"no_mistake\"}}")
+    end
 
-  #   it 'Counts the number of mistakes' do
-  #     expect(@cc.number_of_mistakes).to eq([])
-  #   end
+    # it 'Counts the number of mistakes' do
+    #   expect(@cc.number_of_mistakes).to eq([])
+    # end
 
-  #   it 'Reports the mistakes by mistake type' do
-  #     expect(@cc.mistake_report).to eq([])
-  #   end
-  # end
+    # it 'Reports the mistakes by mistake type' do
+    #   expect(@cc.mistake_report).to eq([])
+    # end
+  end
 
-  # context "example correction #037" do
-  #   before do
-  #     original_sentence = 'I have three child'
-  #     corrected_sentence = 'I have three children.'
-  #     @cc = ChatCorrect::Correct.new(original_sentence: original_sentence, corrected_sentence: corrected_sentence)
-  #   end
+  context "example correction #037" do
+    before do
+      original_sentence = 'I have three child'
+      corrected_sentence = 'I have three children.'
+      @cc = ChatCorrect::Correct.new(original_sentence: original_sentence, corrected_sentence: corrected_sentence)
+    end
 
-  #   it 'Annotates the corrections' do
-  #     expect(@cc.correct).to eq([])
-  #   end
+    it 'Annotates the corrections' do
+      expect(@cc.correct).to eq("{\"0\":{\"I\":\"no_mistake\"},\"1\":{\"have\":\"no_mistake\"},\"2\":{\"three\":\"no_mistake\"},\"3\":{\"child\":\"pluralization_mistake\"},\"4\":{\"children\":\"pluralization_mistake_opposite\"},\"5\":{\".\":\"missing_punctuation_mistake\"}}")
+    end
 
-  #   it 'Counts the number of mistakes' do
-  #     expect(@cc.number_of_mistakes).to eq([])
-  #   end
+    # it 'Counts the number of mistakes' do
+    #   expect(@cc.number_of_mistakes).to eq([])
+    # end
 
-  #   it 'Reports the mistakes by mistake type' do
-  #     expect(@cc.mistake_report).to eq([])
-  #   end
-  # end
+    # it 'Reports the mistakes by mistake type' do
+    #   expect(@cc.mistake_report).to eq([])
+    # end
+  end
 
-  # context "example correction #038" do
-  #   before do
-  #     original_sentence = 'is the bag your'
-  #     corrected_sentence = 'Is the bag yours?'
-  #     @cc = ChatCorrect::Correct.new(original_sentence: original_sentence, corrected_sentence: corrected_sentence)
-  #   end
+  context "example correction #038" do
+    before do
+      original_sentence = 'is the bag your'
+      corrected_sentence = 'Is the bag yours?'
+      @cc = ChatCorrect::Correct.new(original_sentence: original_sentence, corrected_sentence: corrected_sentence)
+    end
 
-  #   it 'Annotates the corrections' do
-  #     expect(@cc.correct).to eq([])
-  #   end
+    it 'Annotates the corrections' do
+      expect(@cc.correct).to eq("{\"0\":{\"is\":\"capitalization_mistake\"},\"1\":{\"Is\":\"capitalization_mistake_opposite\"},\"2\":{\"the\":\"no_mistake\"},\"3\":{\"bag\":\"no_mistake\"},\"4\":{\"your\":\"pluralization_mistake\"},\"5\":{\"yours\":\"pluralization_mistake_opposite\"},\"6\":{\"?\":\"missing_punctuation_mistake\"}}")
+    end
 
-  #   it 'Counts the number of mistakes' do
-  #     expect(@cc.number_of_mistakes).to eq([])
-  #   end
+    # it 'Counts the number of mistakes' do
+    #   expect(@cc.number_of_mistakes).to eq([])
+    # end
 
-  #   it 'Reports the mistakes by mistake type' do
-  #     expect(@cc.mistake_report).to eq([])
-  #   end
-  # end
+    # it 'Reports the mistakes by mistake type' do
+    #   expect(@cc.mistake_report).to eq([])
+    # end
+  end
 
-  # context "example correction #039" do
-  #   before do
-  #     original_sentence = 'Is the bag your'
-  #     corrected_sentence = 'Is this your bag?'
-  #     @cc = ChatCorrect::Correct.new(original_sentence: original_sentence, corrected_sentence: corrected_sentence)
-  #   end
+  context "example correction #039" do
+    before do
+      original_sentence = 'Is the bag your'
+      corrected_sentence = 'Is this your bag?'
+      @cc = ChatCorrect::Correct.new(original_sentence: original_sentence, corrected_sentence: corrected_sentence)
+    end
 
-  #   it 'Annotates the corrections' do
-  #     expect(@cc.correct).to eq([])
-  #   end
+    it 'Annotates the corrections' do
+      expect(@cc.correct).to eq("{\"0\":{\"Is\":\"no_mistake\"},\"1\":{\"the\":\"word_choice_mistake\"},\"2\":{\"this\":\"word_choice_mistake_opposite\"},\"3\":{\"your\":\"word_order_mistake\"},\"4\":{\"bag\":\"word_order_mistake\"},\"5\":{\"?\":\"missing_punctuation_mistake\"}}")
+    end
 
-  #   it 'Counts the number of mistakes' do
-  #     expect(@cc.number_of_mistakes).to eq([])
-  #   end
+    # it 'Counts the number of mistakes' do
+    #   expect(@cc.number_of_mistakes).to eq([])
+    # end
 
-  #   it 'Reports the mistakes by mistake type' do
-  #     expect(@cc.mistake_report).to eq([])
-  #   end
-  # end
+    # it 'Reports the mistakes by mistake type' do
+    #   expect(@cc.mistake_report).to eq([])
+    # end
+  end
 
-  # context "example correction #040" do
-  #   before do
-  #     original_sentence = 'He doesnt wear a tie.'
-  #     corrected_sentence = "He doesn't wear a tie."
-  #     @cc = ChatCorrect::Correct.new(original_sentence: original_sentence, corrected_sentence: corrected_sentence)
-  #   end
+  context "example correction #040" do
+    before do
+      original_sentence = 'He doesnt wear a tie.'
+      corrected_sentence = "He doesn't wear a tie."
+      @cc = ChatCorrect::Correct.new(original_sentence: original_sentence, corrected_sentence: corrected_sentence)
+    end
 
-  #   it 'Annotates the corrections' do
-  #     expect(@cc.correct).to eq([])
-  #   end
+    it 'Annotates the corrections' do
+      expect(@cc.correct).to eq("{\"0\":{\"He\":\"no_mistake\"},\"1\":{\"doesnt\":\"punctuation_mistake\"},\"2\":{\"doesn't\":\"punctuation_mistake_opposite\"},\"3\":{\"wear\":\"no_mistake\"},\"4\":{\"a\":\"no_mistake\"},\"5\":{\"tie\":\"no_mistake\"},\"6\":{\".\":\"no_mistake\"}}")
+    end
 
-  #   it 'Counts the number of mistakes' do
-  #     expect(@cc.number_of_mistakes).to eq([])
-  #   end
+    # it 'Counts the number of mistakes' do
+    #   expect(@cc.number_of_mistakes).to eq([])
+    # end
 
-  #   it 'Reports the mistakes by mistake type' do
-  #     expect(@cc.mistake_report).to eq([])
-  #   end
-  # end
+    # it 'Reports the mistakes by mistake type' do
+    #   expect(@cc.mistake_report).to eq([])
+    # end
+  end
 
-  # context "example correction #041" do
-  #   before do
-  #     original_sentence = 'Rather than the TV, I feel the appearance of internet to be more interrupt our communication.'
-  #     corrected_sentence = 'More than TV, I feel the appearance of internet to be more likely to interrupt our communication.'
-  #     @cc = ChatCorrect::Correct.new(original_sentence: original_sentence, corrected_sentence: corrected_sentence)
-  #   end
+  context "example correction #041" do
+    before do
+      original_sentence = 'Rather than the TV, I feel the appearance of internet to be more interrupt our communication.'
+      corrected_sentence = 'More than TV, I feel the appearance of internet to be more likely to interrupt our communication.'
+      @cc = ChatCorrect::Correct.new(original_sentence: original_sentence, corrected_sentence: corrected_sentence)
+    end
 
-  #   it 'Annotates the corrections' do
-  #     expect(@cc.correct).to eq([])
-  #   end
+    it 'Annotates the corrections' do
+      expect(@cc.correct).to eq("{\"0\":{\"Rather\":\"word_choice_mistake\"},\"1\":{\"More\":\"word_choice_mistake_opposite\"},\"2\":{\"than\":\"no_mistake\"},\"3\":{\"the\":\"unnecessary_word_mistake\"},\"4\":{\"TV\":\"no_mistake\"},\"5\":{\",\":\"no_mistake\"},\"6\":{\"I\":\"no_mistake\"},\"7\":{\"feel\":\"no_mistake\"},\"8\":{\"the\":\"no_mistake\"},\"9\":{\"appearance\":\"no_mistake\"},\"10\":{\"of\":\"no_mistake\"},\"11\":{\"internet\":\"no_mistake\"},\"12\":{\"to\":\"no_mistake\"},\"13\":{\"be\":\"no_mistake\"},\"14\":{\"more\":\"no_mistake\"},\"15\":{\"likely\":\"missing_word_mistake\"},\"16\":{\"to\":\"missing_word_mistake\"},\"17\":{\"interrupt\":\"no_mistake\"},\"18\":{\"our\":\"no_mistake\"},\"19\":{\"communication\":\"no_mistake\"},\"20\":{\".\":\"no_mistake\"}}")
+    end
 
-  #   it 'Counts the number of mistakes' do
-  #     expect(@cc.number_of_mistakes).to eq([])
-  #   end
+    # it 'Counts the number of mistakes' do
+    #   expect(@cc.number_of_mistakes).to eq([])
+    # end
 
-  #   it 'Reports the mistakes by mistake type' do
-  #     expect(@cc.mistake_report).to eq([])
-  #   end
-  # end
+    # it 'Reports the mistakes by mistake type' do
+    #   expect(@cc.mistake_report).to eq([])
+    # end
+  end
 
   # context "example correction #042" do
   #   before do
@@ -838,138 +838,139 @@ RSpec.describe ChatCorrect::Correct do
   #     @cc = ChatCorrect::Correct.new(original_sentence: original_sentence, corrected_sentence: corrected_sentence)
   #   end
 
-  #   it 'Annotates the corrections' do
-  #     expect(@cc.correct).to eq([])
-  #   end
+    # it 'Annotates the corrections' do
+      # Might want to look into fixing the algo to handle the case of split have + SOME_WORD + verb in the future
+      # expect(@cc.correct).to eq("{\"0\":{\"On\":\"no_mistake\"},\"1\":{\"the\":\"no_mistake\"},\"2\":{\"other\":\"no_mistake\"},\"3\":{\"point\":\"word_choice_mistake\"},\"4\":{\"hand\":\"word_choice_mistake_opposite\"},\"5\":{\",\":\"no_mistake\"},\"6\":{\"we\":\"no_mistake\"},\"7\":{\"have\":\"unnecessary_word_mistake\"},\"8\":{\"seldom\":\"no_mistake\"},\"9\":{\"watched\":\"verb_mistake\"},\"10\":{\"watch\":\"verb_mistake_opposite\"},\"11\":{\"a\":\"unnecessary_word_mistake\"},\"12\":{\"TV\":\"no_mistake\"},\"13\":{\"recently\":\"unnecessary_word_mistake\"},\"14\":{\"than\":\"unnecessary_word_mistake\"},\"15\":{\"in\":\"unnecessary_word_mistake\"},\"16\":{\"compared\":\"missing_word_mistake\"},\"17\":{\"to\":\"missing_word_mistake\"},\"18\":{\"the\":\"no_mistake\"},\"19\":{\"past\":\"no_mistake\"},\"20\":{\".\":\"no_mistake\"}}")
+    # end
 
-  #   it 'Counts the number of mistakes' do
-  #     expect(@cc.number_of_mistakes).to eq([])
-  #   end
+    # it 'Counts the number of mistakes' do
+    #   expect(@cc.number_of_mistakes).to eq([])
+    # end
 
-  #   it 'Reports the mistakes by mistake type' do
-  #     expect(@cc.mistake_report).to eq([])
-  #   end
+    # it 'Reports the mistakes by mistake type' do
+    #   expect(@cc.mistake_report).to eq([])
+    # end
   # end
 
-  # context "example correction #043" do
-  #   before do
-  #     original_sentence = 'That is the why not only we can get information from TV, but also we can get information from the internet nowadays.'
-  #     corrected_sentence = 'That is the reason why not only we can get information from TV, but also we can get information from the internet nowadays.'
-  #     @cc = ChatCorrect::Correct.new(original_sentence: original_sentence, corrected_sentence: corrected_sentence)
-  #   end
+  context "example correction #043" do
+    before do
+      original_sentence = 'That is the why not only we can get information from TV, but also we can get information from the internet nowadays.'
+      corrected_sentence = 'That is the reason why not only we can get information from TV, but also we can get information from the internet nowadays.'
+      @cc = ChatCorrect::Correct.new(original_sentence: original_sentence, corrected_sentence: corrected_sentence)
+    end
 
-  #   it 'Annotates the corrections' do
-  #     expect(@cc.correct).to eq([])
-  #   end
+    it 'Annotates the corrections' do
+      expect(@cc.correct).to eq("{\"0\":{\"That\":\"no_mistake\"},\"1\":{\"is\":\"no_mistake\"},\"2\":{\"the\":\"no_mistake\"},\"3\":{\"reason\":\"missing_word_mistake\"},\"4\":{\"why\":\"no_mistake\"},\"5\":{\"not\":\"no_mistake\"},\"6\":{\"only\":\"no_mistake\"},\"7\":{\"we\":\"no_mistake\"},\"8\":{\"can\":\"no_mistake\"},\"9\":{\"get\":\"no_mistake\"},\"10\":{\"information\":\"no_mistake\"},\"11\":{\"from\":\"no_mistake\"},\"12\":{\"TV\":\"no_mistake\"},\"13\":{\",\":\"no_mistake\"},\"14\":{\"but\":\"no_mistake\"},\"15\":{\"also\":\"no_mistake\"},\"16\":{\"we\":\"no_mistake\"},\"17\":{\"can\":\"no_mistake\"},\"18\":{\"get\":\"no_mistake\"},\"19\":{\"information\":\"no_mistake\"},\"20\":{\"from\":\"no_mistake\"},\"21\":{\"the\":\"no_mistake\"},\"22\":{\"internet\":\"no_mistake\"},\"23\":{\"nowadays\":\"no_mistake\"},\"24\":{\".\":\"no_mistake\"}}")
+    end
 
-  #   it 'Counts the number of mistakes' do
-  #     expect(@cc.number_of_mistakes).to eq([])
-  #   end
+    # it 'Counts the number of mistakes' do
+    #   expect(@cc.number_of_mistakes).to eq([])
+    # end
 
-  #   it 'Reports the mistakes by mistake type' do
-  #     expect(@cc.mistake_report).to eq([])
-  #   end
-  # end
+    # it 'Reports the mistakes by mistake type' do
+    #   expect(@cc.mistake_report).to eq([])
+    # end
+  end
 
-  # context "example correction #044" do
-  #   before do
-  #     original_sentence = 'In the other hand, TV topic develop our relationship to provide some topics such as a news, drama, comedy, animation, and so on.'
-  #     corrected_sentence = 'On the other hand, TV topics develop our relationship to provide some topics such as a news, drama, comedy, animation, and so on.'
-  #     @cc = ChatCorrect::Correct.new(original_sentence: original_sentence, corrected_sentence: corrected_sentence)
-  #   end
+  context "example correction #044" do
+    before do
+      original_sentence = 'In the other hand, TV topic develop our relationship to provide some topics such as a news, drama, comedy, animation, and so on.'
+      corrected_sentence = 'On the other hand, TV topics develop our relationship to provide some topics such as a news, drama, comedy, animation, and so on.'
+      @cc = ChatCorrect::Correct.new(original_sentence: original_sentence, corrected_sentence: corrected_sentence)
+    end
 
-  #   it 'Annotates the corrections' do
-  #     expect(@cc.correct).to eq([])
-  #   end
+    it 'Annotates the corrections' do
+      expect(@cc.correct).to eq("{\"0\":{\"In\":\"word_choice_mistake\"},\"1\":{\"On\":\"word_choice_mistake_opposite\"},\"2\":{\"the\":\"no_mistake\"},\"3\":{\"other\":\"no_mistake\"},\"4\":{\"hand\":\"no_mistake\"},\"5\":{\",\":\"no_mistake\"},\"6\":{\"TV\":\"no_mistake\"},\"7\":{\"topic\":\"pluralization_mistake\"},\"8\":{\"topics\":\"pluralization_mistake_opposite\"},\"9\":{\"develop\":\"no_mistake\"},\"10\":{\"our\":\"no_mistake\"},\"11\":{\"relationship\":\"no_mistake\"},\"12\":{\"to\":\"no_mistake\"},\"13\":{\"provide\":\"no_mistake\"},\"14\":{\"some\":\"no_mistake\"},\"15\":{\"topics\":\"no_mistake\"},\"16\":{\"such\":\"no_mistake\"},\"17\":{\"as\":\"no_mistake\"},\"18\":{\"a\":\"no_mistake\"},\"19\":{\"news\":\"no_mistake\"},\"20\":{\",\":\"no_mistake\"},\"21\":{\"drama\":\"no_mistake\"},\"22\":{\",\":\"no_mistake\"},\"23\":{\"comedy\":\"no_mistake\"},\"24\":{\",\":\"no_mistake\"},\"25\":{\"animation\":\"no_mistake\"},\"26\":{\",\":\"no_mistake\"},\"27\":{\"and\":\"no_mistake\"},\"28\":{\"so\":\"no_mistake\"},\"29\":{\"on\":\"no_mistake\"},\"30\":{\".\":\"no_mistake\"}}")
+    end
 
-  #   it 'Counts the number of mistakes' do
-  #     expect(@cc.number_of_mistakes).to eq([])
-  #   end
+    # it 'Counts the number of mistakes' do
+    #   expect(@cc.number_of_mistakes).to eq([])
+    # end
 
-  #   it 'Reports the mistakes by mistake type' do
-  #     expect(@cc.mistake_report).to eq([])
-  #   end
-  # end
+    # it 'Reports the mistakes by mistake type' do
+    #   expect(@cc.mistake_report).to eq([])
+    # end
+  end
 
-  # context "example correction #045" do
-  #   before do
-  #     original_sentence = 'I carried.'
-  #     corrected_sentence = 'I carry'
-  #     @cc = ChatCorrect::Correct.new(original_sentence: original_sentence, corrected_sentence: corrected_sentence)
-  #   end
+  context "example correction #045" do
+    before do
+      original_sentence = 'I carried.'
+      corrected_sentence = 'I carry'
+      @cc = ChatCorrect::Correct.new(original_sentence: original_sentence, corrected_sentence: corrected_sentence)
+    end
 
-  #   it 'Annotates the corrections' do
-  #     expect(@cc.correct).to eq([])
-  #   end
+    it 'Annotates the corrections' do
+      expect(@cc.correct).to eq("{\"0\":{\"I\":\"no_mistake\"},\"1\":{\"carried\":\"verb_mistake\"},\"2\":{\"carry\":\"verb_mistake_opposite\"},\"3\":{\".\":\"punctuation_mistake\"}}")
+    end
 
-  #   it 'Counts the number of mistakes' do
-  #     expect(@cc.number_of_mistakes).to eq([])
-  #   end
+    # it 'Counts the number of mistakes' do
+    #   expect(@cc.number_of_mistakes).to eq([])
+    # end
 
-  #   it 'Reports the mistakes by mistake type' do
-  #     expect(@cc.mistake_report).to eq([])
-  #   end
-  # end
+    # it 'Reports the mistakes by mistake type' do
+    #   expect(@cc.mistake_report).to eq([])
+    # end
+  end
 
-  # context "example correction #046" do
-  #   before do
-  #     original_sentence = 'I went to the store. I bought some eggs.'
-  #     corrected_sentence = 'I went to the store.'
-  #     @cc = ChatCorrect::Correct.new(original_sentence: original_sentence, corrected_sentence: corrected_sentence)
-  #   end
+  context "example correction #046" do
+    before do
+      original_sentence = 'I went to the store. I bought some eggs.'
+      corrected_sentence = 'I went to the store.'
+      @cc = ChatCorrect::Correct.new(original_sentence: original_sentence, corrected_sentence: corrected_sentence)
+    end
 
-  #   it 'Annotates the corrections' do
-  #     expect(@cc.correct).to eq([])
-  #   end
+    it 'Annotates the corrections' do
+      expect(@cc.correct).to eq("{\"0\":{\"I\":\"no_mistake\"},\"1\":{\"went\":\"no_mistake\"},\"2\":{\"to\":\"no_mistake\"},\"3\":{\"the\":\"no_mistake\"},\"4\":{\"store\":\"no_mistake\"},\"5\":{\".\":\"no_mistake\"},\"6\":{\"I\":\"unnecessary_word_mistake\"},\"7\":{\"bought\":\"unnecessary_word_mistake\"},\"8\":{\"some\":\"unnecessary_word_mistake\"},\"9\":{\"eggs\":\"unnecessary_word_mistake\"},\"10\":{\".\":\"punctuation_mistake\"}}")
+    end
 
-  #   it 'Counts the number of mistakes' do
-  #     expect(@cc.number_of_mistakes).to eq([])
-  #   end
+    # it 'Counts the number of mistakes' do
+    #   expect(@cc.number_of_mistakes).to eq([])
+    # end
 
-  #   it 'Reports the mistakes by mistake type' do
-  #     expect(@cc.mistake_report).to eq([])
-  #   end
-  # end
+    # it 'Reports the mistakes by mistake type' do
+    #   expect(@cc.mistake_report).to eq([])
+    # end
+  end
 
-  # context "example correction #047" do
-  #   before do
-  #     original_sentence = 'The laptop can make a lot of things such as a searching knowledge, writing down some memo, watching a movie and so on.'
-  #     corrected_sentence = 'I can do a lot of things with the laptop such as searching knowledge, writing down some memos, watching a movie and so on.'
-  #     @cc = ChatCorrect::Correct.new(original_sentence: original_sentence, corrected_sentence: corrected_sentence)
-  #   end
+  context "example correction #047" do
+    before do
+      original_sentence = 'The laptop can make a lot of things such as a searching knowledge, writing down some memo, watching a movie and so on.'
+      corrected_sentence = 'I can do a lot of things with the laptop such as searching knowledge, writing down some memos, watching a movie and so on.'
+      @cc = ChatCorrect::Correct.new(original_sentence: original_sentence, corrected_sentence: corrected_sentence)
+    end
 
-  #   it 'Annotates the corrections' do
-  #     expect(@cc.correct).to eq([])
-  #   end
+    it 'Annotates the corrections' do
+      expect(@cc.correct).to eq("{\"0\":{\"I\":\"missing_word_mistake\"},\"1\":{\"can\":\"word_order_mistake\"},\"2\":{\"do\":\"missing_word_mistake\"},\"3\":{\"make\":\"unnecessary_word_mistake\"},\"4\":{\"a\":\"word_order_mistake\"},\"5\":{\"lot\":\"word_order_mistake\"},\"6\":{\"of\":\"word_order_mistake\"},\"7\":{\"things\":\"word_order_mistake\"},\"8\":{\"with\":\"missing_word_mistake\"},\"9\":{\"the\":\"word_order_mistake\"},\"10\":{\"laptop\":\"word_order_mistake\"},\"11\":{\"such\":\"no_mistake\"},\"12\":{\"as\":\"no_mistake\"},\"13\":{\"a\":\"unnecessary_word_mistake\"},\"14\":{\"searching\":\"no_mistake\"},\"15\":{\"knowledge\":\"no_mistake\"},\"16\":{\",\":\"no_mistake\"},\"17\":{\"writing\":\"no_mistake\"},\"18\":{\"down\":\"no_mistake\"},\"19\":{\"some\":\"no_mistake\"},\"20\":{\"memo\":\"pluralization_mistake\"},\"21\":{\"memos\":\"pluralization_mistake_opposite\"},\"22\":{\",\":\"no_mistake\"},\"23\":{\"watching\":\"no_mistake\"},\"24\":{\"a\":\"no_mistake\"},\"25\":{\"movie\":\"no_mistake\"},\"26\":{\"and\":\"no_mistake\"},\"27\":{\"so\":\"no_mistake\"},\"28\":{\"on\":\"no_mistake\"},\"29\":{\".\":\"no_mistake\"}}")
+    end
 
-  #   it 'Counts the number of mistakes' do
-  #     expect(@cc.number_of_mistakes).to eq([])
-  #   end
+    # it 'Counts the number of mistakes' do
+    #   expect(@cc.number_of_mistakes).to eq([])
+    # end
 
-  #   it 'Reports the mistakes by mistake type' do
-  #     expect(@cc.mistake_report).to eq([])
-  #   end
-  # end
+    # it 'Reports the mistakes by mistake type' do
+    #   expect(@cc.mistake_report).to eq([])
+    # end
+  end
 
-  # context "example correction #048" do
-  #   before do
-  #     original_sentence = 'Actually when I attended the international meeting, or American society for surgery of hand, at the trip.'
-  #     corrected_sentence = 'Actually, I attended the international meeting for the American Society for surgery of hand while I was on the trip.'
-  #     @cc = ChatCorrect::Correct.new(original_sentence: original_sentence, corrected_sentence: corrected_sentence)
-  #   end
+  context "example correction #048" do
+    before do
+      original_sentence = 'Actually when I attended the international meeting, or American society for surgery of hand, at the trip.'
+      corrected_sentence = 'Actually, I attended the international meeting for the American Society for surgery of hand while I was on the trip.'
+      @cc = ChatCorrect::Correct.new(original_sentence: original_sentence, corrected_sentence: corrected_sentence)
+    end
 
-  #   it 'Annotates the corrections' do
-  #     expect(@cc.correct).to eq([])
-  #   end
+    it 'Annotates the corrections' do
+      expect(@cc.correct).to eq("{\"0\":{\"Actually\":\"no_mistake\"},\"1\":{\"when\":\"unnecessary_word_mistake\"},\"2\":{\",\":\"missing_punctuation_mistake\"},\"3\":{\"I\":\"no_mistake\"},\"4\":{\"attended\":\"no_mistake\"},\"5\":{\"the\":\"no_mistake\"},\"6\":{\"international\":\"no_mistake\"},\"7\":{\"meeting\":\"no_mistake\"},\"8\":{\",\":\"punctuation_mistake\"},\"9\":{\"or\":\"unnecessary_word_mistake\"},\"10\":{\"for\":\"missing_word_mistake\"},\"11\":{\"the\":\"missing_word_mistake\"},\"12\":{\"American\":\"no_mistake\"},\"13\":{\"society\":\"capitalization_mistake\"},\"14\":{\"Society\":\"capitalization_mistake_opposite\"},\"15\":{\"for\":\"no_mistake\"},\"16\":{\"surgery\":\"no_mistake\"},\"17\":{\"of\":\"no_mistake\"},\"18\":{\"hand\":\"no_mistake\"},\"19\":{\",\":\"punctuation_mistake\"},\"20\":{\"at\":\"unnecessary_word_mistake\"},\"21\":{\"while\":\"missing_word_mistake\"},\"22\":{\"I\":\"missing_word_mistake\"},\"23\":{\"was\":\"missing_word_mistake\"},\"24\":{\"on\":\"missing_word_mistake\"},\"25\":{\"the\":\"no_mistake\"},\"26\":{\"trip\":\"no_mistake\"},\"27\":{\".\":\"no_mistake\"}}")
+    end
 
-  #   it 'Counts the number of mistakes' do
-  #     expect(@cc.number_of_mistakes).to eq([])
-  #   end
+    # it 'Counts the number of mistakes' do
+    #   expect(@cc.number_of_mistakes).to eq([])
+    # end
 
-  #   it 'Reports the mistakes by mistake type' do
-  #     expect(@cc.mistake_report).to eq([])
-  #   end
-  # end
+    # it 'Reports the mistakes by mistake type' do
+    #   expect(@cc.mistake_report).to eq([])
+    # end
+  end
 
   # context "example correction #049" do
   #   before do
@@ -982,34 +983,34 @@ RSpec.describe ChatCorrect::Correct do
   #     expect(@cc.correct).to eq([])
   #   end
 
-  #   it 'Counts the number of mistakes' do
-  #     expect(@cc.number_of_mistakes).to eq([])
-  #   end
+    # it 'Counts the number of mistakes' do
+    #   expect(@cc.number_of_mistakes).to eq([])
+    # end
 
-  #   it 'Reports the mistakes by mistake type' do
-  #     expect(@cc.mistake_report).to eq([])
-  #   end
+    # it 'Reports the mistakes by mistake type' do
+    #   expect(@cc.mistake_report).to eq([])
+    # end
   # end
 
-  # context "example correction #050" do
-  #   before do
-  #     original_sentence = 'This year, going back to my work at my university, I have less time to spend my private time, for example, morning conference at 7:10 on Tuesday, at 7:30 on Thursday, preparation for operation, meeting, work for outpatients and so on.'
-  #     corrected_sentence = 'This year, going back to work at my university, I have less private time, for example, morning conference at 7:10 on Tuesday, at 7:30 on Thursday, preparation for operations, meetings, work for outpatients and so on.'
-  #     @cc = ChatCorrect::Correct.new(original_sentence: original_sentence, corrected_sentence: corrected_sentence)
-  #   end
+  context "example correction #050" do
+    before do
+      original_sentence = 'This year, going back to my work at my university, I have less time to spend my private time, for example, morning conference at 7:10 on Tuesday, at 7:30 on Thursday, preparation for operation, meeting, work for outpatients and so on.'
+      corrected_sentence = 'This year, going back to work at my university, I have less private time, for example, morning conference at 7:10 on Tuesday, at 7:30 on Thursday, preparation for operations, meetings, work for outpatients and so on.'
+      @cc = ChatCorrect::Correct.new(original_sentence: original_sentence, corrected_sentence: corrected_sentence)
+    end
 
-  #   it 'Annotates the corrections' do
-  #     expect(@cc.correct).to eq([])
-  #   end
+    it 'Annotates the corrections' do
+      expect(@cc.correct).to eq("{\"0\":{\"This\":\"no_mistake\"},\"1\":{\"year\":\"no_mistake\"},\"2\":{\",\":\"no_mistake\"},\"3\":{\"going\":\"no_mistake\"},\"4\":{\"back\":\"no_mistake\"},\"5\":{\"to\":\"no_mistake\"},\"6\":{\"my\":\"unnecessary_word_mistake\"},\"7\":{\"work\":\"no_mistake\"},\"8\":{\"at\":\"no_mistake\"},\"9\":{\"my\":\"no_mistake\"},\"10\":{\"university\":\"no_mistake\"},\"11\":{\",\":\"no_mistake\"},\"12\":{\"I\":\"no_mistake\"},\"13\":{\"have\":\"no_mistake\"},\"14\":{\"less\":\"no_mistake\"},\"15\":{\"time\":\"unnecessary_word_mistake\"},\"16\":{\"to\":\"unnecessary_word_mistake\"},\"17\":{\"spend\":\"unnecessary_word_mistake\"},\"18\":{\"my\":\"unnecessary_word_mistake\"},\"19\":{\"private\":\"no_mistake\"},\"20\":{\"time\":\"no_mistake\"},\"21\":{\",\":\"no_mistake\"},\"22\":{\"for\":\"no_mistake\"},\"23\":{\"example\":\"no_mistake\"},\"24\":{\",\":\"no_mistake\"},\"25\":{\"morning\":\"no_mistake\"},\"26\":{\"conference\":\"no_mistake\"},\"27\":{\"at\":\"no_mistake\"},\"28\":{\"7:10\":\"no_mistake\"},\"29\":{\"on\":\"no_mistake\"},\"30\":{\"Tuesday\":\"no_mistake\"},\"31\":{\",\":\"no_mistake\"},\"32\":{\"at\":\"no_mistake\"},\"33\":{\"7:30\":\"no_mistake\"},\"34\":{\"on\":\"no_mistake\"},\"35\":{\"Thursday\":\"no_mistake\"},\"36\":{\",\":\"no_mistake\"},\"37\":{\"preparation\":\"no_mistake\"},\"38\":{\"for\":\"no_mistake\"},\"39\":{\"operation\":\"pluralization_mistake\"},\"40\":{\"operations\":\"pluralization_mistake_opposite\"},\"41\":{\",\":\"no_mistake\"},\"42\":{\"meeting\":\"pluralization_mistake\"},\"43\":{\"meetings\":\"pluralization_mistake_opposite\"},\"44\":{\",\":\"no_mistake\"},\"45\":{\"work\":\"no_mistake\"},\"46\":{\"for\":\"no_mistake\"},\"47\":{\"outpatients\":\"no_mistake\"},\"48\":{\"and\":\"no_mistake\"},\"49\":{\"so\":\"no_mistake\"},\"50\":{\"on\":\"no_mistake\"},\"51\":{\".\":\"no_mistake\"}}")
+    end
 
-  #   it 'Counts the number of mistakes' do
-  #     expect(@cc.number_of_mistakes).to eq([])
-  #   end
+    # it 'Counts the number of mistakes' do
+    #   expect(@cc.number_of_mistakes).to eq([])
+    # end
 
-  #   it 'Reports the mistakes by mistake type' do
-  #     expect(@cc.mistake_report).to eq([])
-  #   end
-  # end
+    # it 'Reports the mistakes by mistake type' do
+    #   expect(@cc.mistake_report).to eq([])
+    # end
+  end
 
   # context "example correction #051" do
   #   before do
@@ -1019,77 +1020,77 @@ RSpec.describe ChatCorrect::Correct do
   #   end
 
   #   it 'Annotates the corrections' do
-  #     expect(@cc.correct).to eq([])
+  #     expect(@cc.correct).to eq("{\"0\":{\"These\":\"no_mistake\"},\"1\":{\"are\":\"no_mistake\"},\"2\":{\"my\":\"word_choice_mistake\"},\"3\":{\"things\":\"word_choice_mistake\"},\"4\":{\"to\":\"word_choice_mistake\"},\"5\":{\"the\":\"word_choice_mistake_opposite\"},\"6\":{\"ways\":\"word_choice_mistake_opposite\"},\"7\":{\"that\":\"word_choice_mistake_opposite\"},\"8\":{\"I\":\"word_choice_mistake_opposite\"},\"9\":{\"keep\":\"no_mistake\"},\"10\":{\"healthy\":\"no_mistake\"},\"11\":{\"now\":\"no_mistake\"},\"12\":{\".\":\"no_mistake\"}}")
   #   end
 
-  #   it 'Counts the number of mistakes' do
-  #     expect(@cc.number_of_mistakes).to eq([])
-  #   end
+    # it 'Counts the number of mistakes' do
+    #   expect(@cc.number_of_mistakes).to eq([])
+    # end
 
-  #   it 'Reports the mistakes by mistake type' do
-  #     expect(@cc.mistake_report).to eq([])
-  #   end
+    # it 'Reports the mistakes by mistake type' do
+    #   expect(@cc.mistake_report).to eq([])
+    # end
   # end
 
-  # context "example correction #052" do
-  #   before do
-  #     original_sentence = 'Her name was Dr. Cole.'
-  #     corrected_sentence = 'Her name is Dr. Cole.'
-  #     @cc = ChatCorrect::Correct.new(original_sentence: original_sentence, corrected_sentence: corrected_sentence)
-  #   end
+  context "example correction #052" do
+    before do
+      original_sentence = 'Her name was Dr. Cole.'
+      corrected_sentence = 'Her name is Dr. Cole.'
+      @cc = ChatCorrect::Correct.new(original_sentence: original_sentence, corrected_sentence: corrected_sentence)
+    end
 
-  #   it 'Annotates the corrections' do
-  #     expect(@cc.correct).to eq([])
-  #   end
+    it 'Annotates the corrections' do
+      expect(@cc.correct).to eq("{\"0\":{\"Her\":\"no_mistake\"},\"1\":{\"name\":\"no_mistake\"},\"2\":{\"was\":\"verb_mistake\"},\"3\":{\"is\":\"verb_mistake_opposite\"},\"4\":{\"Dr.\":\"no_mistake\"},\"5\":{\"Cole\":\"no_mistake\"},\"6\":{\".\":\"no_mistake\"}}")
+    end
 
-  #   it 'Counts the number of mistakes' do
-  #     expect(@cc.number_of_mistakes).to eq([])
-  #   end
+    # it 'Counts the number of mistakes' do
+    #   expect(@cc.number_of_mistakes).to eq([])
+    # end
 
-  #   it 'Reports the mistakes by mistake type' do
-  #     expect(@cc.mistake_report).to eq([])
-  #   end
-  # end
+    # it 'Reports the mistakes by mistake type' do
+    #   expect(@cc.mistake_report).to eq([])
+    # end
+  end
 
-  # context "example correction #053" do
-  #   before do
-  #     original_sentence = 'Because gravity.'
-  #     corrected_sentence = 'Because of gravity'
-  #     @cc = ChatCorrect::Correct.new(original_sentence: original_sentence, corrected_sentence: corrected_sentence)
-  #   end
+  context "example correction #053" do
+    before do
+      original_sentence = 'Because gravity.'
+      corrected_sentence = 'Because of gravity'
+      @cc = ChatCorrect::Correct.new(original_sentence: original_sentence, corrected_sentence: corrected_sentence)
+    end
 
-  #   it 'Annotates the corrections' do
-  #     expect(@cc.correct).to eq([])
-  #   end
+    it 'Annotates the corrections' do
+      expect(@cc.correct).to eq("{\"0\":{\"Because\":\"no_mistake\"},\"1\":{\"of\":\"missing_word_mistake\"},\"2\":{\"gravity\":\"no_mistake\"},\"3\":{\".\":\"punctuation_mistake\"}}")
+    end
 
-  #   it 'Counts the number of mistakes' do
-  #     expect(@cc.number_of_mistakes).to eq([])
-  #   end
+    # it 'Counts the number of mistakes' do
+    #   expect(@cc.number_of_mistakes).to eq([])
+    # end
 
-  #   it 'Reports the mistakes by mistake type' do
-  #     expect(@cc.mistake_report).to eq([])
-  #   end
-  # end
+    # it 'Reports the mistakes by mistake type' do
+    #   expect(@cc.mistake_report).to eq([])
+    # end
+  end
 
-  # context "example correction #054" do
-  #   before do
-  #     original_sentence = 'I gots a dog.'
-  #     corrected_sentence = 'I have a dog.'
-  #     @cc = ChatCorrect::Correct.new(original_sentence: original_sentence, corrected_sentence: corrected_sentence)
-  #   end
+  context "example correction #054" do
+    before do
+      original_sentence = 'I gots a dog.'
+      corrected_sentence = 'I have a dog.'
+      @cc = ChatCorrect::Correct.new(original_sentence: original_sentence, corrected_sentence: corrected_sentence)
+    end
 
-  #   it 'Annotates the corrections' do
-  #     expect(@cc.correct).to eq([])
-  #   end
+    it 'Annotates the corrections' do
+      expect(@cc.correct).to eq("{\"0\":{\"I\":\"no_mistake\"},\"1\":{\"gots\":\"verb_mistake\"},\"2\":{\"have\":\"verb_mistake_opposite\"},\"3\":{\"a\":\"no_mistake\"},\"4\":{\"dog\":\"no_mistake\"},\"5\":{\".\":\"no_mistake\"}}")
+    end
 
-  #   it 'Counts the number of mistakes' do
-  #     expect(@cc.number_of_mistakes).to eq([])
-  #   end
+    # it 'Counts the number of mistakes' do
+    #   expect(@cc.number_of_mistakes).to eq([])
+    # end
 
-  #   it 'Reports the mistakes by mistake type' do
-  #     expect(@cc.mistake_report).to eq([])
-  #   end
-  # end
+    # it 'Reports the mistakes by mistake type' do
+    #   expect(@cc.mistake_report).to eq([])
+    # end
+  end
 
   # context "example correction #055" do
   #   before do
@@ -1099,16 +1100,16 @@ RSpec.describe ChatCorrect::Correct do
   #   end
 
   #   it 'Annotates the corrections' do
-  #     expect(@cc.correct).to eq([])
+  #     expect(@cc.correct).to eq("{\"0\":{\"whatƪs\":\"stylistic_choice\"},\"1\":{\"what\":\"stylistic_choice_opposite\"},\"2\":{\"is\":\"stylistic_choice_opposite\"},\"3\":{\"hapen\":\"spelling_mistake\"},\"4\":{\"happen\":\"spelling_mistake_opposite\"}}")
   #   end
 
-  #   it 'Counts the number of mistakes' do
-  #     expect(@cc.number_of_mistakes).to eq([])
-  #   end
+    # it 'Counts the number of mistakes' do
+    #   expect(@cc.number_of_mistakes).to eq([])
+    # end
 
-  #   it 'Reports the mistakes by mistake type' do
-  #     expect(@cc.mistake_report).to eq([])
-  #   end
+    # it 'Reports the mistakes by mistake type' do
+    #   expect(@cc.mistake_report).to eq([])
+    # end
   # end
 
   # context "example correction #056" do
@@ -1119,16 +1120,16 @@ RSpec.describe ChatCorrect::Correct do
   #   end
 
   #   it 'Annotates the corrections' do
-  #     expect(@cc.correct).to eq([])
+  #     expect(@cc.correct).to eq("{\"0\":{\"what\":\"stylistic_choice\"},\"1\":{\"is\":\"stylistic_choice\"},\"2\":{\"whatƪs\":\"stylistic_choice_opposite\"},\"3\":{\"happen\":\"no_mistake\"}}")
   #   end
 
-  #   it 'Counts the number of mistakes' do
-  #     expect(@cc.number_of_mistakes).to eq([])
-  #   end
+    # it 'Counts the number of mistakes' do
+    #   expect(@cc.number_of_mistakes).to eq([])
+    # end
 
-  #   it 'Reports the mistakes by mistake type' do
-  #     expect(@cc.mistake_report).to eq([])
-  #   end
+    # it 'Reports the mistakes by mistake type' do
+    #   expect(@cc.mistake_report).to eq([])
+    # end
   # end
 
   # context "example correction #057" do
@@ -1139,16 +1140,16 @@ RSpec.describe ChatCorrect::Correct do
   #   end
 
   #   it 'Annotates the corrections' do
-  #     expect(@cc.correct).to eq([])
+  #     expect(@cc.correct).to eq("{\"0\":{\"That\":\"no_mistake\"},\"1\":{\"couldnƪt happen\":\"stylistic_choice\"},\"2\":{\"could not happen\":\"stylistic_choice_opposite\"},\"3\":{\".\":\"no_mistake\"}}")
   #   end
 
-  #   it 'Counts the number of mistakes' do
-  #     expect(@cc.number_of_mistakes).to eq([])
-  #   end
+    # it 'Counts the number of mistakes' do
+    #   expect(@cc.number_of_mistakes).to eq([])
+    # end
 
-  #   it 'Reports the mistakes by mistake type' do
-  #     expect(@cc.mistake_report).to eq([])
-  #   end
+    # it 'Reports the mistakes by mistake type' do
+    #   expect(@cc.mistake_report).to eq([])
+    # end
   # end
 
   # context "example correction #058" do
@@ -1159,16 +1160,16 @@ RSpec.describe ChatCorrect::Correct do
   #   end
 
   #   it 'Annotates the corrections' do
-  #     expect(@cc.correct).to eq([])
+  #     expect(@cc.correct).to eq("{\"0\":{\"That\":\"no_mistake\"},\"1\":{\"could not happen\":\"stylistic_choice\"},\"2\":{\"couldnƪt happen\":\"stylistic_choice_opposite\"},\"3\":{\".\":\"no_mistake\"}}")
   #   end
 
-  #   it 'Counts the number of mistakes' do
-  #     expect(@cc.number_of_mistakes).to eq([])
-  #   end
+    # it 'Counts the number of mistakes' do
+    #   expect(@cc.number_of_mistakes).to eq([])
+    # end
 
-  #   it 'Reports the mistakes by mistake type' do
-  #     expect(@cc.mistake_report).to eq([])
-  #   end
+    # it 'Reports the mistakes by mistake type' do
+    #   expect(@cc.mistake_report).to eq([])
+    # end
   # end
 
   # context "example correction #059" do
@@ -1179,16 +1180,16 @@ RSpec.describe ChatCorrect::Correct do
   #   end
 
   #   it 'Annotates the corrections' do
-  #     expect(@cc.correct).to eq([])
+  #     expect(@cc.correct).to eq("{\"0\":{\"It\":\"stylistic_choice\"},\"1\":{\"was\":\"stylistic_choice\"},\"2\":{\"ƪTwas\":\"stylistic_choice_opposite\"},\"3\":{\"the\":\"no_mistake\"},\"4\":{\"night\":\"no_mistake\"},\"5\":{\"before\":\"no_mistake\"},\"6\":{\"Christmas\":\"no_mistake\"},\"7\":{\".\":\"no_mistake\"}}")
   #   end
 
-  #   it 'Counts the number of mistakes' do
-  #     expect(@cc.number_of_mistakes).to eq([])
-  #   end
+    # it 'Counts the number of mistakes' do
+    #   expect(@cc.number_of_mistakes).to eq([])
+    # end
 
-  #   it 'Reports the mistakes by mistake type' do
-  #     expect(@cc.mistake_report).to eq([])
-  #   end
+    # it 'Reports the mistakes by mistake type' do
+    #   expect(@cc.mistake_report).to eq([])
+    # end
   # end
 
   # context "example correction #060" do
@@ -1199,16 +1200,16 @@ RSpec.describe ChatCorrect::Correct do
   #   end
 
   #   it 'Annotates the corrections' do
-  #     expect(@cc.correct).to eq([])
+  #     expect(@cc.correct).to eq("{\"0\":{\"Yesterday\":\"no_mistake\"},\"1\":{\",\":\"no_mistake\"},\"2\":{\"it\":\"stylistic_choice\"},\"3\":{\"was\":\"stylistic_choice\"},\"4\":{\"ƪtwas\":\"stylistic_choice_opposite\"},\"5\":{\"the\":\"no_mistake\"},\"6\":{\"night\":\"no_mistake\"},\"7\":{\"before\":\"no_mistake\"},\"8\":{\"Christmas\":\"no_mistake\"},\"9\":{\".\":\"no_mistake\"}}")
   #   end
 
-  #   it 'Counts the number of mistakes' do
-  #     expect(@cc.number_of_mistakes).to eq([])
-  #   end
+    # it 'Counts the number of mistakes' do
+    #   expect(@cc.number_of_mistakes).to eq([])
+    # end
 
-  #   it 'Reports the mistakes by mistake type' do
-  #     expect(@cc.mistake_report).to eq([])
-  #   end
+    # it 'Reports the mistakes by mistake type' do
+    #   expect(@cc.mistake_report).to eq([])
+    # end
   # end
 
   # context "example correction #061" do
@@ -1219,16 +1220,16 @@ RSpec.describe ChatCorrect::Correct do
   #   end
 
   #   it 'Annotates the corrections' do
-  #     expect(@cc.correct).to eq([])
+  #     expect(@cc.correct).to eq("{\"0\":{\"Usually\":\"no_mistake\"},\"1\":{\"we\":\"no_mistake\"},\"2\":{\"orthopedic\":\"no_mistake\"},\"3\":{\"surgeon\":\"pluralization_mistake\"},\"4\":{\"surgeons\":\"pluralization_mistake_opposite\"},\"5\":{\"suggest\":\"verb_mistake\"},\"6\":{\"will suggest\":\"verb_mistake_opposite\"},\"7\":{\"to\":\"word_choice_mistake\"},\"8\":{\"the\":\"word_choice_mistake_opposite\"},\"9\":{\"patient\":\"missing_word_mistake\"},\"10\":{\"to\":\"missing_word_mistake\"},\"11\":{\"take\":\"verb_mistake\"},\"12\":{\"have\":\"verb_mistake_opposite\"},\"13\":{\"a\":\"word_choice_mistake\"},\"14\":{\"an\":\"word_choice_mistake_opposite\"},\"15\":{\"operation\":\"no_mistake\"},\"16\":{\"which\":\"no_mistake\"},\"17\":{\"replaces\":\"verb_mistake_opposite\"},\"18\":{\"replace\":\"verb_mistake\"},\"19\":{\"the\":\"missing_word_mistake\"},\"20\":{\"to\":\"unnecessary_word_mistake\"},\"21\":{\"broken\":\"word_order_mistake\"},\"22\":{\"fermur\":\"word_order_mistake\"},\"23\":{\"neck\":\"word_order_mistake\"},\"24\":{\"with\":\"missing_word_mistake\"},\"25\":{\"prosthesis\":\"no_mistake\"},\"26\":{\".\":\"no_mistake\"}}")
   #   end
 
-  #   it 'Counts the number of mistakes' do
-  #     expect(@cc.number_of_mistakes).to eq([])
-  #   end
+    # it 'Counts the number of mistakes' do
+    #   expect(@cc.number_of_mistakes).to eq([])
+    # end
 
-  #   it 'Reports the mistakes by mistake type' do
-  #     expect(@cc.mistake_report).to eq([])
-  #   end
+    # it 'Reports the mistakes by mistake type' do
+    #   expect(@cc.mistake_report).to eq([])
+    # end
   # end
 
   # context "example correction #062" do
@@ -1239,16 +1240,16 @@ RSpec.describe ChatCorrect::Correct do
   #   end
 
   #   it 'Annotates the corrections' do
-  #     expect(@cc.correct).to eq([])
+  #     expect(@cc.correct).to eq("{\"0\":{\"But\":\"no_mistake\"},\"1\":{\"she\":\"no_mistake\"},\"2\":{\"had\":\"no_mistake\"},\"3\":{\"some\":\"no_mistake\"},\"4\":{\"difficulty\":\"no_mistake\"},\"5\":{\"in\":\"no_mistake\"},\"6\":{\"her\":\"no_mistake\"},\"7\":{\"condition\":\"no_mistake\"},\"8\":{\":\":\"no_mistake\"},\"9\":{\"heart\":\"no_mistake\"},\"10\":{\"ischemia\":\"no_mistake\"},\"11\":{\"which\":\"no_mistake\"},\"12\":{\"had\":\"no_mistake\"},\"13\":{\"recently\":\"no_mistake\"},\"14\":{\"operation\":\"no_mistake\"},\"15\":{\"of\":\"no_mistake\"},\"16\":{\"PCI\":\"no_mistake\"},\"17\":{\",\":\"no_mistake\"},\"18\":{\"COPD\":\"no_mistake\"},\"19\":{\":\":\"no_mistake\"},\"20\":{\"chornic\":\"spelling_mistake\"},\"21\":{\"chronic\":\"spelling_mistake_opposite\"},\"22\":{\"objective\":\"no_mistake\"},\"23\":{\"pulmpnary\":\"spelling_mistake\"},\"24\":{\"pulmonary\":\"spelling_mistake_opposite\"},\"25\":{\"disease\":\"no_mistake\"},\"26\":{\",\":\"no_mistake\"},\"27\":{\"chornic\":\"spelling_mistake\"},\"28\":{\"chronic\":\"spelling_mistake_opposite\"},\"29\":{\"kidney\":\"no_mistake\"},\"30\":{\"failure\":\"no_mistake\"},\"31\":{\"which\":\"no_mistake\"},\"32\":{\"had\":\"unnecessary_word_mistake\"},\"33\":{\"had treated\":\"verb_mistake\"},\"34\":{\"had been treated\":\"verb_mistake_opposite\"},\"35\":{\"on\":\"word_choice_mistake\"},\"36\":{\"with\":\"word_choice_mistake_opposite\"},\"37\":{\"regular\":\"no_mistake\"},\"38\":{\"hemodyalisis\":\"no_mistake\"},\"39\":{\"for\":\"no_mistake\"},\"40\":{\"some\":\"no_mistake\"},\"41\":{\"decade\":\"pluralization_mistake\"},\"42\":{\"decades\":\"pluralization_mistake_opposite\"},\"43\":{\".\":\"no_mistake\"}}")
   #   end
 
-  #   it 'Counts the number of mistakes' do
-  #     expect(@cc.number_of_mistakes).to eq([])
-  #   end
+    # it 'Counts the number of mistakes' do
+    #   expect(@cc.number_of_mistakes).to eq([])
+    # end
 
-  #   it 'Reports the mistakes by mistake type' do
-  #     expect(@cc.mistake_report).to eq([])
-  #   end
+    # it 'Reports the mistakes by mistake type' do
+    #   expect(@cc.mistake_report).to eq([])
+    # end
   # end
 
   # context "example correction #063" do
@@ -1259,16 +1260,16 @@ RSpec.describe ChatCorrect::Correct do
   #   end
 
   #   it 'Annotates the corrections' do
-  #     expect(@cc.correct).to eq([])
+  #     expect(@cc.correct).to eq("{\"0\":{\"If\":\"no_mistake\"},\"1\":{\"she\":\"no_mistake\"},\"2\":{\"cannot\":\"no_mistake\"},\"3\":{\"be\":\"unnecessary_word_mistake\"},\"4\":{\"take\":\"verb_mistake\"},\"5\":{\"have\":\"verb_mistake_opposite\"},\"6\":{\"the\":\"no_mistake\"},\"7\":{\"operation\":\"no_mistake\"},\"8\":{\",\":\"no_mistake\"},\"9\":{\"she\":\"no_mistake\"},\"10\":{\"usually\":\"unnecessary_word_mistake\"},\"11\":{\"cannot\":\"unnecessary_word_mistake\"},\"12\":{\"probably\":\"missing_word_mistake\"},\"13\":{\"will not be\":\"missing_word_mistake\"},\"14\":{\"able\":\"missing_word_mistake\"},\"15\":{\"to\":\"missing_word_mistake\"},\"16\":{\"walk\":\"no_mistake\"},\"17\":{\"at\":\"no_mistake\"},\"18\":{\"all\":\"no_mistake\"},\"19\":{\"and\":\"no_mistake\"},\"20\":{\"needs\":\"unnecessary_word_mistake\"},\"21\":{\"any\":\"unnecessary_word_mistake\"},\"22\":{\"other’s\":\"unnecessary_word_mistake\"},\"23\":{\"will need\":\"missing_word_mistake\"},\"24\":{\"another\":\"missing_word_mistake\"},\"25\":{\"personƪs\":\"missing_word_mistake\"},\"26\":{\"help\":\"no_mistake\"},\"27\":{\"forever\":\"no_mistake\"},\"28\":{\".\":\"no_mistake\"}}")
   #   end
 
-  #   it 'Counts the number of mistakes' do
-  #     expect(@cc.number_of_mistakes).to eq([])
-  #   end
+    # it 'Counts the number of mistakes' do
+    #   expect(@cc.number_of_mistakes).to eq([])
+    # end
 
-  #   it 'Reports the mistakes by mistake type' do
-  #     expect(@cc.mistake_report).to eq([])
-  #   end
+    # it 'Reports the mistakes by mistake type' do
+    #   expect(@cc.mistake_report).to eq([])
+    # end
   # end
 
   # context "example correction #064" do
@@ -1282,13 +1283,13 @@ RSpec.describe ChatCorrect::Correct do
   #     expect(@cc.correct).to eq([])
   #   end
 
-  #   it 'Counts the number of mistakes' do
-  #     expect(@cc.number_of_mistakes).to eq([])
-  #   end
+    # it 'Counts the number of mistakes' do
+    #   expect(@cc.number_of_mistakes).to eq([])
+    # end
 
-  #   it 'Reports the mistakes by mistake type' do
-  #     expect(@cc.mistake_report).to eq([])
-  #   end
+    # it 'Reports the mistakes by mistake type' do
+    #   expect(@cc.mistake_report).to eq([])
+    # end
   # end
 
   # context "example correction #065" do
@@ -1302,13 +1303,13 @@ RSpec.describe ChatCorrect::Correct do
   #     expect(@cc.correct).to eq([])
   #   end
 
-  #   it 'Counts the number of mistakes' do
-  #     expect(@cc.number_of_mistakes).to eq([])
-  #   end
+    # it 'Counts the number of mistakes' do
+    #   expect(@cc.number_of_mistakes).to eq([])
+    # end
 
-  #   it 'Reports the mistakes by mistake type' do
-  #     expect(@cc.mistake_report).to eq([])
-  #   end
+    # it 'Reports the mistakes by mistake type' do
+    #   expect(@cc.mistake_report).to eq([])
+    # end
   # end
 
   # context "example correction #066" do
@@ -1322,13 +1323,13 @@ RSpec.describe ChatCorrect::Correct do
   #     expect(@cc.correct).to eq([])
   #   end
 
-  #   it 'Counts the number of mistakes' do
-  #     expect(@cc.number_of_mistakes).to eq([])
-  #   end
+    # it 'Counts the number of mistakes' do
+    #   expect(@cc.number_of_mistakes).to eq([])
+    # end
 
-  #   it 'Reports the mistakes by mistake type' do
-  #     expect(@cc.mistake_report).to eq([])
-  #   end
+    # it 'Reports the mistakes by mistake type' do
+    #   expect(@cc.mistake_report).to eq([])
+    # end
   # end
 
   # context "example correction #067" do
@@ -1342,13 +1343,13 @@ RSpec.describe ChatCorrect::Correct do
   #     expect(@cc.correct).to eq([])
   #   end
 
-  #   it 'Counts the number of mistakes' do
-  #     expect(@cc.number_of_mistakes).to eq([])
-  #   end
+    # it 'Counts the number of mistakes' do
+    #   expect(@cc.number_of_mistakes).to eq([])
+    # end
 
-  #   it 'Reports the mistakes by mistake type' do
-  #     expect(@cc.mistake_report).to eq([])
-  #   end
+    # it 'Reports the mistakes by mistake type' do
+    #   expect(@cc.mistake_report).to eq([])
+    # end
   # end
 
   # context "example correction #068" do
@@ -1362,13 +1363,13 @@ RSpec.describe ChatCorrect::Correct do
   #     expect(@cc.correct).to eq([])
   #   end
 
-  #   it 'Counts the number of mistakes' do
-  #     expect(@cc.number_of_mistakes).to eq([])
-  #   end
+    # it 'Counts the number of mistakes' do
+    #   expect(@cc.number_of_mistakes).to eq([])
+    # end
 
-  #   it 'Reports the mistakes by mistake type' do
-  #     expect(@cc.mistake_report).to eq([])
-  #   end
+    # it 'Reports the mistakes by mistake type' do
+    #   expect(@cc.mistake_report).to eq([])
+    # end
   # end
 
   # context "example correction #069" do
@@ -1382,13 +1383,13 @@ RSpec.describe ChatCorrect::Correct do
   #     expect(@cc.correct).to eq([])
   #   end
 
-  #   it 'Counts the number of mistakes' do
-  #     expect(@cc.number_of_mistakes).to eq([])
-  #   end
+    # it 'Counts the number of mistakes' do
+    #   expect(@cc.number_of_mistakes).to eq([])
+    # end
 
-  #   it 'Reports the mistakes by mistake type' do
-  #     expect(@cc.mistake_report).to eq([])
-  #   end
+    # it 'Reports the mistakes by mistake type' do
+    #   expect(@cc.mistake_report).to eq([])
+    # end
   # end
 
   # context "example correction #070" do
