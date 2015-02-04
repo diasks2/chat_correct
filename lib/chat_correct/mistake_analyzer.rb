@@ -17,5 +17,9 @@ module ChatCorrect
       ChatCorrect::Verb.new(word: original['token'], pos: corrected['pos_tag'], text: corrected['token']).verb_error?
     end
 
+    def capitalization_mistake?
+      ChatCorrect::Capitalization.new(token_a: corrected['token'], token_b: original['token']).capitalization_error?
+    end
+
   end
 end

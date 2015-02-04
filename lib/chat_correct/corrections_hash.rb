@@ -43,7 +43,7 @@ module ChatCorrect
                   combined_hash[combined_hash.length] = mistake_info
                   combined_hash[combined_hash.length] = correct_info
                   #puts combined_hash.to_s + ' :verb_mistake 4'
-                when ChatCorrect::Capitalization.new(token_a: corrected_sentence_info_hash[i]['token'], token_b: original_sentence_info_hash[j]['token']).capitalization_error?
+                when ChatCorrect::MistakeAnalyzer.new(original: original_sentence_info_hash[j], corrected: corrected_sentence_info_hash[i]).capitalization_mistake?
                   #puts original_sentence_info_hash[j]['match_id'] + ' :capitalization_mistake 10'
                   #puts corrected_sentence_info_hash[i]['match_id'] + ' :capitalization_mistake_opposite 11'
                   mistake_info[original_sentence_info_hash[j]['token']] = 'capitalization_mistake'
