@@ -172,22 +172,14 @@ module ChatCorrect
     def prev_next_match_check
       corrected_sentence_info_hash.each do |kc, vc|
         if !vc['matched']
-          if kc.eql?(0)
-            prev_match_vc = 'ȸ'
-          else
-            prev_match_vc = corrected_sentence_info_hash[kc - 1]['match_id']
-          end
+          prev_match_vc = set_previous_match(kc, corrected_sentence_info_hash)
           if kc.eql?(corrected_sentence_info_hash.length - 1)
             next_match_vc = 'ȹ'
           else
             next_match_vc = corrected_sentence_info_hash[kc + 1]['match_id']
           end
           original_sentence_info_hash.each do |ks, vs|
-            if ks.eql?(0)
-              prev_match_vs = 'ȸ'
-            else
-              prev_match_vs = original_sentence_info_hash[ks - 1]['match_id']
-            end
+            prev_match_vs = set_previous_match(ks, original_sentence_info_hash)
             if ks.eql?(original_sentence_info_hash.length - 1)
               next_match_vs = 'ȹ'
             else
@@ -199,6 +191,14 @@ module ChatCorrect
             corrected_sentence_info_hash[kc]['matched'] = true
           end
         end
+      end
+    end
+
+    def set_previous_match(key, hash)
+      if key.eql?(0)
+        'ȸ'
+      else
+        hash[key - 1]['match_id']
       end
     end
 
