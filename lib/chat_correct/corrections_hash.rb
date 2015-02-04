@@ -30,27 +30,7 @@ module ChatCorrect
         else
           case
             when original_sentence_info_hash[j]['match_id'].to_s[0].eql?('c') && original_sentence_info_hash[j]['match_id'].to_s[1..original_sentence_info_hash[j]['match_id'].to_s.length].eql?(i.to_s)
-              case
-              when ChatCorrect::MistakeAnalyzer.new(original: original_sentence_info_hash[j], corrected: corrected_sentence_info_hash[i]).no_mistake?
-                @correct_info[corrected_sentence_info_hash[i]['token']] = 'no_mistake'
-                @combined_hash[@combined_hash.length] = @correct_info
-              when ChatCorrect::MistakeAnalyzer.new(original: original_sentence_info_hash[j], corrected: corrected_sentence_info_hash[i]).verb_mistake?
-                update_combined_hash('verb_mistake', original_sentence_info_hash[j]['token'], corrected_sentence_info_hash[i]['token'])
-              when ChatCorrect::MistakeAnalyzer.new(original: original_sentence_info_hash[j], corrected: corrected_sentence_info_hash[i]).capitalization_mistake?
-                update_combined_hash('capitalization_mistake', original_sentence_info_hash[j]['token'], corrected_sentence_info_hash[i]['token'])
-              when ChatCorrect::Pluralization.new(token_a: corrected_sentence_info_hash[i]['token'], token_b: original_sentence_info_hash[j]['token']).pluralization_error?
-                update_combined_hash('pluralization_mistake', original_sentence_info_hash[j]['token'], corrected_sentence_info_hash[i]['token'])
-              when ChatCorrect::MistakeAnalyzer.new(original: original_sentence_info_hash[j], corrected: corrected_sentence_info_hash[i]).spelling_mistake?
-                update_combined_hash('spelling_mistake', original_sentence_info_hash[j]['token'], corrected_sentence_info_hash[i]['token'])
-              when ChatCorrect::MistakeAnalyzer.new(original: original_sentence_info_hash[j], corrected: corrected_sentence_info_hash[i]).punctuation_mistake?
-                update_combined_hash('punctuation_mistake', original_sentence_info_hash[j]['token'], corrected_sentence_info_hash[i]['token'])
-              when ChatCorrect::MistakeAnalyzer.new(original: original_sentence_info_hash[j], corrected: corrected_sentence_info_hash[i]).unnecessary_word_missing_punctuation_mistake?
-                update_combined_hash('unnecessary_word_mistake', original_sentence_info_hash[j]['token'], corrected_sentence_info_hash[i]['token'], 'missing_punctuation_mistake')
-              when ChatCorrect::MistakeAnalyzer.new(original: original_sentence_info_hash[j], corrected: corrected_sentence_info_hash[i]).possessive_mistake?
-                update_combined_hash('possessive_mistake', original_sentence_info_hash[j]['token'], corrected_sentence_info_hash[i]['token'])
-              else
-                update_combined_hash('word_choice_mistake', original_sentence_info_hash[j]['token'], corrected_sentence_info_hash[i]['token'])
-              end
+              matching_ids_error_analysis(original_sentence_info_hash[j], corrected_sentence_info_hash[i])
               j +=1
               i +=1
             when original_sentence_info_hash[j]['match_id'].to_s[0] == 'c' && original_sentence_info_hash[j]['match_id'].to_s[1..original_sentence_info_hash[j]['match_id'].to_s.length] != i.to_s
@@ -265,6 +245,34 @@ module ChatCorrect
       @correct_info[corrected] = om
       @combined_hash[@combined_hash.length] = @mistake_info
       @combined_hash[@combined_hash.length] = @correct_info
+    end
+
+    def matching_ids_error_analysis(original, corrected)
+      case
+      when ChatCorrect::MistakeAnalyzer.new(original: original, corrected: corrected).no_mistake?
+        @correct_info[corrected['token']] = 'no_mistake'
+        @combined_hash[@combined_hash.length] = @correct_info
+      when ChatCorrect::MistakeAnalyzer.new(original: original, corrected: corrected).verb_mistake?
+        update_combined_hash('verb_mistake', original['token'], corrected['token'], nil)
+      when ChatCorrect::MistakeAnalyzer.new(original: original, corrected: corrected).capitalization_mistake?
+        update_combined_hash('capitalization_mistake', original['token'], corrected['token'], nil)
+      when ChatCorrect::Pluralization.new(token_a: corrected['token'], token_b: original['token']).pluralization_error?
+        update_combined_hash('pluralization_mistake', original['token'], corrected['token'], nil)
+      when ChatCorrect::MistakeAnalyzer.new(original: original, corrected: corrected).spelling_mistake?
+        update_combined_hash('spelling_mistake', original['token'], corrected['token'], nil)
+      when ChatCorrect::MistakeAnalyzer.new(original: original, corrected: corrected).punctuation_mistake?
+        update_combined_hash('punctuation_mistake', original['token'], corrected['token'], nil)
+      when ChatCorrect::MistakeAnalyzer.new(original: original, corrected: corrected).unnecessary_word_missing_punctuation_mistake?
+        update_combined_hash('unnecessary_word_mistake', original['token'], corrected['token'], 'missing_punctuation_mistake')
+      when ChatCorrect::MistakeAnalyzer.new(original: original, corrected: corrected).possessive_mistake?
+        update_combined_hash('possessive_mistake', original['token'], corrected['token'], nil)
+      else
+        update_combined_hash('word_choice_mistake', original['token'], corrected['token'], nil)
+      end
+    end
+
+    def unmatched_ids_error_analysis(original, corrected)
+
     end
   end
 end
