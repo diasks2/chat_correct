@@ -7,7 +7,7 @@ module ChatCorrect
     end
 
     def capitalization_error?
-      token_a.downcase.eql?(token_b.downcase) && (token_a != token_b)
+      token_a.downcase.eql?(token_b.downcase) && token_a != token_b
     end
   end
 end
