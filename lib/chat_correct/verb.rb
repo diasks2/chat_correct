@@ -49,7 +49,7 @@ module ChatCorrect
               mood.each do |mood|
                 if (mood == :imperative && tense == :present && person == :second) || mood != :imperative
                   conjugated_word = get_verb_infinitive(word).verb.conjugate :tense => tense, :person => person, :plurality => plurality, :aspect => aspect, :mood => mood
-                  if !text.match(/#{conjugated_word}/).nil? == true && conjugated_word.length > 0
+                  if text.match(/#{conjugated_word}/) && conjugated_word.length > 0
                     return true
                     break
                   end

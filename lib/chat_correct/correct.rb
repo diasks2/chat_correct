@@ -171,35 +171,28 @@ module ChatCorrect
 
     def prev_next_match_check
       corrected_sentence_info_hash.each do |kc, vc|
-        unless vc['matched'] == true
-          if kc == 0
+        if !vc['matched']
+          if kc.eql?(0)
             prev_match_vc = 'ȸ'
           else
             prev_match_vc = corrected_sentence_info_hash[kc - 1]['match_id']
           end
-
-          if kc == corrected_sentence_info_hash.length - 1
+          if kc.eql?(corrected_sentence_info_hash.length - 1)
             next_match_vc = 'ȹ'
           else
             next_match_vc = corrected_sentence_info_hash[kc + 1]['match_id']
           end
           original_sentence_info_hash.each do |ks, vs|
-            if ks == 0
+            if ks.eql?(0)
               prev_match_vs = 'ȸ'
             else
               prev_match_vs = original_sentence_info_hash[ks - 1]['match_id']
             end
-            if ks == original_sentence_info_hash.length - 1
+            if ks.eql?(original_sentence_info_hash.length - 1)
               next_match_vs = 'ȹ'
             else
               next_match_vs = original_sentence_info_hash[ks + 1]['match_id']
             end
-            #puts 'KC: ' + kc.to_s
-            #puts 'KS: ' + ks.to_s
-              #puts 'prev_match_vc: ' + prev_match_vc.to_s
-              #puts 'next_match_vc: ' + next_match_vc.to_s
-              #puts 'prev_match_vs: ' + prev_match_vs.to_s
-              #puts 'next_match_vs: ' + next_match_vs.to_s
             if vs['match_id'].blank?
               if (prev_match_vc == prev_match_vs) && (next_match_vc == next_match_vs)
                 original_sentence_info_hash[ks]['match_id'] = vc['match_id']
@@ -245,34 +238,34 @@ module ChatCorrect
 
     def stage_2
       corrected_sentence_info_hash.each do |kc, vc|
-        unless vc['matched'] == true
-          if kc == 0
+        if !vc['matched']
+          if kc.eql?(0)
             prev_match_vc = 'ȸ'
           else
             prev_match_vc = corrected_sentence_info_hash[kc - 1]['match_id']
           end
-          if kc == corrected_sentence_info_hash.length - 1
+          if kc.eql?(corrected_sentence_info_hash.length - 1)
               next_match_vc = 'ȹ'
             else
               next_match_vc = corrected_sentence_info_hash[kc + 1]['match_id']
             end
-            if kc == corrected_sentence_info_hash.length - 1
+            if kc.eql?(corrected_sentence_info_hash.length - 1)
               next_word_vc = 'ȹ'
             else
               next_word_vc = corrected_sentence_info_hash[kc + 1]['token']
             end
           original_sentence_info_hash.each do |ks, vs|
-            if ks == 0
+            if ks.eql?(0)
               prev_match_vs = 'ȸ'
             else
               prev_match_vs = original_sentence_info_hash[ks - 1]['match_id']
             end
-          if ks == original_sentence_info_hash.length - 1
+          if ks.eql?(original_sentence_info_hash.length - 1)
               next_match_vs = 'ȹ'
             else
               next_match_vs = original_sentence_info_hash[ks + 1]['match_id']
             end
-            if ks == original_sentence_info_hash.length - 1
+            if ks.eql?(original_sentence_info_hash.length - 1)
               next_word_vs = 'ȹ'
             else
               next_word_vs = original_sentence_info_hash[ks + 1]['token']
@@ -343,29 +336,21 @@ module ChatCorrect
 
     def stage_8
       corrected_sentence_info_hash.each do |kc, vc|
-        unless vc['matched'] == true
-          if kc == corrected_sentence_info_hash.length - 1
+        if !vc['matched']
+          if kc.eql?(corrected_sentence_info_hash.length - 1)
             next_match_vc = 'ȹ'
           else
             next_match_vc = corrected_sentence_info_hash[kc + 1]['match_id']
           end
           original_sentence_info_hash.each do |ks, vs|
-            if ks == original_sentence_info_hash.length - 1
+            if ks.eql?(original_sentence_info_hash.length - 1)
               next_match_vs = 'ȹ'
             else
               next_match_vs = original_sentence_info_hash[ks + 1]['match_id']
             end
             if vs['match_id'].blank?
-              if vs['multiple_words'] == true && vc['multiple_words'] == true
-                unless vc['matched'] == true
-                  write_match_to_info_hash(ks, kc, vc)
-                end
-              end
-              if next_match_vc == 'ȹ' && next_match_vs == 'ȹ' && vs['token'].gsub(/[[:punct:]]/, '') == '' && vc['token'].gsub(/[[:punct:]]/, '') == ''
-                unless vc['matched'] == true
-                  write_match_to_info_hash(ks, kc, vc)
-                end
-              end
+              write_match_to_info_hash(ks, kc, vc) if vs['multiple_words'] && vc['multiple_words'] && !vc['matched']
+              write_match_to_info_hash(ks, kc, vc) if next_match_vc.eql?('ȹ') && next_match_vs.eql?('ȹ') && vs['token'].gsub(/[[:punct:]]/, '').eql?('') && vc['token'].gsub(/[[:punct:]]/, '').eql?('') && !vc['matched']
             end
           end
         end

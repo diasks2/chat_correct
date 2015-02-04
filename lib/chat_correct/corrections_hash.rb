@@ -168,7 +168,7 @@ module ChatCorrect
         if corrected_sentence_info_hash[@i]['token'].gsub(/[[:punct:]]/, '').eql?('')
           update_combined_hash_single_mistake_corrected('punctuation_mistake')
         else
-          unless @j == 0
+          if @j != 0
             concatenated_corrected_string = corrected_sentence_info_hash[@i - 1]['token'].to_s + corrected_sentence_info_hash[@i]['token'].to_s
             if ChatCorrect::Possessive.new(token_a: original_sentence_info_hash[@j - 1]['token'], token_b: concatenated_corrected_string).possessive?
               @mistake_info[original_sentence_info_hash[@j - 1]['token']] = 'possessive_mistake'
