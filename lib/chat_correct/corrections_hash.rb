@@ -29,11 +29,11 @@ module ChatCorrect
           @i +=1
         else
           case
-            when original_sentence_info_hash[@j]['match_id'].to_s[0].eql?('c') && original_sentence_info_hash[@j]['match_id'].to_s[1..original_sentence_info_hash[@j]['match_id'].to_s.length].eql?(i.to_s)
+            when original_sentence_info_hash[@j]['match_id'].to_s[0].eql?('c') && original_sentence_info_hash[@j]['match_id'].to_s[1..original_sentence_info_hash[@j]['match_id'].to_s.length].eql?(@i.to_s)
               matching_ids_error_analysis(original_sentence_info_hash[@j], corrected_sentence_info_hash[@i])
               @j +=1
               @i +=1
-            when original_sentence_info_hash[@j]['match_id'].to_s[0] == 'c' && original_sentence_info_hash[@j]['match_id'].to_s[1..original_sentence_info_hash[@j]['match_id'].to_s.length] != i.to_s
+            when original_sentence_info_hash[@j]['match_id'].to_s[0] == 'c' && original_sentence_info_hash[@j]['match_id'].to_s[1..original_sentence_info_hash[@j]['match_id'].to_s.length] != @i.to_s
               word_order_counter = 0
               word_order_key = 0
               original_sentence_info_hash.each do |ks1, kv1|
@@ -93,7 +93,7 @@ module ChatCorrect
                 else
                   unless @j == 0
                     #puts 'Student sentence word: ' + original_sentence_info_hash[@j - 1]['token'].to_s
-                    concatenated_corrected_string = corrected_sentence_info_hash[i - 1]['token'].to_s + corrected_sentence_info_hash[@i]['token'].to_s
+                    concatenated_corrected_string = corrected_sentence_info_hash[@i - 1]['token'].to_s + corrected_sentence_info_hash[@i]['token'].to_s
                     #puts 'Corrected sentence word: ' + concatenated_corrected_string
                     #puts check_possessive(original_sentence_info_hash[@j - 1]['token'], concatenated_corrected_string).to_s
                     if ChatCorrect::Possessive.new(token_a: original_sentence_info_hash[@j - 1]['token'], token_b: concatenated_corrected_string).possessive?
@@ -234,7 +234,7 @@ module ChatCorrect
           end
         end
       end
-      @combined_hash.to_@json
+      @combined_hash.to_json
     end
 
     private
