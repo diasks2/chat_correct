@@ -32,101 +32,97 @@ module ChatCorrect
           case
             when original_sentence_info_hash[j]['match_id'].to_s[0] == 'c' && original_sentence_info_hash[j]['match_id'].to_s[1..original_sentence_info_hash[j]['match_id'].to_s.length] == i.to_s
               case
-                when ChatCorrect::MistakeAnalyzer.new(original: original_sentence_info_hash[j], corrected: corrected_sentence_info_hash[i]).no_mistake?
-                  correct_info[corrected_sentence_info_hash[i]['token']] = 'no_mistake'
-                  combined_hash[combined_hash.length] = correct_info
-                when ChatCorrect::MistakeAnalyzer.new(original: original_sentence_info_hash[j], corrected: corrected_sentence_info_hash[i]).verb_mistake?
-                  #puts original_sentence_info_hash[j]['match_id'] + ' :verb_mistake 4'
-                  #puts corrected_sentence_info_hash[i]['match_id'] + ' :verb_mistake_opposite 5'
-                  mistake_info[original_sentence_info_hash[j]['token']] = 'verb_mistake'
-                  correct_info[corrected_sentence_info_hash[i]['token']] = 'verb_mistake_opposite'
-                  combined_hash[combined_hash.length] = mistake_info
-                  combined_hash[combined_hash.length] = correct_info
-                  #puts combined_hash.to_s + ' :verb_mistake 4'
-                when ChatCorrect::MistakeAnalyzer.new(original: original_sentence_info_hash[j], corrected: corrected_sentence_info_hash[i]).capitalization_mistake?
-                  #puts original_sentence_info_hash[j]['match_id'] + ' :capitalization_mistake 10'
-                  #puts corrected_sentence_info_hash[i]['match_id'] + ' :capitalization_mistake_opposite 11'
-                  mistake_info[original_sentence_info_hash[j]['token']] = 'capitalization_mistake'
-                  correct_info[corrected_sentence_info_hash[i]['token']] = 'capitalization_mistake_opposite'
-                  combined_hash[combined_hash.length] = mistake_info
-                  combined_hash[combined_hash.length] = correct_info
-                  #puts combined_hash.to_s + ' :capitalization_mistake 10'
-                when ChatCorrect::Pluralization.new(token_a: corrected_sentence_info_hash[i]['token'], token_b: original_sentence_info_hash[j]['token']).pluralization_error?
-                  #puts original_sentence_info_hash[j]['match_id'] + ' :pluralization_mistake 10a'
-                  #puts corrected_sentence_info_hash[i]['match_id'] + ' :pluralization_mistake 11a'
-                  mistake_info[original_sentence_info_hash[j]['token']] = 'pluralization_mistake'
-                  correct_info[corrected_sentence_info_hash[i]['token']] = 'pluralization_mistake_opposite'
-                  combined_hash[combined_hash.length] = mistake_info
-                  combined_hash[combined_hash.length] = correct_info
-                  #puts combined_hash.to_s + ' :pluralization_mistake 10a'
-                when ChatCorrect::Spelling.new(token_a: corrected_sentence_info_hash[i]['token'], token_b: original_sentence_info_hash[j]['token']).spelling_error?
-                  if  ChatCorrect::PunctuationMasqueradingAsSpellingError.new(token_a: corrected_sentence_info_hash[i]['token'], token_b: original_sentence_info_hash[j]['token']).exists?
-                    #puts 'Check Possessive: ' + check_possessive(original_sentence_info_hash[j]['token'], corrected_sentence_info_hash[i]['token']).to_s
-                    if ChatCorrect::Possessive.new(token_a: original_sentence_info_hash[j]['token'], token_b: corrected_sentence_info_hash[i]['token']).possessive?
-                      #puts original_sentence_info_hash[j]['match_id'] + ' :possessive_mistake 12'
-                      #puts corrected_sentence_info_hash[i]['match_id'] + ' :possessive_mistake_opposite 13'
-                      mistake_info[original_sentence_info_hash[j]['token']] = 'possessive_mistake'
-                      correct_info[corrected_sentence_info_hash[i]['token']] = 'possessive_mistake_opposite'
-                      combined_hash[combined_hash.length] = mistake_info
-                      combined_hash[combined_hash.length] = correct_info
-                      #puts combined_hash.to_s + ' :possessive_mistake 12'
-                    else
-                      #puts original_sentence_info_hash[j]['match_id'] + ' :punctuation_mistake 12'
-                      #puts corrected_sentence_info_hash[i]['match_id'] + ' :punctuation_mistake_opposite 13'
-                      mistake_info[original_sentence_info_hash[j]['token']] = 'punctuation_mistake'
-                      correct_info[corrected_sentence_info_hash[i]['token']] = 'punctuation_mistake_opposite'
-                      combined_hash[combined_hash.length] = mistake_info
-                      combined_hash[combined_hash.length] = correct_info
-                      #puts combined_hash.to_s + ' :punctuation_mistake 12'
-                    end
-                  else
-                    #puts original_sentence_info_hash[j]['match_id'] + ' :spelling_mistake 12'
-                    #puts corrected_sentence_info_hash[i]['match_id'] + ' :spelling_mistake_opposite 13'
-                    mistake_info[original_sentence_info_hash[j]['token']] = 'spelling_mistake'
-                    correct_info[corrected_sentence_info_hash[i]['token']] = 'spelling_mistake_opposite'
-                    combined_hash[combined_hash.length] = mistake_info
-                    combined_hash[combined_hash.length] = correct_info
-                    #puts combined_hash.to_s + ' :spelling_mistake 12'
-                  end
-                when corrected_sentence_info_hash[i]['punctuation'] == true
-                    #puts 'Student sentence punctuation (true or false): ' + original_sentence_info_hash[j]['punctuation'].to_s
-                    #puts 'Student word: ' + original_sentence_info_hash[j]['token'].to_s
-                  if original_sentence_info_hash[j]['punctuation'] == true
-                    #puts original_sentence_info_hash[j]['match_id'] + ' :punctuation_mistake 14'
-                    #puts corrected_sentence_info_hash[i]['match_id'] + ' :punctuation_mistake_opposite 15'
+              when ChatCorrect::MistakeAnalyzer.new(original: original_sentence_info_hash[j], corrected: corrected_sentence_info_hash[i]).no_mistake?
+                correct_info[corrected_sentence_info_hash[i]['token']] = 'no_mistake'
+                combined_hash[combined_hash.length] = correct_info
+              when ChatCorrect::MistakeAnalyzer.new(original: original_sentence_info_hash[j], corrected: corrected_sentence_info_hash[i]).verb_mistake?
+                #puts original_sentence_info_hash[j]['match_id'] + ' :verb_mistake 4'
+                #puts corrected_sentence_info_hash[i]['match_id'] + ' :verb_mistake_opposite 5'
+                mistake_info[original_sentence_info_hash[j]['token']] = 'verb_mistake'
+                correct_info[corrected_sentence_info_hash[i]['token']] = 'verb_mistake_opposite'
+                combined_hash[combined_hash.length] = mistake_info
+                combined_hash[combined_hash.length] = correct_info
+                #puts combined_hash.to_s + ' :verb_mistake 4'
+              when ChatCorrect::MistakeAnalyzer.new(original: original_sentence_info_hash[j], corrected: corrected_sentence_info_hash[i]).capitalization_mistake?
+                #puts original_sentence_info_hash[j]['match_id'] + ' :capitalization_mistake 10'
+                #puts corrected_sentence_info_hash[i]['match_id'] + ' :capitalization_mistake_opposite 11'
+                mistake_info[original_sentence_info_hash[j]['token']] = 'capitalization_mistake'
+                correct_info[corrected_sentence_info_hash[i]['token']] = 'capitalization_mistake_opposite'
+                combined_hash[combined_hash.length] = mistake_info
+                combined_hash[combined_hash.length] = correct_info
+                #puts combined_hash.to_s + ' :capitalization_mistake 10'
+              when ChatCorrect::Pluralization.new(token_a: corrected_sentence_info_hash[i]['token'], token_b: original_sentence_info_hash[j]['token']).pluralization_error?
+                #puts original_sentence_info_hash[j]['match_id'] + ' :pluralization_mistake 10a'
+                #puts corrected_sentence_info_hash[i]['match_id'] + ' :pluralization_mistake 11a'
+                mistake_info[original_sentence_info_hash[j]['token']] = 'pluralization_mistake'
+                correct_info[corrected_sentence_info_hash[i]['token']] = 'pluralization_mistake_opposite'
+                combined_hash[combined_hash.length] = mistake_info
+                combined_hash[combined_hash.length] = correct_info
+                #puts combined_hash.to_s + ' :pluralization_mistake 10a'
+              when ChatCorrect::MistakeAnalyzer.new(original: original_sentence_info_hash[j], corrected: corrected_sentence_info_hash[i]).spelling_mistake?
+                #puts original_sentence_info_hash[j]['match_id'] + ' :spelling_mistake 12'
+                #puts corrected_sentence_info_hash[i]['match_id'] + ' :spelling_mistake_opposite 13'
+                mistake_info[original_sentence_info_hash[j]['token']] = 'spelling_mistake'
+                correct_info[corrected_sentence_info_hash[i]['token']] = 'spelling_mistake_opposite'
+                combined_hash[combined_hash.length] = mistake_info
+                combined_hash[combined_hash.length] = correct_info
+                #puts combined_hash.to_s + ' :spelling_mistake 12'
+              when ChatCorrect::MistakeAnalyzer.new(original: original_sentence_info_hash[j], corrected: corrected_sentence_info_hash[i]).possessive_mistake?
+                #puts original_sentence_info_hash[j]['match_id'] + ' :possessive_mistake 12'
+                #puts corrected_sentence_info_hash[i]['match_id'] + ' :possessive_mistake_opposite 13'
+                mistake_info[original_sentence_info_hash[j]['token']] = 'possessive_mistake'
+                correct_info[corrected_sentence_info_hash[i]['token']] = 'possessive_mistake_opposite'
+                combined_hash[combined_hash.length] = mistake_info
+                combined_hash[combined_hash.length] = correct_info
+                #puts combined_hash.to_s + ' :possessive_mistake 12'
+              when ChatCorrect::Spelling.new(token_a: corrected_sentence_info_hash[i]['token'], token_b: original_sentence_info_hash[j]['token']).spelling_error?
+                if ChatCorrect::PunctuationMasqueradingAsSpellingError.new(token_a: corrected_sentence_info_hash[i]['token'], token_b: original_sentence_info_hash[j]['token']).exists?
+                  #puts 'Check Possessive: ' + check_possessive(original_sentence_info_hash[j]['token'], corrected_sentence_info_hash[i]['token']).to_s
+                  unless ChatCorrect::Possessive.new(token_a: original_sentence_info_hash[j]['token'], token_b: corrected_sentence_info_hash[i]['token']).possessive?
+                    #puts original_sentence_info_hash[j]['match_id'] + ' :punctuation_mistake 12'
+                    #puts corrected_sentence_info_hash[i]['match_id'] + ' :punctuation_mistake_opposite 13'
                     mistake_info[original_sentence_info_hash[j]['token']] = 'punctuation_mistake'
                     correct_info[corrected_sentence_info_hash[i]['token']] = 'punctuation_mistake_opposite'
                     combined_hash[combined_hash.length] = mistake_info
                     combined_hash[combined_hash.length] = correct_info
-                    #puts combined_hash.to_s + ' :punctuation_mistake 14'
-                  else
-                    #puts original_sentence_info_hash[j]['match_id'] + ' :unnecessary_word_mistake 14.1'
-                    #puts corrected_sentence_info_hash[i]['match_id'] + ' :missing_punctuation_mistake 15.1'
-                    mistake_info[original_sentence_info_hash[j]['token']] = 'unnecessary_word_mistake'
-                    correct_info[corrected_sentence_info_hash[i]['token']] = 'missing_punctuation_mistake'
-                    combined_hash[combined_hash.length] = mistake_info
-                    combined_hash[combined_hash.length] = correct_info
-                    #puts combined_hash.to_s + ' :unnecessary_word_mistake & missing_punctuation_mistake 14.1 & 15.1'
+                    #puts combined_hash.to_s + ' :punctuation_mistake 12'
                   end
+                end
+              when ChatCorrect::MistakeAnalyzer.new(original: original_sentence_info_hash[j], corrected: corrected_sentence_info_hash[i]).punctuation_mistake?
+                  #puts original_sentence_info_hash[j]['match_id'] + ' :punctuation_mistake 14'
+                  #puts corrected_sentence_info_hash[i]['match_id'] + ' :punctuation_mistake_opposite 15'
+                  mistake_info[original_sentence_info_hash[j]['token']] = 'punctuation_mistake'
+                  correct_info[corrected_sentence_info_hash[i]['token']] = 'punctuation_mistake_opposite'
+                  combined_hash[combined_hash.length] = mistake_info
+                  combined_hash[combined_hash.length] = correct_info
+                  #puts combined_hash.to_s + ' :punctuation_mistake 14'
+              when ChatCorrect::MistakeAnalyzer.new(original: original_sentence_info_hash[j], corrected: corrected_sentence_info_hash[i]).unnecessary_word_missing_punctuation_mistake?
+                  #puts original_sentence_info_hash[j]['match_id'] + ' :unnecessary_word_mistake 14.1'
+                  #puts corrected_sentence_info_hash[i]['match_id'] + ' :missing_punctuation_mistake 15.1'
+                  mistake_info[original_sentence_info_hash[j]['token']] = 'unnecessary_word_mistake'
+                  correct_info[corrected_sentence_info_hash[i]['token']] = 'missing_punctuation_mistake'
+                  combined_hash[combined_hash.length] = mistake_info
+                  combined_hash[combined_hash.length] = correct_info
+                  #puts combined_hash.to_s + ' :unnecessary_word_mistake & missing_punctuation_mistake 14.1 & 15.1'
+              else
+                #puts 'Check Possessive: ' + check_possessive(original_sentence_info_hash[j]['token'], corrected_sentence_info_hash[i]['token']).to_s
+                if ChatCorrect::Possessive.new(token_a: original_sentence_info_hash[j]['token'], token_b: corrected_sentence_info_hash[i]['token']).possessive?
+                  #puts original_sentence_info_hash[j]['match_id'] + ' :possessive_mistake 16'
+                  #puts corrected_sentence_info_hash[i]['match_id'] + ' :possessive_mistake_opposite 17'
+                  mistake_info[original_sentence_info_hash[j]['token']] = 'possessive_mistake'
+                  correct_info[corrected_sentence_info_hash[i]['token']] = 'possessive_mistake_opposite'
+                  combined_hash[combined_hash.length] = mistake_info
+                  combined_hash[combined_hash.length] = correct_info
+                  #puts combined_hash.to_s + ' :possessive_mistake 16'
                 else
-                  #puts 'Check Possessive: ' + check_possessive(original_sentence_info_hash[j]['token'], corrected_sentence_info_hash[i]['token']).to_s
-                  if ChatCorrect::Possessive.new(token_a: original_sentence_info_hash[j]['token'], token_b: corrected_sentence_info_hash[i]['token']).possessive?
-                    #puts original_sentence_info_hash[j]['match_id'] + ' :possessive_mistake 16'
-                    #puts corrected_sentence_info_hash[i]['match_id'] + ' :possessive_mistake_opposite 17'
-                    mistake_info[original_sentence_info_hash[j]['token']] = 'possessive_mistake'
-                    correct_info[corrected_sentence_info_hash[i]['token']] = 'possessive_mistake_opposite'
-                    combined_hash[combined_hash.length] = mistake_info
-                    combined_hash[combined_hash.length] = correct_info
-                    #puts combined_hash.to_s + ' :possessive_mistake 16'
-                  else
-                    #puts original_sentence_info_hash[j]['match_id'] + ' :word_choice_mistake 16'
-                    #puts corrected_sentence_info_hash[i]['match_id'] + ' :word_choice_mistake_opposite 17'
-                    mistake_info[original_sentence_info_hash[j]['token']] = 'word_choice_mistake'
-                    correct_info[corrected_sentence_info_hash[i]['token']] = 'word_choice_mistake_opposite'
-                    combined_hash[combined_hash.length] = mistake_info
-                    combined_hash[combined_hash.length] = correct_info
-                    #puts combined_hash.to_s + ' :word_choice_mistake 16'
-                  end
+                  #puts original_sentence_info_hash[j]['match_id'] + ' :word_choice_mistake 16'
+                  #puts corrected_sentence_info_hash[i]['match_id'] + ' :word_choice_mistake_opposite 17'
+                  mistake_info[original_sentence_info_hash[j]['token']] = 'word_choice_mistake'
+                  correct_info[corrected_sentence_info_hash[i]['token']] = 'word_choice_mistake_opposite'
+                  combined_hash[combined_hash.length] = mistake_info
+                  combined_hash[combined_hash.length] = correct_info
+                  #puts combined_hash.to_s + ' :word_choice_mistake 16'
+                end
               end
               j +=1
               i +=1

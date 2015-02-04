@@ -21,5 +21,24 @@ module ChatCorrect
       ChatCorrect::Capitalization.new(token_a: corrected['token'], token_b: original['token']).capitalization_error?
     end
 
+    def punctuation_mistake?
+      corrected['punctuation'] && original['punctuation']
+    end
+
+    def unnecessary_word_missing_punctuation_mistake?
+      corrected['punctuation'] && !original['punctuation']
+    end
+
+    def possessive_mistake?
+      ChatCorrect::Spelling.new(token_a: corrected['token'], token_b: original['token']).spelling_error? &&
+      ChatCorrect::PunctuationMasqueradingAsSpellingError.new(token_a: corrected['token'], token_b: original['token']).exists? &&
+      ChatCorrect::Possessive.new(token_a: original['token'], token_b: corrected['token']).possessive?
+    end
+
+    def spelling_mistake?
+      ChatCorrect::Spelling.new(token_a: corrected['token'], token_b: original['token']).spelling_error? &&
+      !ChatCorrect::PunctuationMasqueradingAsSpellingError.new(token_a: corrected['token'], token_b: original['token']).exists?
+    end
+
   end
 end
