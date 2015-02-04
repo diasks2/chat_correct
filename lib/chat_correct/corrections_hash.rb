@@ -127,8 +127,6 @@ module ChatCorrect
         update_combined_hash('punctuation_mistake', original['token'], corrected['token'], nil)
       when ChatCorrect::MistakeAnalyzer.new(original: original, corrected: corrected).unnecessary_word_missing_punctuation_mistake?
         update_combined_hash('unnecessary_word_mistake', original['token'], corrected['token'], 'missing_punctuation_mistake')
-      when ChatCorrect::MistakeAnalyzer.new(original: original, corrected: corrected).possessive_mistake?
-        update_combined_hash('possessive_mistake', original['token'], corrected['token'], nil)
       else
         update_combined_hash('word_choice_mistake', original['token'], corrected['token'], nil)
       end

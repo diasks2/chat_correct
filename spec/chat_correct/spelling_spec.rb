@@ -43,9 +43,16 @@ RSpec.describe ChatCorrect::Spelling do
     expect(cc.spelling_error?).to eq(false)
   end
 
-  it 'returns false if a spelling mistake is not found #006' do
+  it 'returns false if a spelling mistake is not found #007' do
     token_a = 'that'
     token_b = 'this'
+    cc = ChatCorrect::Spelling.new(token_a: token_a, token_b: token_b)
+    expect(cc.spelling_error?).to eq(false)
+  end
+
+  it 'returns false if a spelling mistake is not found #007' do
+    token_a = 'is'
+    token_b = 'Is'
     cc = ChatCorrect::Spelling.new(token_a: token_a, token_b: token_b)
     expect(cc.spelling_error?).to eq(false)
   end
