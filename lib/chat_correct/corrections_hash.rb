@@ -9,137 +9,137 @@ module ChatCorrect
     end
 
     def create
-      j = 0
-      i = 0
-      while i < corrected_sentence_info_hash.length do
+      @j = 0
+      @i = 0
+      while @i < corrected_sentence_info_hash.length do
         @correct_info = {}
         @mistake_info = {}
-        if j >= original_sentence_info_hash.length
-          if corrected_sentence_info_hash[i]['token'].gsub(/[[:punct:]]/, '') == ''
-            #puts corrected_sentence_info_hash[i]['match_id'] + ' :punctuation_mistake 1'
-            @correct_info[corrected_sentence_info_hash[i]['token']] = 'missing_punctuation_mistake'
+        if @j >= original_sentence_info_hash.length
+          if corrected_sentence_info_hash[@i]['token'].gsub(/[[:punct:]]/, '') == ''
+            #puts corrected_sentence_info_hash[@i]['match_id'] + ' :punctuation_mistake 1'
+            @correct_info[corrected_sentence_info_hash[@i]['token']] = 'missing_punctuation_mistake'
             @combined_hash[@combined_hash.length] = @correct_info
             #puts @combined_hash.to_s + ' :punctuation_mistake 1'
           else
-            #puts corrected_sentence_info_hash[i]['match_id']  + ' :missing_word_mistake 2'
-            @correct_info[corrected_sentence_info_hash[i]['token']] = 'missing_word_mistake'
+            #puts corrected_sentence_info_hash[@i]['match_id']  + ' :missing_word_mistake 2'
+            @correct_info[corrected_sentence_info_hash[@i]['token']] = 'missing_word_mistake'
             @combined_hash[@combined_hash.length] = @correct_info
             #puts @combined_hash.to_s + ' :missing_word_mistake 2'
           end
-          i +=1
+          @i +=1
         else
           case
-            when original_sentence_info_hash[j]['match_id'].to_s[0].eql?('c') && original_sentence_info_hash[j]['match_id'].to_s[1..original_sentence_info_hash[j]['match_id'].to_s.length].eql?(i.to_s)
-              matching_ids_error_analysis(original_sentence_info_hash[j], corrected_sentence_info_hash[i])
-              j +=1
-              i +=1
-            when original_sentence_info_hash[j]['match_id'].to_s[0] == 'c' && original_sentence_info_hash[j]['match_id'].to_s[1..original_sentence_info_hash[j]['match_id'].to_s.length] != i.to_s
+            when original_sentence_info_hash[@j]['match_id'].to_s[0].eql?('c') && original_sentence_info_hash[@j]['match_id'].to_s[1..original_sentence_info_hash[@j]['match_id'].to_s.length].eql?(i.to_s)
+              matching_ids_error_analysis(original_sentence_info_hash[@j], corrected_sentence_info_hash[@i])
+              @j +=1
+              @i +=1
+            when original_sentence_info_hash[@j]['match_id'].to_s[0] == 'c' && original_sentence_info_hash[@j]['match_id'].to_s[1..original_sentence_info_hash[@j]['match_id'].to_s.length] != i.to_s
               word_order_counter = 0
               word_order_key = 0
               original_sentence_info_hash.each do |ks1, kv1|
-                if kv1['match_id'] == corrected_sentence_info_hash[i]['match_id']
+                if kv1['match_id'] == corrected_sentence_info_hash[@i]['match_id']
                   word_order_counter = 1
                   word_order_key = ks1
                 end
               end
               if word_order_counter == 1
-                #puts 'Corrected: ' + corrected_sentence_info_hash[i]['token'].to_s
-                #puts 'Student: ' + original_sentence_info_hash[j]['token']
-                if corrected_sentence_info_hash[i]['token'].downcase == original_sentence_info_hash[word_order_key]['token'].downcase
-                  #puts corrected_sentence_info_hash[i]['match_id'] + ' :word_order_mistake 17'
-                  @correct_info[corrected_sentence_info_hash[i]['token']] = 'word_order_mistake'
+                #puts 'Corrected: ' + corrected_sentence_info_hash[@i]['token'].to_s
+                #puts 'Student: ' + original_sentence_info_hash[@j]['token']
+                if corrected_sentence_info_hash[@i]['token'].downcase == original_sentence_info_hash[word_order_key]['token'].downcase
+                  #puts corrected_sentence_info_hash[@i]['match_id'] + ' :word_order_mistake 17'
+                  @correct_info[corrected_sentence_info_hash[@i]['token']] = 'word_order_mistake'
                   @combined_hash[@combined_hash.length] = @correct_info
                   #puts @combined_hash.to_s + ' :word_order_mistake 17'
                 else
-                  #puts '17.1 corrected sentence word: ' + corrected_sentence_info_hash[i]['token'].to_s
+                  #puts '17.1 corrected sentence word: ' + corrected_sentence_info_hash[@i]['token'].to_s
                   #puts '17.1 student sentence word: ' + original_sentence_info_hash[word_order_key]['token'].to_s
-                  #puts '17.1 corrected sentence pos_tag: ' + corrected_sentence_info_hash[i]['pos_tag'].to_s
-                  if ChatCorrect::Verb.new(word: corrected_sentence_info_hash[i]['token'], pos: 'vb', text: original_sentence_info_hash[word_order_key]['token']).verb_error?
-                    #puts corrected_sentence_info_hash[i]['match_id'] + ' :verb_mistake_opposite 17.001'
-                    @correct_info[corrected_sentence_info_hash[i]['token']] = 'verb_mistake_opposite'
+                  #puts '17.1 corrected sentence pos_tag: ' + corrected_sentence_info_hash[@i]['pos_tag'].to_s
+                  if ChatCorrect::Verb.new(word: corrected_sentence_info_hash[@i]['token'], pos: 'vb', text: original_sentence_info_hash[word_order_key]['token']).verb_error?
+                    #puts corrected_sentence_info_hash[@i]['match_id'] + ' :verb_mistake_opposite 17.001'
+                    @correct_info[corrected_sentence_info_hash[@i]['token']] = 'verb_mistake_opposite'
                     @combined_hash[@combined_hash.length] = @correct_info
                     #puts @combined_hash.to_s + ' :verb_mistake_opposite 17.001'
-                    #puts original_sentence_info_hash[j]['match_id'] + ' :verb_mistake 17.002'
+                    #puts original_sentence_info_hash[@j]['match_id'] + ' :verb_mistake 17.002'
                     @mistake_info[original_sentence_info_hash[word_order_key]['token']] = 'verb_mistake'
                     @combined_hash[@combined_hash.length] = @mistake_info
                     #puts @combined_hash.to_s + ' :verb_mistake 17.002'
-                  elsif ChatCorrect::Pluralization.new(token_a: corrected_sentence_info_hash[i]['token'], token_b: original_sentence_info_hash[word_order_key]['token']).pluralization_error?
-                    #puts corrected_sentence_info_hash[i]['match_id'] + ' :pluralization_mistake_opposite 17.01'
-                    @correct_info[corrected_sentence_info_hash[i]['token']] = 'pluralization_mistake_opposite'
+                  elsif ChatCorrect::Pluralization.new(token_a: corrected_sentence_info_hash[@i]['token'], token_b: original_sentence_info_hash[word_order_key]['token']).pluralization_error?
+                    #puts corrected_sentence_info_hash[@i]['match_id'] + ' :pluralization_mistake_opposite 17.01'
+                    @correct_info[corrected_sentence_info_hash[@i]['token']] = 'pluralization_mistake_opposite'
                     @combined_hash[@combined_hash.length] = @correct_info
                     #puts @combined_hash.to_s + ' :pluralization_mistake_opposite 17.01'
-                    #puts original_sentence_info_hash[j]['match_id'] + ' :pluralization_mistake 17.02'
+                    #puts original_sentence_info_hash[@j]['match_id'] + ' :pluralization_mistake 17.02'
                     @mistake_info[original_sentence_info_hash[word_order_key]['token']] = 'pluralization_mistake'
                     @combined_hash[@combined_hash.length] = @mistake_info
                     #puts @combined_hash.to_s + ' :pluralization_mistake 17.02'
                   else
-                    #puts corrected_sentence_info_hash[i]['match_id'] + ' :missing_word_mistake 17.1'
-                    @correct_info[corrected_sentence_info_hash[i]['token']] = 'missing_word_mistake'
+                    #puts corrected_sentence_info_hash[@i]['match_id'] + ' :missing_word_mistake 17.1'
+                    @correct_info[corrected_sentence_info_hash[@i]['token']] = 'missing_word_mistake'
                     @combined_hash[@combined_hash.length] = @correct_info
                     #puts @combined_hash.to_s + ' :missing_word_mistake 17.1'
-                    #puts original_sentence_info_hash[j]['match_id'] + ' :unnecessary_word_mistake 17.2'
+                    #puts original_sentence_info_hash[@j]['match_id'] + ' :unnecessary_word_mistake 17.2'
                     @mistake_info[original_sentence_info_hash[word_order_key]['token']] = 'unnecessary_word_mistake'
                     @combined_hash[@combined_hash.length] = @mistake_info
                     #puts @combined_hash.to_s + ' :unnecessary_word_mistake 17.2'
                   end
                 end
-                j +=1
+                @j +=1
               else
-                if corrected_sentence_info_hash[i]['token'].gsub(/[[:punct:]]/, '') == ''
-                  #puts corrected_sentence_info_hash[i]['match_id'] + ' :punctuation_mistake_mistake 18'
-                  @correct_info[corrected_sentence_info_hash[i]['token']] = 'punctuation_mistake'
+                if corrected_sentence_info_hash[@i]['token'].gsub(/[[:punct:]]/, '') == ''
+                  #puts corrected_sentence_info_hash[@i]['match_id'] + ' :punctuation_mistake_mistake 18'
+                  @correct_info[corrected_sentence_info_hash[@i]['token']] = 'punctuation_mistake'
                   @combined_hash[@combined_hash.length] = @correct_info
                   #puts @combined_hash.to_s + ' :punctuation_mistake_mistake 18'
                 else
-                  unless j == 0
-                    #puts 'Student sentence word: ' + original_sentence_info_hash[j - 1]['token'].to_s
-                    concatenated_corrected_string = corrected_sentence_info_hash[i - 1]['token'].to_s + corrected_sentence_info_hash[i]['token'].to_s
+                  unless @j == 0
+                    #puts 'Student sentence word: ' + original_sentence_info_hash[@j - 1]['token'].to_s
+                    concatenated_corrected_string = corrected_sentence_info_hash[i - 1]['token'].to_s + corrected_sentence_info_hash[@i]['token'].to_s
                     #puts 'Corrected sentence word: ' + concatenated_corrected_string
-                    #puts check_possessive(original_sentence_info_hash[j - 1]['token'], concatenated_corrected_string).to_s
-                    if ChatCorrect::Possessive.new(token_a: original_sentence_info_hash[j - 1]['token'], token_b: concatenated_corrected_string).possessive?
-                      #puts original_sentence_info_hash[j - 1]['match_id'] + ' :possessive_mistake 19'
-                      #puts corrected_sentence_info_hash[i]['match_id'] + ' :possessive_mistake_opposite 19.1'
-                      @mistake_info[original_sentence_info_hash[j - 1]['token']] = 'possessive_mistake'
+                    #puts check_possessive(original_sentence_info_hash[@j - 1]['token'], concatenated_corrected_string).to_s
+                    if ChatCorrect::Possessive.new(token_a: original_sentence_info_hash[@j - 1]['token'], token_b: concatenated_corrected_string).possessive?
+                      #puts original_sentence_info_hash[@j - 1]['match_id'] + ' :possessive_mistake 19'
+                      #puts corrected_sentence_info_hash[@i]['match_id'] + ' :possessive_mistake_opposite 19.1'
+                      @mistake_info[original_sentence_info_hash[@j - 1]['token']] = 'possessive_mistake'
                       @correct_info[concatenated_corrected_string] = 'possessive_mistake_opposite'
                       @combined_hash[@combined_hash.length - 1] = @mistake_info
                       @combined_hash[@combined_hash.length] = @correct_info
                       #puts @combined_hash.to_s + ' :possessive_mistake 19'
                     else
-                      #puts corrected_sentence_info_hash[i]['match_id'] + ' :missing_word_mistake 19'
-                      @correct_info[corrected_sentence_info_hash[i]['token']] = 'missing_word_mistake'
+                      #puts corrected_sentence_info_hash[@i]['match_id'] + ' :missing_word_mistake 19'
+                      @correct_info[corrected_sentence_info_hash[@i]['token']] = 'missing_word_mistake'
                       @combined_hash[@combined_hash.length] = @correct_info
                       #puts @combined_hash.to_s + ' :missing_word_mistake 19'
                     end
                   else
-                    #puts corrected_sentence_info_hash[i]['match_id'] + ' :missing_word_mistake 19'
-                    @correct_info[corrected_sentence_info_hash[i]['token']] = 'missing_word_mistake'
+                    #puts corrected_sentence_info_hash[@i]['match_id'] + ' :missing_word_mistake 19'
+                    @correct_info[corrected_sentence_info_hash[@i]['token']] = 'missing_word_mistake'
                     @combined_hash[@combined_hash.length] = @correct_info
                     #puts @combined_hash.to_s + ' :missing_word_mistake 19'
                   end
                 end
               end
-              i +=1
-            when original_sentence_info_hash[j]['match_id'].to_s[0] == 's'
-              if original_sentence_info_hash[j]['token'].gsub(/[[:punct:]]/, '') == '' || original_sentence_info_hash[j]['token'] == '∯' || original_sentence_info_hash[j]['token'] == '∬' || original_sentence_info_hash[j]['token'] == '∫' || original_sentence_info_hash[j]['token'] == '∮'
-                #puts original_sentence_info_hash[j]['match_id'] + ' :punctuation_mistake_mistake 20'
-                @mistake_info[original_sentence_info_hash[j]['token']] = 'punctuation_mistake'
+              @i +=1
+            when original_sentence_info_hash[@j]['match_id'].to_s[0] == 's'
+              if original_sentence_info_hash[@j]['token'].gsub(/[[:punct:]]/, '') == '' || original_sentence_info_hash[@j]['token'] == '∯' || original_sentence_info_hash[@j]['token'] == '∬' || original_sentence_info_hash[@j]['token'] == '∫' || original_sentence_info_hash[@j]['token'] == '∮'
+                #puts original_sentence_info_hash[@j]['match_id'] + ' :punctuation_mistake_mistake 20'
+                @mistake_info[original_sentence_info_hash[@j]['token']] = 'punctuation_mistake'
                 @combined_hash[@combined_hash.length] = @mistake_info
                 #puts @combined_hash.to_s + ' :punctuation_mistake_mistake 20'
-                @final_matched_array << original_sentence_info_hash[j]['match_id'].to_s
+                @final_matched_array << original_sentence_info_hash[@j]['match_id'].to_s
               else
-                #puts original_sentence_info_hash[j]['match_id'] + ' :unnecessary_word_mistake 21'
-                @mistake_info[original_sentence_info_hash[j]['token']] = 'unnecessary_word_mistake'
+                #puts original_sentence_info_hash[@j]['match_id'] + ' :unnecessary_word_mistake 21'
+                @mistake_info[original_sentence_info_hash[@j]['token']] = 'unnecessary_word_mistake'
                 @combined_hash[@combined_hash.length] = @mistake_info
                 #puts @combined_hash.to_s + ' :unnecessary_word_mistake 21'
-                @final_matched_array << original_sentence_info_hash[j]['match_id'].to_s
+                @final_matched_array << original_sentence_info_hash[@j]['match_id'].to_s
               end
-              j +=1
-            when original_sentence_info_hash[j]['match_id'].to_s[0] == 'd'
-              #puts original_sentence_info_hash[j]['match_id'] + ' :duplicate_word_mistake 22'
-              @mistake_info[original_sentence_info_hash[j]['token']] = 'duplicate_word_mistake'
+              @j +=1
+            when original_sentence_info_hash[@j]['match_id'].to_s[0] == 'd'
+              #puts original_sentence_info_hash[@j]['match_id'] + ' :duplicate_word_mistake 22'
+              @mistake_info[original_sentence_info_hash[@j]['token']] = 'duplicate_word_mistake'
               @combined_hash[@combined_hash.length] = @mistake_info
               #puts @combined_hash.to_s + ' :duplicate_word_mistake 22'
-              j +=1
+              @j +=1
           end
         end
       end
@@ -234,7 +234,7 @@ module ChatCorrect
           end
         end
       end
-      @combined_hash.to_json
+      @combined_hash.to_@json
     end
 
     private
