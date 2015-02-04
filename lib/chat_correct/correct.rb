@@ -193,12 +193,10 @@ module ChatCorrect
             else
               next_match_vs = original_sentence_info_hash[ks + 1]['match_id']
             end
-            if vs['match_id'].blank?
-              if (prev_match_vc == prev_match_vs) && (next_match_vc == next_match_vs)
-                original_sentence_info_hash[ks]['match_id'] = vc['match_id']
-                corrected_sentence_info_hash[kc]['matched'] = true
-              end
-            end
+            next if vs['match_id']
+            next unless (prev_match_vc == prev_match_vs) && (next_match_vc == next_match_vs)
+            original_sentence_info_hash[ks]['match_id'] = vc['match_id']
+            corrected_sentence_info_hash[kc]['matched'] = true
           end
         end
       end
@@ -270,7 +268,7 @@ module ChatCorrect
             else
               next_word_vs = original_sentence_info_hash[ks + 1]['token']
             end
-            if vs['match_id'].blank?
+            if vs['match_id'].to_s.strip.empty?
               if (prev_match_vc == prev_match_vs) && (next_match_vc == next_match_vs)
                 original_sentence_info_hash[ks]['match_id'] = vc['match_id']
                 corrected_sentence_info_hash[kc]['matched'] = true
@@ -288,7 +286,7 @@ module ChatCorrect
       corrected_sentence_info_hash.each do |kc, vc|
         next if vc['matched']
         original_sentence_info_hash.each do |ks, vs|
-          next if !vs['match_id'].blank?
+          next if !vs['match_id'].to_s.strip.empty?
           send("#{inner_method}", kc, vc, ks, vs)
         end
       end
@@ -348,10 +346,9 @@ module ChatCorrect
             else
               next_match_vs = original_sentence_info_hash[ks + 1]['match_id']
             end
-            if vs['match_id'].blank?
-              write_match_to_info_hash(ks, kc, vc) if vs['multiple_words'] && vc['multiple_words'] && !vc['matched']
-              write_match_to_info_hash(ks, kc, vc) if next_match_vc.eql?('ȹ') && next_match_vs.eql?('ȹ') && vs['token'].gsub(/[[:punct:]]/, '').eql?('') && vc['token'].gsub(/[[:punct:]]/, '').eql?('') && !vc['matched']
-            end
+            next if vs['match_id']
+            write_match_to_info_hash(ks, kc, vc) if vs['multiple_words'] && vc['multiple_words'] && !vc['matched']
+            write_match_to_info_hash(ks, kc, vc) if next_match_vc.eql?('ȹ') && next_match_vs.eql?('ȹ') && vs['token'].gsub(/[[:punct:]]/, '').eql?('') && vc['token'].gsub(/[[:punct:]]/, '').eql?('') && !vc['matched']
           end
         end
       end
@@ -359,9 +356,8 @@ module ChatCorrect
 
     def stage_9
       original_sentence_info_hash.each do |k, v|
-        if v['match_id'].blank?
-          original_sentence_info_hash[k]['match_id'] = 's' + k.to_s
-        end
+        next if v['match_id']
+        original_sentence_info_hash[k]['match_id'] = 's' + k.to_s
       end
     end
   end
