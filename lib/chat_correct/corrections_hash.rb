@@ -54,45 +54,36 @@ module ChatCorrect
       end
       @combined_hash.each do |k, v|
         v.each do |k1, v1|
-          if k1.include?('ƪ') == true && v1.include?('missing_word_mistake') && @combined_hash[k - 1].to_s.include?('unnecessary_word_mistake') && @combined_hash[k - 2].to_s.include?('unnecessary_word_mistake')
-            if ChatCorrect::Contraction.new(token_a: @combined_hash[k - 2].key('unnecessary_word_mistake').to_s, token_b: @combined_hash[k - 1].key('unnecessary_word_mistake').to_s, contraction: k1.to_s).contraction?
-              @combined_hash[k][k1] = 'stylistic_choice_opposite'
-              @combined_hash[k - 1][@combined_hash[k - 1].key('unnecessary_word_mistake')] = 'stylistic_choice'
-              @combined_hash[k - 2][@combined_hash[k - 2].key('unnecessary_word_mistake')] = 'stylistic_choice'
-            end
-          end
-          if k1.include?('ƪ') == true && v1.include?('missing_word_mistake') && @combined_hash[k + 1].to_s.include?('unnecessary_word_mistake') && @combined_hash[k + 2].to_s.include?('unnecessary_word_mistake')
-            if ChatCorrect::Contraction.new(token_a: @combined_hash[k + 2].key('unnecessary_word_mistake').to_s, token_b: @combined_hash[k + 1].key('unnecessary_word_mistake').to_s, contraction: k1.to_s).contraction?
-              @combined_hash[k][k1] = 'stylistic_choice_opposite'
-              @combined_hash[k + 1][@combined_hash[k + 1].key('unnecessary_word_mistake')] = 'stylistic_choice'
-              @combined_hash[k + 2][@combined_hash[k + 2].key('unnecessary_word_mistake')] = 'stylistic_choice'
-            end
-          end
-          if k1.include?('ƪ') == true && v1.include?('unnecessary_word_mistake') && @combined_hash[k + 1].to_s.include?('missing_word_mistake') && @combined_hash[k + 2].to_s.include?('missing_word_mistake')
-            if ChatCorrect::Contraction.new(token_a: @combined_hash[k + 1].key('missing_word_mistake').to_s, token_b: @combined_hash[k + 2].key('missing_word_mistake').to_s,  contraction: k1.to_s).contraction?
-              @combined_hash[k][k1] = 'stylistic_choice'
-              @combined_hash[k + 1][@combined_hash[k + 1].key('missing_word_mistake')] = 'stylistic_choice_opposite'
-              @combined_hash[k + 2][@combined_hash[k + 2].key('missing_word_mistake')] = 'stylistic_choice_opposite'
-            end
-          end
-          if k1.include?('ƪ') == true && v1.include?('unnecessary_word_mistake') && @combined_hash[k - 1].to_s.include?('missing_word_mistake') && @combined_hash[k - 2].to_s.include?('missing_word_mistake')
-            if ChatCorrect::Contraction.new(token_a: @combined_hash[k - 2].key('missing_word_mistake').to_s, token_b: @combined_hash[k - 1].key('missing_word_mistake').to_s,  contraction: k1.to_s).contraction?
-              @combined_hash[k][k1] = 'stylistic_choice'
-              @combined_hash[k - 1][@combined_hash[k - 1].key('missing_word_mistake')] = 'stylistic_choice_opposite'
-              @combined_hash[k - 2][@combined_hash[k - 2].key('missing_word_mistake')] = 'stylistic_choice_opposite'
-            end
-          end
-          if k1.include?('ƪ') == true && v1.include?('verb_mistake') && @combined_hash[k + 1].to_s.include?('verb_mistake_opposite')
-            if ChatCorrect::Contraction.new(token_a: @combined_hash[k + 1].key('verb_mistake_opposite').to_s.split[0].to_s, token_b: @combined_hash[k + 1].key('verb_mistake_opposite').to_s.split[1].to_s,  contraction: k1.gsub(/ƪ/o, "'").split[0].to_s.gsub(/'/o, 'ƪ')).contraction?
-              @combined_hash[k][k1] = 'stylistic_choice'
-              @combined_hash[k + 1][@combined_hash[k + 1].key('verb_mistake_opposite')] = 'stylistic_choice_opposite'
-            end
-          end
-          if k1.include?('ƪ') == true && v1.include?('verb_mistake_opposite') && @combined_hash[k - 1].to_s.include?('verb_mistake')
-            if ChatCorrect::Contraction.new(token_a: @combined_hash[k - 1].key('verb_mistake').to_s.split[0].to_s, token_b: @combined_hash[k - 1].key('verb_mistake').to_s.split[1].to_s,  contraction: k1.gsub(/ƪ/o, "'").split[0].to_s.gsub(/'/o, 'ƪ')).contraction?
-              @combined_hash[k][k1] = 'stylistic_choice_opposite'
-              @combined_hash[k - 1][@combined_hash[k - 1].key('verb_mistake')] = 'stylistic_choice'
-            end
+          next unless k1.include?('ƪ')
+          case
+          when v1.include?('missing_word_mistake') && @combined_hash[k - 1].to_s.include?('unnecessary_word_mistake') && @combined_hash[k - 2].to_s.include?('unnecessary_word_mistake')
+            next if !ChatCorrect::Contraction.new(token_a: @combined_hash[k - 2].key('unnecessary_word_mistake').to_s, token_b: @combined_hash[k - 1].key('unnecessary_word_mistake').to_s, contraction: k1.to_s).contraction?
+            @combined_hash[k][k1] = 'stylistic_choice_opposite'
+            @combined_hash[k - 1][@combined_hash[k - 1].key('unnecessary_word_mistake')] = 'stylistic_choice'
+            @combined_hash[k - 2][@combined_hash[k - 2].key('unnecessary_word_mistake')] = 'stylistic_choice'
+          when v1.include?('missing_word_mistake') && @combined_hash[k + 1].to_s.include?('unnecessary_word_mistake') && @combined_hash[k + 2].to_s.include?('unnecessary_word_mistake')
+            next if !ChatCorrect::Contraction.new(token_a: @combined_hash[k + 2].key('unnecessary_word_mistake').to_s, token_b: @combined_hash[k + 1].key('unnecessary_word_mistake').to_s, contraction: k1.to_s).contraction?
+            @combined_hash[k][k1] = 'stylistic_choice_opposite'
+            @combined_hash[k + 1][@combined_hash[k + 1].key('unnecessary_word_mistake')] = 'stylistic_choice'
+            @combined_hash[k + 2][@combined_hash[k + 2].key('unnecessary_word_mistake')] = 'stylistic_choice'
+          when v1.include?('unnecessary_word_mistake') && @combined_hash[k + 1].to_s.include?('missing_word_mistake') && @combined_hash[k + 2].to_s.include?('missing_word_mistake')
+            next if !ChatCorrect::Contraction.new(token_a: @combined_hash[k + 1].key('missing_word_mistake').to_s, token_b: @combined_hash[k + 2].key('missing_word_mistake').to_s,  contraction: k1.to_s).contraction?
+            @combined_hash[k][k1] = 'stylistic_choice'
+            @combined_hash[k + 1][@combined_hash[k + 1].key('missing_word_mistake')] = 'stylistic_choice_opposite'
+            @combined_hash[k + 2][@combined_hash[k + 2].key('missing_word_mistake')] = 'stylistic_choice_opposite'
+          when v1.include?('unnecessary_word_mistake') && @combined_hash[k - 1].to_s.include?('missing_word_mistake') && @combined_hash[k - 2].to_s.include?('missing_word_mistake')
+            next if !ChatCorrect::Contraction.new(token_a: @combined_hash[k - 2].key('missing_word_mistake').to_s, token_b: @combined_hash[k - 1].key('missing_word_mistake').to_s,  contraction: k1.to_s).contraction?
+            @combined_hash[k][k1] = 'stylistic_choice'
+            @combined_hash[k - 1][@combined_hash[k - 1].key('missing_word_mistake')] = 'stylistic_choice_opposite'
+            @combined_hash[k - 2][@combined_hash[k - 2].key('missing_word_mistake')] = 'stylistic_choice_opposite'
+          when v1.include?('verb_mistake') && @combined_hash[k + 1].to_s.include?('verb_mistake_opposite')
+            next if !ChatCorrect::Contraction.new(token_a: @combined_hash[k + 1].key('verb_mistake_opposite').to_s.split[0].to_s, token_b: @combined_hash[k + 1].key('verb_mistake_opposite').to_s.split[1].to_s,  contraction: k1.gsub(/ƪ/o, "'").split[0].to_s.gsub(/'/o, 'ƪ')).contraction?
+            @combined_hash[k][k1] = 'stylistic_choice'
+            @combined_hash[k + 1][@combined_hash[k + 1].key('verb_mistake_opposite')] = 'stylistic_choice_opposite'
+          when v1.include?('verb_mistake_opposite') && @combined_hash[k - 1].to_s.include?('verb_mistake')
+            next if !ChatCorrect::Contraction.new(token_a: @combined_hash[k - 1].key('verb_mistake').to_s.split[0].to_s, token_b: @combined_hash[k - 1].key('verb_mistake').to_s.split[1].to_s,  contraction: k1.gsub(/ƪ/o, "'").split[0].to_s.gsub(/'/o, 'ƪ')).contraction?
+            @combined_hash[k][k1] = 'stylistic_choice_opposite'
+            @combined_hash[k - 1][@combined_hash[k - 1].key('verb_mistake')] = 'stylistic_choice'
           end
         end
       end
