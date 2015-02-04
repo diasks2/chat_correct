@@ -45,10 +45,7 @@ module ChatCorrect
               when ChatCorrect::MistakeAnalyzer.new(original: original_sentence_info_hash[j], corrected: corrected_sentence_info_hash[i]).punctuation_mistake?
                 update_combined_hash('punctuation_mistake', original_sentence_info_hash[j]['token'], corrected_sentence_info_hash[i]['token'])
               when ChatCorrect::MistakeAnalyzer.new(original: original_sentence_info_hash[j], corrected: corrected_sentence_info_hash[i]).unnecessary_word_missing_punctuation_mistake?
-                @mistake_info[original_sentence_info_hash[j]['token']] = 'unnecessary_word_mistake'
-                @correct_info[corrected_sentence_info_hash[i]['token']] = 'missing_punctuation_mistake'
-                @combined_hash[@combined_hash.length] = @mistake_info
-                @combined_hash[@combined_hash.length] = @correct_info
+                update_combined_hash('unnecessary_word_mistake', original_sentence_info_hash[j]['token'], corrected_sentence_info_hash[i]['token'], 'missing_punctuation_mistake')
               when ChatCorrect::MistakeAnalyzer.new(original: original_sentence_info_hash[j], corrected: corrected_sentence_info_hash[i]).possessive_mistake?
                 update_combined_hash('possessive_mistake', original_sentence_info_hash[j]['token'], corrected_sentence_info_hash[i]['token'])
               else
@@ -262,9 +259,10 @@ module ChatCorrect
 
     private
 
-    def update_combined_hash(mistake, original, corrected)
+    def update_combined_hash(mistake, original, corrected, opposite_mistake)
+      opposite_mistake.nil? ? om = "#{mistake}_opposite" : om = opposite_mistake
       @mistake_info[original] = "#{mistake}"
-      @correct_info[corrected] = "#{mistake}_opposite"
+      @correct_info[corrected] = om
       @combined_hash[@combined_hash.length] = @mistake_info
       @combined_hash[@combined_hash.length] = @correct_info
     end
