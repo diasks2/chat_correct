@@ -115,13 +115,13 @@ cc.mistakes
 #        'correction' => 'punctuation'
 #       },
 #       3 => {
-#        'position' => 3,
+#        'position' => 6,
 #        'error_type' => 'unnecessary_word',
 #        'mistake' => 'are',
 #        'correction' => ''
 #       },
 #       4 => {
-#        'position' => 3,
+#        'position' => 8,
 #        'error_type' => 'punctuation',
 #        'mistake' => '.',
 #        'correction' => '?'
