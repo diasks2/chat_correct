@@ -31,7 +31,7 @@ The correct method returns a hash of the original sentence interleaved with the 
 ```ruby
 os = "is the, puncttuation are wrong."
 cs = "Is the punctuation wrong?"
-cc = ChatCorrect.new(original_sentence: os, corrected_sentence: cs)
+cc = ChatCorrect::Correct.new(original_sentence: os, corrected_sentence: cs)
 cc.correct
 
 # =>  {
