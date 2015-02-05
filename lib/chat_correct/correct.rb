@@ -38,7 +38,8 @@ module ChatCorrect
       debug
       stage_9
       debug
-      reverse_symbols(ChatCorrect::CorrectionsHash.new(original_sentence_info_hash: original_sentence_info_hash, corrected_sentence_info_hash: corrected_sentence_info_hash).create)
+      correction_hash = ChatCorrect::CorrectionsHash.new(original_sentence_info_hash: original_sentence_info_hash, corrected_sentence_info_hash: corrected_sentence_info_hash).create
+      build_corrections_hash(correction_hash)
     end
 
     def mistakes
@@ -60,6 +61,17 @@ module ChatCorrect
     end
 
     private
+
+    def build_corrections_hash(correction_hash)
+      final_hash = {}
+      correction_hash.each do |k, v|
+        interim_hash = {}
+        interim_hash['token'] = reverse_symbols(v.keys[0])
+        interim_hash['type'] = v.values[0]
+        final_hash[k] = interim_hash
+      end
+      final_hash
+    end
 
     def reverse_symbols(txt)
       txt.gsub('∬', '"')

@@ -87,13 +87,13 @@ module ChatCorrect
           end
         end
       end
-      @combined_hash.to_json
+      @combined_hash
     end
 
     private
 
     def update_combined_hash(mistake, original, corrected, opposite_mistake)
-      opposite_mistake.nil? ? om = "#{mistake}_correction" : om = opposite_mistake
+      opposite_mistake.nil? ? om = "#{mistake.gsub(/_mistake/, '')}_correction" : om = opposite_mistake
       @mistake_info[original] = "#{mistake}"
       @correct_info[corrected] = om
       @combined_hash[@combined_hash.length] = @mistake_info
