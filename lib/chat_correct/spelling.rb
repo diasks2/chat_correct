@@ -1,4 +1,4 @@
-require 'levenshtein'
+require 'text'
 
 module ChatCorrect
   class Spelling
@@ -12,9 +12,9 @@ module ChatCorrect
     def spelling_error?
       token_a.length > 1 && token_b.length > 1 &&
       token_a.gsub(/[[:punct:]]/, "") != "" && token_b.gsub(/[[:punct:]]/, "") != "" &&
-      !(token_a[0] != token_b[0] && Levenshtein.distance(token_a.downcase, token_b.downcase) > 1) &&
+      !(token_a[0] != token_b[0] && Text::Levenshtein.distance(token_a.downcase, token_b.downcase) > 1) &&
       !(WORD_CHOICE.include?(token_a.downcase) && WORD_CHOICE.include?(token_b.downcase)) &&
-      Levenshtein.distance(token_a.downcase, token_b.downcase) < 3 && token_a.downcase != token_b.downcase
+      Text::Levenshtein.distance(token_a.downcase, token_b.downcase) < 3 && token_a.downcase != token_b.downcase
     end
   end
 end

@@ -1,4 +1,5 @@
 require 'engtagger'
+require 'text'
 
 module ChatCorrect
   class Correct
@@ -297,7 +298,7 @@ module ChatCorrect
 
     def stage_4(kc, vc, ks, vs)
       return unless vc['token'].length > 3 && vs['token'].length > 3 &&
-      Levenshtein.distance(vc['token'], vs['token']) < 3 && !vc['matched']
+      Text::Levenshtein.distance(vc['token'], vs['token']) < 3 && !vc['matched']
         write_match_to_info_hash(ks, kc, vc)
     end
 
@@ -321,7 +322,7 @@ module ChatCorrect
       # and 'the' that appear very far apart in the sentence and should not be matched.
       return unless vc['token'].length > 1 &&
       vs['token'].length > 1 &&
-      Levenshtein.distance(vc['token'], vs['token']) < 3 &&
+      Text::Levenshtein.distance(vc['token'], vs['token']) < 3 &&
       vs['token'].to_s[0].eql?(vc['token'].to_s[0]) &&
       (vs['position'].to_i - vc['position'].to_i).abs < 5 &&
       !vc['matched']
