@@ -92,7 +92,7 @@ The mistakes method returns a hash of each mistake, ordered by its position in t
 ```ruby
 os = "is the, puncttuation are wrong."
 cs = "Is the punctuation wrong?"
-cc = ChatCorrect.new(original_sentence: os, corrected_sentence: cs)
+cc = ChatCorrect::Correct.new(original_sentence: os, corrected_sentence: cs)
 cc.mistakes
 
 # =>  {
@@ -142,7 +142,7 @@ The mistake report method returns a hash containing the number of mistakes for e
 ```ruby
 os = "is the, puncttuation are wrong."
 cs = "Is the punctuation wrong?"
-cc = ChatCorrect.new(original_sentence: os, corrected_sentence: cs)
+cc = ChatCorrect::Correct.new(original_sentence: os, corrected_sentence: cs)
 cc.mistake_report
 # => { 
 #      'missing_word'     => 0, 
@@ -170,7 +170,7 @@ The number of mistakes method returns the total number of mistakes in the origin
 ```ruby
 os = "is the, puncttuation are wrong."
 cs = "Is the punctuation wrong?"
-cc = ChatCorrect.new(original_sentence: os, corrected_sentence: cs)
+cc = ChatCorrect::Correct.new(original_sentence: os, corrected_sentence: cs)
 cc.number_of_mistakes
 # => 5
 ```
