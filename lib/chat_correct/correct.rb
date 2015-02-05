@@ -2,7 +2,7 @@ require 'engtagger'
 
 module ChatCorrect
   class Correct
-    TYPES_OF_MISTAKES = ['missing_word', 'unnecessary_word', 'spelling', 'verb_tense', 'punctuation', 'word_order', 'capitalization', 'duplicate_word', 'word_choice', 'pluralization', 'possessive', 'stylistic_choice']
+    TYPES_OF_MISTAKES = ['missing_word', 'unnecessary_word', 'spelling', 'verb', 'punctuation', 'word_order', 'capitalization', 'duplicate_word', 'word_choice', 'pluralization', 'possessive', 'stylistic_choice']
     attr_reader :original_sentence, :corrected_sentence
     def initialize(original_sentence:, corrected_sentence:)
       @original_sentence = original_sentence
@@ -43,21 +43,41 @@ module ChatCorrect
     end
 
     def mistakes
-      {}
+      mistakes_hash = {}
+      correct.each do |key, value|
+        next if !value['type'].split('_')[-1].eql?('mistake') || value['type'].split('_')[0].eql?('no')
+        interim_hash = {}
+        interim_hash['position'] = key
+        if value['type'].split('_').length > 2
+          interim_hash['error_type'] = value['type'].split('_')[0] + '_' + value['type'].split('_')[1]
+        else
+          interim_hash['error_type'] = value['type'].split('_')[0]
+        end
+        interim_hash['mistake'] = value['token']
+        if correct[key + 1]['type'].split('_')[0].eql?(correct[key]['type'].split('_')[0])
+          interim_hash['correction'] = correct[key + 1]['token']
+        else
+          interim_hash['correction'] = ''
+        end
+        mistakes_hash[mistakes_hash.length] = interim_hash
+      end
+      mistakes_hash
     end
 
     def mistake_report
       mistake_report_hash = {}
       TYPES_OF_MISTAKES.each do |mistake|
-        mistake_report_hash[mistake] = 0
+        counter = 0
+        mistakes.each do |key, value|
+          counter += 1 if value['error_type'].eql?(mistake)
+        end
+        mistake_report_hash[mistake] = counter
       end
       mistake_report_hash
     end
 
     def number_of_mistakes
-      if (original_sentence_tokenized - corrected_sentence_tokenized).eql?([])
-        0
-      end
+      mistakes.length
     end
 
     private

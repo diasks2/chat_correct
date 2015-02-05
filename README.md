@@ -146,7 +146,7 @@ cc.mistake_report
 #      'missing_word'     => 0, 
 #      'unnecessary_word' => 1,
 #      'spelling'         => 1,
-#      'verb_tense'       => 0,
+#      'verb'             => 0,
 #      'punctuation'      => 2,
 #      'word_order'       => 0,
 #      'capitalization'   => 1,
