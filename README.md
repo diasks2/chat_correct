@@ -1,5 +1,7 @@
 # Chat Correct
 
+[![Gem Version](https://badge.fury.io/rb/chat_correct.svg)](http://badge.fury.io/rb/chat_correct) [![Build Status](https://travis-ci.org/diasks2/chat_correct.png)](https://travis-ci.org/diasks2/chat_correct) [![License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat)](https://github.com/diasks2/chat_correct/blob/master/LICENSE.txt)
+
 A Ruby gem to help students improve their English. A teacher can correct a student's sentence and this gem will automatically provide information on the type of error (i.e. punctuation, spelling, etc.), the placement of the errors, and the number of errors.
 
 Live Demo: [Chat Correct chat room application](http://www.chat-correct.com)
