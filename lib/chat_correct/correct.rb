@@ -11,33 +11,12 @@ module ChatCorrect
     end
 
     def correct
-      stage_1
-      debug
-      stage_2
-      debug
-      iterate_sentences('stage_3')
-      debug
-      iterate_sentences('stage_4')
-      debug
-      iterate_sentences('stage_5')
-      debug
-      iterate_sentences('stage_6')
-      debug
-      iterate_sentences('stage_7')
-      debug
-      stage_8
-      debug
-      prev_next_match_check
-      debug
-      stage_9
-      debug
-      correction_hash = ChatCorrect::CorrectionsHash.new(original_sentence_info_hash: original_sentence_info_hash, corrected_sentence_info_hash: corrected_sentence_info_hash).create
-      build_corrections_hash(correction_hash)
+      analyze
     end
 
     def mistakes
       mistakes_hash = {}
-      correct.each do |key, value|
+      analyze.each do |key, value|
         next if !value['type'].split('_')[-1].eql?('mistake') || value['type'].split('_')[0].eql?('no')
         interim_hash = {}
         interim_hash['position'] = key
@@ -74,6 +53,35 @@ module ChatCorrect
     end
 
     private
+
+    def analyze
+      @analyze ||= iterate_stages
+    end
+
+    def iterate_stages
+      stage_1
+      debug
+      stage_2
+      debug
+      iterate_sentences('stage_3')
+      debug
+      iterate_sentences('stage_4')
+      debug
+      iterate_sentences('stage_5')
+      debug
+      iterate_sentences('stage_6')
+      debug
+      iterate_sentences('stage_7')
+      debug
+      stage_8
+      debug
+      prev_next_match_check
+      debug
+      stage_9
+      debug
+      correction_hash = ChatCorrect::CorrectionsHash.new(original_sentence_info_hash: original_sentence_info_hash, corrected_sentence_info_hash: corrected_sentence_info_hash).create
+      build_corrections_hash(correction_hash)
+    end
 
     def build_corrections_hash(correction_hash)
       final_hash = {}
