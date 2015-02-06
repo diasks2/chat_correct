@@ -11,14 +11,6 @@ module ChatCorrect
     end
 
     def correct
-      # puts "OS: #{original_sentence}"
-      # puts "CS: #{corrected_sentence}"
-      # puts "OST: #{original_sentence_tokenized}"
-      # puts "CST: #{corrected_sentence_tokenized}"
-      # puts "OSTag: #{original_sentence_tagged}"
-      # puts "CSTag: #{corrected_sentence_tagged}"
-      # puts "OSTD: #{original_sentence_tokenized_downcased}"
-      # puts "CSTD: #{corrected_sentence_tokenized_downcased}"
       stage_1
       debug
       stage_2
@@ -240,7 +232,6 @@ module ChatCorrect
             !matched_id_array.include?(vc['match_id'].to_s) &&
             !vo['duplicates'] &&
             !vc['duplicates']
-
             original_sentence_info_hash[ko]['match_id'] = vc['match_id']
             corrected_sentence_info_hash[kc]['matched'] = true
             matched_id_array << vc['match_id'].to_s
@@ -290,42 +281,42 @@ module ChatCorrect
     end
 
     def stage_3(kc, vc, ks, vs)
-      return unless vc['token'].eql?(vs['token']) &&
-      (vc['prev_word1'].eql?(vs['prev_word1']) || vc['next_word1'].eql?(vs['next_word1'])) &&
-      !vc['matched'] && vs['prev_word1'] != 'ȸ'
+      return if vc['token'] != vs['token'] ||
+      (vc['prev_word1'] != vs['prev_word1'] && vc['next_word1'] != vs['next_word1']) ||
+      vc['matched'] || vs['prev_word1'].eql?('ȸ')
         write_match_to_info_hash(ks, kc, vc)
     end
 
     def stage_4(kc, vc, ks, vs)
-      return unless vc['token'].length > 3 && vs['token'].length > 3 &&
-      Text::Levenshtein.distance(vc['token'], vs['token']) < 3 && !vc['matched']
+      return if vc['token'].length < 4 || vs['token'].length < 4 ||
+      Text::Levenshtein.distance(vc['token'], vs['token']) > 2 || vc['matched']
         write_match_to_info_hash(ks, kc, vc)
     end
 
     def stage_5(kc, vc, ks, vs)
-      return unless ChatCorrect::Pluralization.new(token_a: vc['token'], token_b: vs['token']).pluralization_error? &&
-      !vc['matched']
+      return if !ChatCorrect::Pluralization.new(token_a: vc['token'], token_b: vs['token']).pluralization_error? ||
+      vc['matched']
         write_match_to_info_hash(ks, kc, vc)
     end
 
     def stage_6(kc, vc, ks, vs)
-      return unless ChatCorrect::Verb.new(word: vs['token'], pos: vc['pos_tag'], text: vc['token']).verb_error? &&
-      (vc['prev_word1'].eql?(vs['prev_word1']) || vc['next_word1'].eql?(vs['next_word1'])) &&
-      !vc['matched'] && !vs['next_word1'].include?(' ')
+      return if !ChatCorrect::Verb.new(word: vs['token'], pos: vc['pos_tag'], text: vc['token']).verb_error? ||
+      (vc['prev_word1'] != vs['prev_word1'] && vc['next_word1'] != vs['next_word1']) ||
+      vc['matched'] || vs['next_word1'].include?(' ')
         write_match_to_info_hash(ks, kc, vc)
     end
 
     def stage_7(kc, vc, ks, vs)
       # Distance between position of words is currently hardcoded to 5,
       # but this is a SWAG and can be adjusted based on testing.
-      # The idea is to stop the algoroithm from matching words like 'to'
+      # The idea is to stop the algorithm from matching words like 'to'
       # and 'the' that appear very far apart in the sentence and should not be matched.
-      return unless vc['token'].length > 1 &&
-      vs['token'].length > 1 &&
-      Text::Levenshtein.distance(vc['token'], vs['token']) < 3 &&
-      vs['token'].to_s[0].eql?(vc['token'].to_s[0]) &&
-      (vs['position'].to_i - vc['position'].to_i).abs < 5 &&
-      !vc['matched']
+      return if vc['token'].length < 2 ||
+      vs['token'].length < 2 ||
+      Text::Levenshtein.distance(vc['token'], vs['token']) > 2 ||
+      vs['token'].to_s[0] != vc['token'].to_s[0] ||
+      (vs['position'].to_i - vc['position'].to_i).abs > 4 ||
+      vc['matched']
         write_match_to_info_hash(ks, kc, vc)
     end
 
