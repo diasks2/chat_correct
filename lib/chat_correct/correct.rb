@@ -17,20 +17,7 @@ module ChatCorrect
       mistakes_hash = {}
       analyze.each do |key, value|
         next if !value['type'].split('_')[-1].eql?('mistake') || value['type'].split('_')[0].eql?('no')
-        interim_hash = {}
-        interim_hash['position'] = key
-        if value['type'].split('_').length > 2
-          interim_hash['error_type'] = value['type'].split('_')[0] + '_' + value['type'].split('_')[1]
-        else
-          interim_hash['error_type'] = value['type'].split('_')[0]
-        end
-        interim_hash['mistake'] = value['token']
-        if correct[key + 1]['type'].split('_')[0].eql?(correct[key]['type'].split('_')[0])
-          interim_hash['correction'] = correct[key + 1]['token']
-        else
-          interim_hash['correction'] = ''
-        end
-        mistakes_hash[mistakes_hash.length] = interim_hash
+        mistakes_hash = build_mistakes_hash(mistakes_hash, key, value)
       end
       mistakes_hash
     end
@@ -80,6 +67,34 @@ module ChatCorrect
       debug
       correction_hash = ChatCorrect::CorrectionsHash.new(original_sentence_info_hash: original_sentence_info_hash, corrected_sentence_info_hash: corrected_sentence_info_hash).create
       build_corrections_hash(correction_hash)
+    end
+
+    def update_interim_hash_with_error(interim_hash, value)
+      if value['type'].split('_').length > 2
+        interim_hash['error_type'] = value['type'].split('_')[0] + '_' + value['type'].split('_')[1]
+      else
+        interim_hash['error_type'] = value['type'].split('_')[0]
+      end
+      interim_hash
+    end
+
+    def update_interim_hash_with_correction(interim_hash, key)
+      if correct[key + 1]['type'].split('_')[0].eql?(correct[key]['type'].split('_')[0])
+        interim_hash['correction'] = correct[key + 1]['token']
+      else
+        interim_hash['correction'] = ''
+      end
+      interim_hash
+    end
+
+    def build_mistakes_hash(mistakes_hash, key, value)
+      interim_hash = {}
+      interim_hash['position'] = key
+      interim_hash = update_interim_hash_with_error(interim_hash, value)
+      interim_hash['mistake'] = value['token']
+      interim_hash = update_interim_hash_with_correction(interim_hash, key) unless correct[key + 1].blank?
+      mistakes_hash[mistakes_hash.length] = interim_hash
+      mistakes_hash
     end
 
     def build_corrections_hash(correction_hash)
