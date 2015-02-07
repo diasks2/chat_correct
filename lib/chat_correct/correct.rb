@@ -1,13 +1,12 @@
-require 'engtagger'
-require 'text'
-
 module ChatCorrect
   class Correct
     TYPES_OF_MISTAKES = ['missing_word', 'unnecessary_word', 'spelling', 'verb', 'punctuation', 'word_order', 'capitalization', 'duplicate_word', 'word_choice', 'pluralization', 'possessive', 'stylistic_choice']
-    attr_reader :original_sentence, :corrected_sentence
+    attr_reader :original_sentence, :corrected_sentence, :tgr
     def initialize(original_sentence:, corrected_sentence:)
       @original_sentence = original_sentence
       @corrected_sentence = corrected_sentence
+      @tgr = EngTagger.new
+      Linguistics.use(:en)
     end
 
     def correct
@@ -106,20 +105,18 @@ module ChatCorrect
     end
 
     def original_sentence_tokenized
-      @original_sentence_tokenized ||= ChatCorrect::CombineMultiWordVerbs.new(text: original_sentence).combine
+      @original_sentence_tokenized ||= ChatCorrect::CombineMultiWordVerbs.new(text: original_sentence, tgr: tgr).combine
     end
 
     def corrected_sentence_tokenized
-      @corrected_sentence_tokenized ||= ChatCorrect::CombineMultiWordVerbs.new(text: corrected_sentence).combine
+      @corrected_sentence_tokenized ||= ChatCorrect::CombineMultiWordVerbs.new(text: corrected_sentence, tgr: tgr).combine
     end
 
     def original_sentence_tagged
-      tgr = EngTagger.new
       @original_sentence_tagged ||= tgr.add_tags(original_sentence).split
     end
 
     def corrected_sentence_tagged
-      tgr = EngTagger.new
       @corrected_sentence_tagged ||= tgr.add_tags(corrected_sentence).split
     end
 

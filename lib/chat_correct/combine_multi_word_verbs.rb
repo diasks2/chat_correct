@@ -1,16 +1,14 @@
-require 'engtagger'
-
 module ChatCorrect
   class CombineMultiWordVerbs
     TOKEN_ARRAY = ['are', 'am', 'was', 'were', 'have', 'has', 'had', 'will', 'would', 'could', 'did', 'arenƪt', 'wasnƪt', 'werenƪt', 'havenƪt', 'hasnƪt', 'hadnƪt', 'wouldnƪt', 'couldnƪt', 'didnƪt']
     TOKEN_ARRAY_2 = ['are', 'am', 'was', 'were', 'have', 'has', 'had', 'will', 'would', 'did', 'could']
-    attr_reader :text
-    def initialize(text:)
+    attr_reader :text, :tgr
+    def initialize(text:, tgr:)
       @text = text
+      @tgr = tgr
     end
 
     def combine
-      tgr = EngTagger.new
       tokens = ChatCorrect::Tokenize.new(text: text).tokenize
       sentence_tagged = tgr.add_tags(text).split
       tokens_to_delete = []

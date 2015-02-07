@@ -1,5 +1,3 @@
-require 'text'
-
 module ChatCorrect
   class Spelling
     WORD_CHOICE = ["the", "that", "this", "on", "at", "in", "an", "it", "if", "of", "to"]

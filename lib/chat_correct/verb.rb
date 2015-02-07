@@ -1,5 +1,3 @@
-require 'verbs'
-
 module ChatCorrect
   class Verb
     attr_reader :word, :pos, :text

@@ -1,5 +1,3 @@
-require 'linguistics'
-
 module ChatCorrect
   class Pluralization
     attr_reader :token_a, :token_b
@@ -10,7 +8,6 @@ module ChatCorrect
 
     def pluralization_error?
       begin
-        Linguistics.use(:en)
         token_a_plural = token_a.en.plural
         token_b_plural = token_b.en.plural
       rescue
