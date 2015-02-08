@@ -10,10 +10,14 @@ module ChatCorrect
     end
 
     def correct
+      raise "You must include an Original Sentence" if original_sentence.nil? || original_sentence.eql?('')
+      raise "You must include a Corrected Sentence" if corrected_sentence.nil? || corrected_sentence.eql?('')
       analyze
     end
 
     def mistakes
+      raise "You must include an Original Sentence" if original_sentence.nil? || original_sentence.eql?('')
+      raise "You must include a Corrected Sentence" if corrected_sentence.nil? || corrected_sentence.eql?('')
       mistakes_hash = {}
       analyze.each do |key, value|
         next if !value['type'].split('_')[-1].eql?('mistake') || value['type'].split('_')[0].eql?('no')
@@ -23,6 +27,8 @@ module ChatCorrect
     end
 
     def mistake_report
+      raise "You must include an Original Sentence" if original_sentence.nil? || original_sentence.eql?('')
+      raise "You must include a Corrected Sentence" if corrected_sentence.nil? || corrected_sentence.eql?('')
       mistake_report_hash = {}
       TYPES_OF_MISTAKES.each do |mistake|
         counter = 0
@@ -35,6 +41,8 @@ module ChatCorrect
     end
 
     def number_of_mistakes
+      raise "You must include an Original Sentence" if original_sentence.nil? || original_sentence.eql?('')
+      raise "You must include a Corrected Sentence" if corrected_sentence.nil? || corrected_sentence.eql?('')
       mistakes.length
     end
 
