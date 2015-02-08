@@ -33,7 +33,7 @@ module ChatCorrect
       TYPES_OF_MISTAKES.each do |mistake|
         counter = 0
         mistakes.each do |key, value|
-          counter += 1 if value['error_type'].eql?(mistake)
+          counter += 1 if value['error_type'].eql?(mistake) || value['error_type'].split('_')[1].eql?(mistake)
         end
         mistake_report_hash[mistake] = counter
       end
@@ -54,32 +54,36 @@ module ChatCorrect
 
     def iterate_stages
       stage_1
-      debug
+      # debug
       stage_2
-      debug
+      # debug
       iterate_sentences('stage_3')
-      debug
+      # debug
       iterate_sentences('stage_4')
-      debug
+      # debug
       iterate_sentences('stage_5')
-      debug
+      # debug
       iterate_sentences('stage_6')
-      debug
+      # debug
       iterate_sentences('stage_7')
-      debug
+      # debug
       stage_8
-      debug
+      # debug
       prev_next_match_check
-      debug
+      # debug
       stage_9
-      debug
+      # debug
       correction_hash = ChatCorrect::CorrectionsHash.new(original_sentence_info_hash: original_sentence_info_hash, corrected_sentence_info_hash: corrected_sentence_info_hash).create
       build_corrections_hash(correction_hash)
     end
 
     def update_interim_hash_with_error(interim_hash, value)
       if value['type'].split('_').length > 2
-        interim_hash['error_type'] = value['type'].split('_')[0] + '_' + value['type'].split('_')[1]
+        if value['type'].split('_')[1].eql?('punctuation')
+          interim_hash['error_type'] = 'punctuation'
+        else
+          interim_hash['error_type'] = value['type'].split('_')[0] + '_' + value['type'].split('_')[1]
+        end
       else
         interim_hash['error_type'] = value['type'].split('_')[0]
       end
@@ -99,7 +103,11 @@ module ChatCorrect
       interim_hash = {}
       interim_hash['position'] = key
       interim_hash = update_interim_hash_with_error(interim_hash, value)
-      interim_hash['mistake'] = value['token']
+      if value['type'].split('_').length > 2 && value['type'].split('_')[1].eql?('punctuation')
+        interim_hash['mistake'] = ''
+      else
+        interim_hash['mistake'] = value['token']
+      end
       interim_hash = update_interim_hash_with_correction(interim_hash, key) unless correct[key + 1].blank?
       mistakes_hash[mistakes_hash.length] = interim_hash
       mistakes_hash
@@ -240,9 +248,9 @@ module ChatCorrect
 
     def debug
       # puts "++++++++++++++++++++"
-      original_sentence_info_hash.each do |k, v|
+      # original_sentence_info_hash.each do |k, v|
         # puts 'Key: ' + k.to_s + '; Word: ' + v['token'].to_s + '; Match ID: ' + v['match_id'].to_s
-      end
+      # end
     end
 
     def stage_1
