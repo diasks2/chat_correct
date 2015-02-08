@@ -20,7 +20,7 @@ module ChatCorrect
       raise "You must include a Corrected Sentence" if corrected_sentence.nil? || corrected_sentence.eql?('')
       mistakes_hash = {}
       analyze.each do |key, value|
-        next if !value['type'].split('_')[-1].eql?('mistake') || value['type'].split('_')[0].eql?('no')
+        next if (!value['type'].split('_')[-1].eql?('mistake') && !value['type'].split('_')[0].eql?('missing')) || value['type'].split('_')[0].eql?('no')
         mistakes_hash = build_mistakes_hash(mistakes_hash, key, value)
       end
       mistakes_hash
@@ -91,7 +91,9 @@ module ChatCorrect
     end
 
     def update_interim_hash_with_correction(interim_hash, key)
-      if correct[key + 1]['type'].split('_')[0].eql?(correct[key]['type'].split('_')[0])
+      if correct[key]['type'].split('_')[1].eql?('order')
+        interim_hash['correction'] = 'N/A'
+      elsif correct[key + 1]['type'].split('_')[0].eql?(correct[key]['type'].split('_')[0])
         interim_hash['correction'] = correct[key + 1]['token']
       else
         interim_hash['correction'] = ''
@@ -103,12 +105,22 @@ module ChatCorrect
       interim_hash = {}
       interim_hash['position'] = key
       interim_hash = update_interim_hash_with_error(interim_hash, value)
-      if value['type'].split('_').length > 2 && value['type'].split('_')[1].eql?('punctuation')
+      if value['type'].split('_')[1].eql?('order')
+        if mistakes_hash.length.eql?(0) || mistakes_hash[0]['error_type'].eql?('unnecessary_word') || mistakes_hash[0]['error_type'].eql?('word_order')
+          interim_hash['mistake'] = reverse_symbols(original_sentence_info_hash[key]['token'])
+        else
+          interim_hash['mistake'] = reverse_symbols(original_sentence_info_hash[key - 1]['token'])
+        end
+      elsif value['type'].split('_').length > 2 && value['type'].split('_')[1].eql?('punctuation')
         interim_hash['mistake'] = ''
       else
         interim_hash['mistake'] = value['token']
       end
-      interim_hash = update_interim_hash_with_correction(interim_hash, key) unless correct[key + 1].blank?
+      if correct[key + 1].blank? && value['type'].split('_')[1].eql?('order')
+        interim_hash['correction'] = 'N/A'
+      else
+        interim_hash = update_interim_hash_with_correction(interim_hash, key) unless correct[key + 1].blank?
+      end
       mistakes_hash[mistakes_hash.length] = interim_hash
       mistakes_hash
     end

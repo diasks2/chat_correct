@@ -17,7 +17,7 @@ module ChatCorrect
         @mistake_info = {}
         if @j >= original_sentence_info_hash.length
           if corrected_sentence_info_hash[@i]['token'].gsub(/[[:punct:]]/, '').eql?('')
-            @correct_info[corrected_sentence_info_hash[@i]['token']] = 'missing_punctuation_mistake'
+            @correct_info[corrected_sentence_info_hash[@i]['token']] = 'missing_punctuation_correction'
             @combined_hash[@combined_hash.length] = @correct_info
           else
             @correct_info[corrected_sentence_info_hash[@i]['token']] = 'missing_word_mistake'
@@ -126,7 +126,7 @@ module ChatCorrect
       when ChatCorrect::MistakeAnalyzer.new(original: original, corrected: corrected).punctuation_mistake?
         update_combined_hash('punctuation_mistake', original['token'], corrected['token'], nil)
       when ChatCorrect::MistakeAnalyzer.new(original: original, corrected: corrected).unnecessary_word_missing_punctuation_mistake?
-        update_combined_hash('unnecessary_word_mistake', original['token'], corrected['token'], 'missing_punctuation_mistake')
+        update_combined_hash('unnecessary_word_mistake', original['token'], corrected['token'], 'missing_punctuation_correction')
       else
         update_combined_hash('word_choice_mistake', original['token'], corrected['token'], nil)
       end
