@@ -708,13 +708,17 @@ RSpec.describe ChatCorrect::Correct do
       expect(@cc.correct).to eq({0=>{"token"=>"If", "type"=>"no_mistake"}, 1=>{"token"=>"my", "type"=>"no_mistake"}, 2=>{"token"=>"school", "type"=>"no_mistake"}, 3=>{"token"=>"were located", "type"=>"no_mistake"}, 4=>{"token"=>"in", "type"=>"no_mistake"}, 5=>{"token"=>"Tokyo", "type"=>"no_mistake"}, 6=>{"token"=>",", "type"=>"no_mistake"}, 7=>{"token"=>"the", "type"=>"missing_word_mistake"}, 8=>{"token"=>"situation", "type"=>"no_mistake"}, 9=>{"token"=>"would have", "type"=>"verb_mistake"}, 10=>{"token"=>"would have been", "type"=>"verb_correction"}, 11=>{"token"=>"quite", "type"=>"no_mistake"}, 12=>{"token"=>"changed", "type"=>"word_choice_mistake"}, 13=>{"token"=>"different", "type"=>"word_choice_correction"}, 14=>{"token"=>".", "type"=>"no_mistake"}})
     end
 
-    # it 'Counts the number of mistakes' do
-    #   expect(@cc.number_of_mistakes).to eq([])
-    # end
+    it 'Reports the mistakes' do
+      expect(@cc.mistakes).to eq({0=>{"position"=>7, "error_type"=>"missing_word", "mistake"=>"the", "correction"=>""}, 1=>{"position"=>9, "error_type"=>"verb", "mistake"=>"would have", "correction"=>"would have been"}, 2=>{"position"=>12, "error_type"=>"word_choice", "mistake"=>"changed", "correction"=>"different"}})
+    end
 
-    # it 'Reports the mistakes by mistake type' do
-    #   expect(@cc.mistake_report).to eq([])
-    # end
+    it 'Counts the number of mistakes' do
+      expect(@cc.number_of_mistakes).to eq(3)
+    end
+
+    it 'Reports the mistakes by mistake type' do
+      expect(@cc.mistake_report).to eq({"missing_word"=>1, "unnecessary_word"=>0, "spelling"=>0, "verb"=>1, "punctuation"=>0, "word_order"=>0, "capitalization"=>0, "duplicate_word"=>0, "word_choice"=>1, "pluralization"=>0, "possessive"=>0, "stylistic_choice"=>0})
+    end
   end
 
   context "example correction #031" do
@@ -728,13 +732,17 @@ RSpec.describe ChatCorrect::Correct do
       expect(@cc.correct).to eq({0=>{"token"=>"However", "type"=>"no_mistake"}, 1=>{"token"=>",", "type"=>"no_mistake"}, 2=>{"token"=>"under", "type"=>"missing_word_mistake"}, 3=>{"token"=>"normal", "type"=>"missing_word_mistake"}, 4=>{"token"=>"circumstances", "type"=>"missing_word_mistake"}, 5=>{"token"=>",", "type"=>"punctuation_mistake"}, 6=>{"token"=>"I", "type"=>"no_mistake"}, 7=>{"token"=>"think", "type"=>"no_mistake"}, 8=>{"token"=>"a", "type"=>"unnecessary_word_mistake"}, 9=>{"token"=>"success", "type"=>"no_mistake"}, 10=>{"token"=>"in", "type"=>"no_mistake"}, 11=>{"token"=>"life", "type"=>"no_mistake"}, 12=>{"token"=>"comes", "type"=>"no_mistake"}, 13=>{"token"=>"from", "type"=>"no_mistake"}, 14=>{"token"=>"careful", "type"=>"no_mistake"}, 15=>{"token"=>"planning", "type"=>"no_mistake"}, 16=>{"token"=>"when", "type"=>"unnecessary_word_mistake"}, 17=>{"token"=>"it", "type"=>"unnecessary_word_mistake"}, 18=>{"token"=>"is", "type"=>"unnecessary_word_mistake"}, 19=>{"token"=>"a", "type"=>"unnecessary_word_mistake"}, 20=>{"token"=>"usual", "type"=>"unnecessary_word_mistake"}, 21=>{"token"=>"situation", "type"=>"unnecessary_word_mistake"}, 22=>{"token"=>".", "type"=>"no_mistake"}})
     end
 
-    # it 'Counts the number of mistakes' do
-    #   expect(@cc.number_of_mistakes).to eq([])
-    # end
+    it 'Reports the mistakes' do
+      expect(@cc.mistakes).to eq({0=>{"position"=>2, "error_type"=>"missing_word", "mistake"=>"under", "correction"=>"normal"}, 1=>{"position"=>3, "error_type"=>"missing_word", "mistake"=>"normal", "correction"=>"circumstances"}, 2=>{"position"=>4, "error_type"=>"missing_word", "mistake"=>"circumstances", "correction"=>""}, 3=>{"position"=>5, "error_type"=>"punctuation", "mistake"=>",", "correction"=>""}, 4=>{"position"=>8, "error_type"=>"unnecessary_word", "mistake"=>"a", "correction"=>""}, 5=>{"position"=>16, "error_type"=>"unnecessary_word", "mistake"=>"when", "correction"=>"it"}, 6=>{"position"=>17, "error_type"=>"unnecessary_word", "mistake"=>"it", "correction"=>"is"}, 7=>{"position"=>18, "error_type"=>"unnecessary_word", "mistake"=>"is", "correction"=>"a"}, 8=>{"position"=>19, "error_type"=>"unnecessary_word", "mistake"=>"a", "correction"=>"usual"}, 9=>{"position"=>20, "error_type"=>"unnecessary_word", "mistake"=>"usual", "correction"=>"situation"}, 10=>{"position"=>21, "error_type"=>"unnecessary_word", "mistake"=>"situation", "correction"=>""}})
+    end
 
-    # it 'Reports the mistakes by mistake type' do
-    #   expect(@cc.mistake_report).to eq([])
-    # end
+    it 'Counts the number of mistakes' do
+      expect(@cc.number_of_mistakes).to eq(11)
+    end
+
+    it 'Reports the mistakes by mistake type' do
+      expect(@cc.mistake_report).to eq({"missing_word"=>3, "unnecessary_word"=>7, "spelling"=>0, "verb"=>0, "punctuation"=>1, "word_order"=>0, "capitalization"=>0, "duplicate_word"=>0, "word_choice"=>0, "pluralization"=>0, "possessive"=>0, "stylistic_choice"=>0})
+    end
   end
 
   context "example correction #032" do
@@ -748,13 +756,17 @@ RSpec.describe ChatCorrect::Correct do
       expect(@cc.correct).to eq({0=>{"token"=>"He", "type"=>"no_mistake"}, 1=>{"token"=>"is", "type"=>"no_mistake"}, 2=>{"token"=>"super", "type"=>"no_mistake"}, 3=>{"token"=>"rad", "type"=>"word_choice_mistake"}, 4=>{"token"=>"cool", "type"=>"word_choice_correction"}, 5=>{"token"=>".", "type"=>"punctuation_mistake"}, 6=>{"token"=>"!", "type"=>"punctuation_correction"}})
     end
 
-    # it 'Counts the number of mistakes' do
-    #   expect(@cc.number_of_mistakes).to eq([])
-    # end
+     it 'Reports the mistakes' do
+      expect(@cc.mistakes).to eq({0=>{"position"=>3, "error_type"=>"word_choice", "mistake"=>"rad", "correction"=>"cool"}, 1=>{"position"=>5, "error_type"=>"punctuation", "mistake"=>".", "correction"=>"!"}})
+    end
 
-    # it 'Reports the mistakes by mistake type' do
-    #   expect(@cc.mistake_report).to eq([])
-    # end
+    it 'Counts the number of mistakes' do
+      expect(@cc.number_of_mistakes).to eq(2)
+    end
+
+    it 'Reports the mistakes by mistake type' do
+      expect(@cc.mistake_report).to eq({"missing_word"=>0, "unnecessary_word"=>0, "spelling"=>0, "verb"=>0, "punctuation"=>1, "word_order"=>0, "capitalization"=>0, "duplicate_word"=>0, "word_choice"=>1, "pluralization"=>0, "possessive"=>0, "stylistic_choice"=>0})
+    end
   end
 
   context "example correction #033" do
