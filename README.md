@@ -8,17 +8,17 @@ Live Demo: [Chat Correct chat room application](http://www.chat-correct.com)
 
 ![](https://s3.amazonaws.com/tm-town-nlp-resources/chat_correct_screenshot.jpg)
 
-##Install  
+##Install
 
-**Ruby**  
-*Supports Ruby 2.1.5 and above*  
+**Ruby**
+*Supports Ruby 2.1.0 and above*
 ```
 gem install chat_correct
 ```
 
-**Ruby on Rails**  
-Add this line to your application’s Gemfile:  
-```ruby 
+**Ruby on Rails**
+Add this line to your application’s Gemfile:
+```ruby
 gem 'chat_correct'
 ```
 
@@ -144,8 +144,8 @@ os = "is the, puncttuation are wrong."
 cs = "Is the punctuation wrong?"
 cc = ChatCorrect::Correct.new(original_sentence: os, corrected_sentence: cs)
 cc.mistake_report
-# => { 
-#      'missing_word'     => 0, 
+# => {
+#      'missing_word'     => 0,
 #      'unnecessary_word' => 1,
 #      'spelling'         => 1,
 #      'verb'             => 0,
@@ -206,3 +206,4 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
+
