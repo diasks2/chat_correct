@@ -10,13 +10,13 @@ Live Demo: [Chat Correct chat room application](http://www.chat-correct.com)
 
 ##Install
 
-**Ruby**
+**Ruby**  
 *Supports Ruby 2.1.0 and above*
 ```
 gem install chat_correct
 ```
 
-**Ruby on Rails**
+**Ruby on Rails**  
 Add this line to your application’s Gemfile:
 ```ruby
 gem 'chat_correct'
