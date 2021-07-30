@@ -1888,4 +1888,16 @@ RSpec.describe ChatCorrect::Correct do
       expect { @cc.correct }.to raise_error('You must include a Corrected Sentence')
     end
   end
+
+  context "example correction #085" do
+    before do
+      original_sentence = 'heyz uz guz'
+      corrected_sentence = 'Hey you guys!'
+      @cc = ChatCorrect::Correct.new(original_sentence: original_sentence, corrected_sentence: corrected_sentence)
+    end
+
+    it 'Annotates the corrections' do
+      expect(@cc.correct).to eq({0=>{"token"=>"heyz", "type"=>"unnecessary_word_mistake"}, 1=>{"token"=>"uz", "type"=>"unnecessary_word_mistake"}, 2=>{"token"=>"Hey", "type"=>"missing_word_mistake"}, 3=>{"token"=>"you", "type"=>"missing_word_mistake"}, 4=>{"token"=>"guz", "type"=>"spelling_mistake"}, 5=>{"token"=>"guys", "type"=>"spelling_correction"}, 6=>{"token"=>"!", "type"=>"missing_punctuation_correction"}})
+    end
+  end
 end
