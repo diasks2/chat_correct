@@ -8,7 +8,7 @@ Live Demo: [Chat Correct chat room application](http://www.chat-correct.com)
 
 ![](https://s3.amazonaws.com/tm-town-nlp-resources/chat_correct_screenshot.jpg)
 
-##Install
+## Install
 
 **Ruby**  
 *Supports Ruby 2.1.0 and above*
